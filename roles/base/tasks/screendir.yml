@@ -1,0 +1,13 @@
+---
+# https://superuser.com/questions/1195962/cannot-make-directory-var-run-screen-permission-denied/1284329#1284329
+- name: make local screendir
+  file:
+    path: "{{ ansible_env.HOME }}/.screen"
+    state: directory
+    mode: 0700
+
+- name: set screendir env var
+  lineinfile:
+    path: "{{ ansible_env.HOME }}/.bashrc"
+    regexp: '^export SCREENDIR='
+    line: 'export SCREENDIR=$HOME/.screen'

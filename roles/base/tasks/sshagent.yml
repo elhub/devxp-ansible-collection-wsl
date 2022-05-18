@@ -1,0 +1,26 @@
+---
+- name: ssh_find_agent
+  get_url:
+    url: https://raw.githubusercontent.com/wwalker/ssh-find-agent/master/ssh-find-agent.sh
+    dest: "{{ ansible_env.HOME }}/.local/bin/ssh-find-agent.sh"
+    mode: 0755
+  tags:
+    - sshagent
+
+- name: add find agent to bash rc
+  blockinfile:
+    path: "{{ ansible_env.HOME }}/.bashrc"
+    marker: "# {mark} Ansible - ssh-find-agent"
+    block: |
+      source {{ ansible_env.HOME }}/.local/bin/ssh-find-agent.sh
+      ssh_find_agent -a
+      if [ -z "$SSH_AUTH_SOCK" ]
+      then
+        eval $(ssh-agent) > /dev/null
+        ssh-add -l >/dev/null || alias ssh='ssh-add -l >/dev/null || ssh-add && unalias ssh; ssh'
+      fi
+
+      find ~/.ssh/ -type f -exec grep -l "PRIVATE" {} \; | xargs ssh-add &> /dev/null
+
+  tags:
+    - sshagent

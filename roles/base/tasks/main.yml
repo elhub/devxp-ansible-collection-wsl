@@ -1,0 +1,12 @@
+---
+- name: add .local paths
+  file:
+    path: "{{ ansible_env.HOME }}/.local/{{ item }}"
+    state: directory
+  loop:
+    - bin
+    - lib
+
+- include_tasks: sshagent.yml
+- include_tasks: packages.yml
+- include_tasks: screendir.yml

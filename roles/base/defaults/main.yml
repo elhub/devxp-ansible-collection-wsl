@@ -1,0 +1,15 @@
+---
+default_packages:
+  - build-essential
+  - colordiff
+  - curl
+  - dos2unix
+  - jq
+  - make
+  - nano
+  - ubuntu-wsl
+  - unzip
+  - wdiff
+  - zip
+
+config_packages:
