@@ -1,0 +1,17 @@
+---
+namespace: elhub_devxp
+name: ansible_collection_wsl
+version: 0.0.1
+readme: README.md
+authors:
+  - "@elhub/devxp"
+description: >-
+  WSL Ansible Collection that facilitates the installation and configuration
+  of the varied Linux(WSL) tools that are used at Elhub.
+license:
+  - MIT
+tags: []
+dependencies: {}
+repository: https://github.com/elhub/ansible-collection-wsl
+documentation: https://github.com/elhub/ansible-collection-wsl/blob/main/README.md
+issues: https://jira.elhub.cloud/projects/TD/issues
