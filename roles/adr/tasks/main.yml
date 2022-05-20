@@ -1,0 +1,25 @@
+---
+- name: Clean old dev-tools installation
+  file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - "/usr/local/lib/adr-j-3.1.0-SNAPSHOT"
+    - "/usr/local/bin/adr"
+  ignore_errors: "{{ ansible_check_mode }}"
+
+- name: Unpack adr-j lib
+  unarchive:
+    src: "{{ repository }}/elhub-bin/adr-j/{{ adr_version }}/adr-j.zip"
+    dest: "{{ ansible_env.HOME }}/.local/lib"
+    remote_src: yes
+  become: yes
+  ignore_errors: "{{ ansible_check_mode }}"
+
+- name: Link adr
+  file:
+    src: "{{ ansible_env.HOME }}/.local/lib/adr-j-{{ adr_version }}/bin/adr-j"
+    dest: "{{ ansible_env.HOME }}/.local/bin/adr"
+    state: link
+  become: yes
+  ignore_errors: "{{ ansible_check_mode }}"
