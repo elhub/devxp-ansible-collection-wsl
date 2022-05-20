@@ -1,0 +1,13 @@
+---
+- name: Set up arcanist scripts
+  template:
+    src: "{{ item }}.sh.j2"
+    dest: "{{ ansible_env.HOME }}/.local/bin/{{ item }}"
+    mode: 0755
+  become_user: root
+  become: yes
+  loop:
+    - git-clone-all
+    - git-mirror
+    - git-status-all
+  ignore_errors: "{{ ansible_check_mode }}"
