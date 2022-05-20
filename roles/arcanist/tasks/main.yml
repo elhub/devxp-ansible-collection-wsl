@@ -85,3 +85,12 @@
   ignore_errors: "{{ ansible_check_mode }}"
 
 - include_tasks: templates.yml
+
+- name: Validate that arc works # noqa command-instead-of-shell
+  shell: "arc help --"
+  args:
+    executable: /bin/bash
+  register: result
+  failed_when:
+    - result.rc != 77
+  changed_when: false
