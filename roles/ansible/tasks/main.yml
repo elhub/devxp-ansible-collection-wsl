@@ -1,0 +1,12 @@
+---
+- name: Ensure ansible
+  pip:
+    name: ansible
+    extra_args: --user
+
+- name: Ensure ansible pip dependencies
+  pip:
+    name:
+      - jmespath
+      - dnspython
+      - lxml
