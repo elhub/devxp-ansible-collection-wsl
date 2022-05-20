@@ -5,6 +5,7 @@
     state: directory
   loop:
     - bin
+    - etc
     - lib
 
 - include_tasks: sshagent.yml

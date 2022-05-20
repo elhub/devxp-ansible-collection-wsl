@@ -1,0 +1,2 @@
+---
+git_hooks_path: "{{ ansible_env.HOME }}/.local/etc/git-hooks"

@@ -1,0 +1,28 @@
+---
+- name: Ensure git
+  apt:
+    name:
+      - git
+  become: yes
+
+- name: add git-hooks paths
+  file:
+    path: "{{ git_hooks_path }}"
+    state: directory
+
+- name: Set git global config
+  shell: >
+    test "$(git config --global {{ item.key }})" == "{{ item.value }}"
+    && echo "unchanged"
+    || git config --global {{ item.key }} "{{ item.value }}"
+  register: git_config
+  changed_when: git_config.stdout != "unchanged"
+  args:
+    executable: /bin/bash
+  loop:
+    - {key: "user.name", value: "$(getent passwd \"$USER\" | cut -d: -f5 | cut -d, -f1)"}
+    - {key: "user.email", value: "$(whoami)@statnett.no"}
+    - {key: "core.autocrlf", value: "input"}
+    - {key: "core.eol", value: "lf"}
+    - {key: "credential.helper", value: "cache --timeout=144000"}
+    - {key: "core.hooksPath", value: "{{ git_hooks_path }}"}
