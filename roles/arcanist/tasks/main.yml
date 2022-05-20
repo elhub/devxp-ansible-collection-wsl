@@ -1,0 +1,87 @@
+---
+# Set up arcanist on the workstation
+#
+# We use the repos on GitHub in order to control the location of the installation,
+# and keep up to speed with the latest version.
+
+- name: Ensure install path exists
+  file:
+    path: "{{ install_path }}"
+    state: directory
+    mode: 0755
+
+- name: Ensure arcanist
+  git:
+    repo: https://github.com/phacility/arcanist.git
+    dest: "{{  install_path  }}/arcanist"
+    version: master
+
+- name: Ensure dev-tools-arcanist extensions
+  git:
+    repo: https://github.com/elhub/dev-tools-arcanist.git
+    dest: "{{ install_path }}/extensions"
+    version: main
+
+- name: Write arcconfig
+  template:
+    src: arcconfig.j2
+    dest: "{{ install_path }}/config"
+    mode: 0644
+
+- name: Link /etc/arcconfig
+  file:
+    src: "{{ install_path }}/config"
+    dest: /etc/arcconfig
+    state: link
+  become_user: root
+  become: yes
+  ignore_errors: "{{ ansible_check_mode }}"
+
+- name: Clean old dev-tools installation
+  file:
+    path: "{{ ansible_env.HOME }}/.dev-tools"
+    state: absent
+
+- name: Clean old dev-tools redirects
+  file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - "/usr/local/bin/arc"
+    - "/usr/local/bin/phage"
+    - "/usr/local/bin/arc-init"
+    - "/usr/local/bin/arc-patch-clean"
+    - "/usr/local/bin/arc-status"
+  ignore_errors: "{{ ansible_check_mode }}"
+
+- name: Link arc
+  file:
+    src: "{{ install_path }}/arcanist/bin/arc"
+    dest: "{{ ansible_env.HOME }}/.local/bin/arc"
+    state: link
+  become_user: root
+  become: yes
+  ignore_errors: "{{ ansible_check_mode }}"
+
+- name: Link phage
+  file:
+    src: "{{ install_path }}/arcanist/bin/phage"
+    dest: "{{ ansible_env.HOME }}/.local/bin/phage"
+    state: link
+  become_user: root
+  become: yes
+  ignore_errors: "{{ ansible_check_mode }}"
+
+- name: Set up arcanist scripts
+  template:
+    src: "{{ item }}.sh.j2"
+    dest: "{{ ansible_env.HOME }}/.local/bin/{{ item }}"
+    mode: 0755
+  become_user: root
+  become: yes
+  loop:
+    - arc-init
+    - arc-patch-clean
+  ignore_errors: "{{ ansible_check_mode }}"
+
+- include_tasks: templates.yml
