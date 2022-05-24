@@ -1,0 +1,3 @@
+---
+# version of node to install, defaults to 'latest'
+node_version: 'node'

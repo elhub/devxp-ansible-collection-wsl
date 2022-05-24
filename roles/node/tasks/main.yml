@@ -1,0 +1,13 @@
+---
+- name: ensure nvm is installed
+  shell: >
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+  args:
+    creates: "{{ nvm_install_path }}/nvm.sh"
+
+- name: install npm
+  shell: >
+    . {{ nvm_install_path }}/nvm.sh
+    nvm install {{ node_version }}
+  register: node_version_response
+  changed_when: "'already installed' not in node_version_response.stderr"
