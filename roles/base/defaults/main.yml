@@ -5,9 +5,11 @@ default_packages:
   - colordiff
   - curl
   - dos2unix
+  - findutils
   - jq
   - make
   - nano
+  - tar
   - ubuntu-wsl
   - unzip
   - wdiff
@@ -15,3 +17,16 @@ default_packages:
 
 # Additional packages to install on WSL in addition to the ones listed above.
 config_packages:
+
+# SDKMAN
+# Set sdkman_dir to override
+sdkman_dir: "{{ ansible_env.HOME }}/.sdkman"
+
+# The directory in which to download the SDKMAN initialization script.
+sdkman_tmp_dir: /tmp
+
+# Default user/group owner of the SDKMAN directory is determined by
+# `ansible_user_id' and `ansible_user_gid', respectively.
+# They can be overidden with the following variables.
+# sdkman_user: jane.doe
+# sdkman_group: jane.doe
