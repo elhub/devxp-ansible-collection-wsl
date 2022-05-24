@@ -1,2 +1,3 @@
 ---
-install_path: "{{ user_home }}/.arcanist"
+# The location to install the arcanist scripts in.
+install_path: "{{ ansible_env.HOME }}/.arcanist"

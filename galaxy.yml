@@ -1,5 +1,5 @@
 ---
-namespace: elhub_devxp
+namespace: elhub
 name: ansible_collection_wsl
 version: 0.0.1
 readme: README.md

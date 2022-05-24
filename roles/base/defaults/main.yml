@@ -1,4 +1,5 @@
 ---
+# Default packages to install on WSL. Should generally not be overridden.
 default_packages:
   - build-essential
   - colordiff
@@ -12,4 +13,5 @@ default_packages:
   - wdiff
   - zip
 
+# Additional packages to install on WSL in addition to the ones listed above.
 config_packages:
