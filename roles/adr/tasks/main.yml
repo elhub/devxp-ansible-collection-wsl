@@ -10,7 +10,7 @@
 
 - name: Unpack adr-j lib
   unarchive:
-    src: "{{ repository }}/elhub-bin/adr-j/{{ adr_version }}/adr-j.zip"
+    src: "{{ repository }}/{{ adr_version }}/adr-j.zip"
     dest: "{{ ansible_env.HOME }}/.local/lib"
     remote_src: yes
   become: yes

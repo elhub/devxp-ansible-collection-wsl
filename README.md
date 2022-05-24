@@ -60,9 +60,12 @@ The roles in this playbook are shared by the ansible playbooks used to set up th
 For details and examples for the individual roles:
 
 * **base** role: See the documentation [here](https://github.com/elhub/ansible-collection-wsl/blob/main/roles/base/README.md)
+* **adr** role: See the documentation [here](https://github.com/elhub/ansible-collection-wsl/blob/main/roles/adr/README.md)
+* **ansible** role: See the documentation [here](https://github.com/elhub/ansible-collection-wsl/blob/main/roles/ansible/README.md)
 * **arcanist** role: See the documentation [here](https://github.com/elhub/ansible-collection-wsl/blob/main/roles/arcanist/README.md)
 * **git** role: See the documentation [here](https://github.com/elhub/ansible-collection-wsl/blob/main/roles/git/README.md)
-* **java** role: See the documentation [here](https://github.com/elhub/ansible-collection-wsl/blob/main/roles/java/README.md)
+* **git_utils** role: See the documentation [here](https://github.com/elhub/ansible-collection-wsl/blob/main/roles/git_utils/README.md)
+* **node** role: See the documentation [here](https://github.com/elhub/ansible-collection-wsl/blob/main/roles/node/README.md)
 
 ## Contributing
 
