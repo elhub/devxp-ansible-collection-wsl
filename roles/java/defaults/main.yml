@@ -1,0 +1,22 @@
+---
+# SDKMAN
+# Where to find sdkman
+sdkman_dir: "{{ ansible_env.HOME }}/.sdkman"
+
+# Packages to Install
+# Default packages - use sdkman_additional_packages to append additional packages to install
+sdkman_default_packages:
+  - {sdk: java, version: 8.0.302-open}
+
+# Additional packages to install
+sdkman_additional_packages: []
+
+# The list of actual packages installed
+sdkman_install_packages: "{{ sdkman_default_packages + sdkman_additional_packages }}"
+
+# Packages to Uninstall
+# By default none.
+sdkman_uninstall_packages: []
+
+# Configure default package versions
+sdkman_defaults: {}

@@ -62,7 +62,7 @@ For details and examples for the individual roles:
 * **base** role: See the documentation [here](https://github.com/elhub/ansible-collection-wsl/blob/main/roles/base/README.md)
 * **arcanist** role: See the documentation [here](https://github.com/elhub/ansible-collection-wsl/blob/main/roles/arcanist/README.md)
 * **git** role: See the documentation [here](https://github.com/elhub/ansible-collection-wsl/blob/main/roles/git/README.md)
-
+* **java** role: See the documentation [here](https://github.com/elhub/ansible-collection-wsl/blob/main/roles/java/README.md)
 
 ## Contributing
 

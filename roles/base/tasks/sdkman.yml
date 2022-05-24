@@ -1,12 +1,12 @@
 ---
 - name: Set SDKMAN user/group vars
   set_fact:
-    sdkman_user: '{{ sdkman_user | default(ansible_user_id) }}'
-    sdkman_group: '{{ sdkman_group | default(ansible_user_gid) }}'
+    sdkman_user: "{{ sdkman_user | default(ansible_user_id) }}"
+    sdkman_group: "{{ sdkman_group | default(ansible_user_gid) }}"
 
 - name: Check for SDKMAN installation
   stat:
-    path: '{{ sdkman_dir }}/bin/sdkman-init.sh'
+    path: "{{ sdkman_dir }}/bin/sdkman-init.sh"
   register: sdkman_init
 
 # Install SDKMAN if not uninstalled
@@ -78,3 +78,9 @@
     - .zshrc
   loop_control:
     loop_var: sdkman_profile
+
+- name: Flush SDK caches
+  shell: source {{ sdkman_dir }}/bin/sdkman-init.sh && sdk flush
+  args:
+    executable: /bin/bash
+  changed_when: false
