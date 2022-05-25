@@ -1,0 +1,3 @@
+---
+dependencies:
+  - role: elhub.ansible_collection_wsl.base

@@ -57,15 +57,21 @@ collections:
 The roles in this playbook are shared by the ansible playbooks used to set up the developer PC's; see e.g.,
 [devxp-linux](https://github.com/elhub/devxp-linux).
 
-For details and examples for the individual roles:
+The base role is used to bootstrap the environment for the other roles.
 
 * **base** role: See the documentation [here](https://github.com/elhub/ansible-collection-wsl/blob/main/roles/base/README.md)
+
+For details and examples for the other individual roles:
+
 * **adr** role: See the documentation [here](https://github.com/elhub/ansible-collection-wsl/blob/main/roles/adr/README.md)
 * **ansible** role: See the documentation [here](https://github.com/elhub/ansible-collection-wsl/blob/main/roles/ansible/README.md)
 * **arcanist** role: See the documentation [here](https://github.com/elhub/ansible-collection-wsl/blob/main/roles/arcanist/README.md)
 * **git** role: See the documentation [here](https://github.com/elhub/ansible-collection-wsl/blob/main/roles/git/README.md)
 * **git_utils** role: See the documentation [here](https://github.com/elhub/ansible-collection-wsl/blob/main/roles/git_utils/README.md)
+* **java** role: See the documentation [here](https://github.com/elhub/ansible-collection-wsl/blob/main/roles/java/README.md)
+* **kotlin** role: See the documentation [here](https://github.com/elhub/ansible-collection-wsl/blob/main/roles/kotlin/README.md)
 * **node** role: See the documentation [here](https://github.com/elhub/ansible-collection-wsl/blob/main/roles/node/README.md)
+* **python** role: See the documentation [here](https://github.com/elhub/ansible-collection-wsl/blob/main/roles/python/README.md)
 
 ## Contributing
 

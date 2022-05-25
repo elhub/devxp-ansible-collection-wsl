@@ -1,3 +1,6 @@
 ---
 # version of node to install, defaults to 'latest'
 node_version: 'node'
+
+# Install path for nvm (defaults to $HOME/.nvm)
+nvm_install_path: "{{ ansible_env.HOME }}/.nvm"

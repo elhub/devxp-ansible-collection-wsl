@@ -2,10 +2,9 @@
 - name: Install Kotlin packages
   shell: >
     source {{ sdkman_dir }}/bin/sdkman-init.sh &&
-    sdk install {{ item.sdk }} {{ item.version | default('') }} {{ item.localpath | default('') }}
+    sdk install kotlin {{ sdkman_install_versions }}
   args:
     executable: /bin/bash
-  loop: "{{ sdkman_install_packages }}"
   register: sdk_install
   changed_when: |
     'is already installed.' not in sdk_install.stdout
@@ -15,24 +14,22 @@
 - name: Uninstall SDK candidates/versions
   shell: >
     source {{ sdkman_dir }}/bin/sdkman-init.sh &&
-    sdk uninstall {{ item.sdk }} {{ item.version }}
+    sdk uninstall kotlin {{ item }}
   args:
     executable: /bin/bash
-  loop: "{{ sdkman_uninstall_packages }}"
+  loop: "{{ sdkman_uninstall_versions }}"
   register: sdk_uninstall
-  changed_when: not item.candidate + " " + item.version + " is not installed." in sdk_uninstall.stdout
+  changed_when: not 'is not installed.' in sdk_uninstall.stdout
 
 - name: Get SDK defaults
-  shell: source {{ sdkman_dir }}/bin/sdkman-init.sh && sdk current {{ item }}
+  shell: source {{ sdkman_dir }}/bin/sdkman-init.sh && sdk current kotlin
   args:
     executable: /bin/bash
   register: get_sdk_defaults
   changed_when: false
-  loop: "{{ sdkman_install_packages | map(attribute='sdk') | unique | list }}"
 
 - name: Set SDK defaults
-  shell: source {{ sdkman_dir }}/bin/sdkman-init.sh && sdk default {{ item.key }} {{ item.value }}
+  shell: source {{ sdkman_dir }}/bin/sdkman-init.sh && sdk default kotlin {{ sdkman_default_version }}
   args:
     executable: /bin/bash
-  loop: "{{ sdkman_defaults | dict2items }}"
-  changed_when: not item.value in (get_sdk_defaults.results | selectattr('item', 'equalto', item.key) | first).stdout
+  changed_when: not sdkman_default_version in (get_sdk_defaults.results | selectattr('item', 'equalto', 'kotlin') | first).stdout

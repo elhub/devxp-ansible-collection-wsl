@@ -1,2 +1,0 @@
----
-nvm_install_path: "{{ ansible_env.HOME }}/.nvm"
