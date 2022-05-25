@@ -10,6 +10,8 @@
     state: directory
     mode: 0755
 
+- include_tasks: php.yml
+
 - name: Ensure arcanist
   git:
     repo: https://github.com/phacility/arcanist.git

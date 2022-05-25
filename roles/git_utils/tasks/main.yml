@@ -1,5 +1,17 @@
 ---
-- name: Set up arcanist scripts
+- name: Clean old dev-tools installation
+  file:
+    path: "/usr/local/bin/{{ item }}}"
+    state: absent
+  become_user: root
+  become: yes
+  loop:
+    - git-clone-all
+    - git-mirror
+    - git-status-all
+  ignore_errors: "{{ ansible_check_mode }}"
+
+- name: Set up git util scripts
   template:
     src: "{{ item }}.sh.j2"
     dest: "{{ ansible_env.HOME }}/.local/bin/{{ item }}"
