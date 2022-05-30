@@ -1,0 +1,13 @@
+---
+- name: Validate role
+  hosts: all
+  gather_facts: false
+  tasks:
+  - name: Run sdk
+    shell: "source $HOME/.sdkman/bin/sdkman-init.sh && sdk help"
+    args:
+      executable: /bin/bash
+    register: result
+    changed_when: false
+    failed_when:
+      - result.rc != 0

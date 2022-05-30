@@ -1,0 +1,10 @@
+---
+- name: Install molecule
+  pip:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - molecule
+      - molecule-lint
+      - molecule-docker

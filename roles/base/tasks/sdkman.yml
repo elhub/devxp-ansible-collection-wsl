@@ -43,36 +43,14 @@
     - sdkman_privilege
 
 - name: Update SDKMAN
-  shell: . {{ sdkman_dir }}/bin/sdkman-init.sh && sdk selfupdate
+  shell: ". {{ sdkman_dir }}/bin/sdkman-init.sh && sdk selfupdate"
   args:
     executable: /bin/bash
   register: sdk_selfupdate
   changed_when: sdk_selfupdate.stdout != 'No update available at this time.'
-  when: sdkman_update | bool
 
-- block:
-    - name: "Set {{ sdkman_profile }} path"
-      set_fact:
-        sdkman_profile_path: "{{ ansible_env.HOME }}/{{ sdkman_profile }}"
-
-    - name: "Detect settings in {{ sdkman_profile_path }}"
-      command: "grep 'sdkman-init.sh' '{{ sdkman_profile_path }}'"
-      changed_when: false
-      failed_when: false
-      register: sdkman_profile_result
-
-    - name: "Add SDKMAN_OFFLINE_MODE to {{ sdkman_profile_path }}"
-      lineinfile:
-        path: "{{ sdkman_profile_path }}"
-        regexp: '^export SDKMAN_OFFLINE_MODE='
-        line: "export SDKMAN_OFFLINE_MODE={{ 'true' if sdkman_offline_mode else 'false' }}"
-      when: sdkman_profile_result.rc == 0
-
-      environment:
-        SDKMAN_DIR: "{{ sdkman_dir }}"
-        SDKMAN_OFFLINE_MODE: "false"
-      become: "{{ sdkman_user != ansible_user_id }}"
-      become_user: "{{ sdkman_user }}"
+- name: Persist additional SDKMAN environment variables
+  include_tasks: sdkman_env.yml
   loop:
     - .bashrc
     - .zshrc

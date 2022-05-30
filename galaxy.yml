@@ -1,11 +1,11 @@
 ---
 namespace: elhub
 name: ansible_collection_wsl
-version: 0.0.1
+version: 1.0-SNAPSHOT
 readme: README.md
 authors:
   - "@elhub/devxp"
-description: >-
+description: >
   WSL Ansible Collection that facilitates the installation and configuration
   of the varied Linux(WSL) tools that are used at Elhub.
 license:

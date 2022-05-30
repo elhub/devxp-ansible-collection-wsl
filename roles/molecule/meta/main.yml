@@ -1,6 +1,6 @@
 ---
 galaxy_info:
-  role_name: adr
+  role_name: molecule
   namespace: elhub
   author: elhub/devxp
   description: See README
@@ -13,8 +13,8 @@ galaxy_info:
         - 20.04
   galaxy_tags: []
 
-# Although technically, adr needs neither base or java to install, JAVA_HOME needs to be set in order for the app to
-# be able to run.
 dependencies:
   - role: base
-  - role: java
+  - role: python
+  - role: ansible
+  - role: docker

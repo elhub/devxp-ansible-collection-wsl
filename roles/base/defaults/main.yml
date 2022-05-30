@@ -1,14 +1,18 @@
 ---
 # Default packages to install on WSL. Should generally not be overridden.
 default_packages:
+  - apt-transport-https
   - build-essential
+  - ca-certificates
   - colordiff
   - curl
   - dos2unix
   - findutils
+  - gnupg-agent
   - jq
   - make
   - nano
+  - software-properties-common
   - tar
   - ubuntu-wsl
   - unzip
@@ -24,6 +28,9 @@ sdkman_dir: "{{ ansible_env.HOME }}/.sdkman"
 
 # The directory in which to download the SDKMAN initialization script.
 sdkman_tmp_dir: /tmp
+
+# Validate sdman when downloading
+sdkman_validate_ssl: true
 
 # Default user/group owner of the SDKMAN directory is determined by
 # `ansible_user_id' and `ansible_user_gid', respectively.

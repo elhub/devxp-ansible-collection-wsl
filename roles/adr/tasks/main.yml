@@ -6,6 +6,7 @@
   loop:
     - "/usr/local/lib/adr-j-3.1.0-SNAPSHOT"
     - "/usr/local/bin/adr"
+  become: yes
   ignore_errors: "{{ ansible_check_mode }}"
 
 - name: Unpack adr-j lib

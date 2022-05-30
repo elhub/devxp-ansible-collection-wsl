@@ -1,0 +1,10 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Install base"
+      include_role:
+        name: base
+    - name: "Install docker"
+      include_role:
+        name: docker

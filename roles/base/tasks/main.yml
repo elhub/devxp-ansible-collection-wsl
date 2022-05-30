@@ -2,6 +2,7 @@
 - name: add .local paths
   file:
     path: "{{ ansible_env.HOME }}/.local/{{ item }}"
+    mode: 0755
     state: directory
   loop:
     - bin
