@@ -1,4 +1,8 @@
 ---
+- name: Set docker user
+  set_fact:
+    docker_user: "{{ docker_user | default(ansible_user_id) }}"
+
 - name: Add apt signing key for Docker
   apt_key:
     url: https://download.docker.com/linux/ubuntu/gpg
@@ -25,7 +29,7 @@
 
 - name: Add user to docker group
   user:
-    name: "{{ ansible_user }}"
+    name: "{{ docker_user }}"
     groups: docker
     append: yes
   become: yes

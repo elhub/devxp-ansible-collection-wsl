@@ -1,0 +1,13 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Install base"
+      include_role:
+        name: base
+    - name: "Install git"
+      include_role:
+        name: git
+    - name: "Install arcanist"
+      include_role:
+        name: arcanist

@@ -2,10 +2,11 @@
 - name: Install Kotlin packages
   shell: >
     source {{ sdkman_dir }}/bin/sdkman-init.sh &&
-    sdk install kotlin {{ sdkman_install_versions }}
+    sdk install kotlin {{ item }}
   args:
     executable: /bin/bash
   register: sdk_install
+  loop: '{{ sdkman_install_versions }}'
   changed_when: |
     'is already installed.' not in sdk_install.stdout
   failed_when: |
@@ -29,7 +30,7 @@
   changed_when: false
 
 - name: Set SDK defaults
-  shell: source {{ sdkman_dir }}/bin/sdkman-init.sh && sdk default kotlin {{ sdkman_default_version }}
+  shell: source {{ sdkman_dir }}/bin/sdkman-init.sh && sdk default kotlin {{ sdkman_default_version | first }}
   args:
     executable: /bin/bash
-  changed_when: not sdkman_default_version in (get_sdk_defaults.results | selectattr('item', 'equalto', 'kotlin') | first).stdout
+  changed_when: not (sdkman_default_version | first) in get_sdk_defaults.stdout

@@ -6,7 +6,8 @@ sdkman_dir: "{{ ansible_env.HOME }}/.sdkman"
 # Kotlin versions to Install
 # This is also set as the default version - override this if you want a different default
 # Use sdkman_additional_versions to add more than version of the SDK
-sdkman_default_version: 8.0.302-open
+sdkman_default_version:
+  - 8.0.302-open
 
 # Additional versions to install
 sdkman_additional_versions: []

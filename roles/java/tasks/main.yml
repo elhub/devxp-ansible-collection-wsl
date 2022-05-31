@@ -2,9 +2,10 @@
 - name: Install Java packages
   shell: >
     source {{ sdkman_dir }}/bin/sdkman-init.sh &&
-    sdk install java {{ sdkman_install_versions }}
+    sdk install java {{ item }}
   args:
     executable: /bin/bash
+  loop: "{{ sdkman_install_versions }}"
   register: sdk_install
   changed_when: |
     'is already installed.' not in sdk_install.stdout
@@ -29,7 +30,7 @@
   changed_when: false
 
 - name: Set SDK defaults
-  shell: source {{ sdkman_dir }}/bin/sdkman-init.sh && sdk default java {{ sdkman_default_version }}
+  shell: source {{ sdkman_dir }}/bin/sdkman-init.sh && sdk default java {{ sdkman_default_version | first }}
   args:
     executable: /bin/bash
-  changed_when: not sdkman_default_version in (get_sdk_defaults.results | selectattr('item', 'equalto', 'java') | first).stdout
+  changed_when: not (sdkman_default_version | first) in get_sdk_defaults.stdout

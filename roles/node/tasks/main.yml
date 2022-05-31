@@ -4,6 +4,8 @@
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
   args:
     creates: "{{ nvm_install_path }}/nvm.sh"
+  tags:
+    - skip_ansible_lint  # Temporary skip until file can be cleaned up
 
 - name: install npm
   shell: >

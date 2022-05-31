@@ -1,3 +1,17 @@
 ---
+galaxy_info:
+  role_name: git
+  namespace: elhub
+  author: elhub/devxp
+  description: See README
+  company: Elhub
+  license: MIT
+  min_ansible_version: 2.2
+  platforms:
+    - name: Ubuntu
+      versions:
+        - 20.04
+  galaxy_tags: []
+
 dependencies:
-  - role: elhub.ansible_collection_wsl.base
+  - role: base

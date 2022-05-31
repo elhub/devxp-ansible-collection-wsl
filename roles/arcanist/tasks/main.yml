@@ -55,6 +55,7 @@
     - "/usr/local/bin/arc-patch-clean"
     - "/usr/local/bin/arc-status"
   ignore_errors: "{{ ansible_check_mode }}"
+  become: yes
 
 - name: Link arc
   file:

@@ -4,7 +4,8 @@
   gather_facts: false
   tasks:
   - name: Run adr
-    command: "adr help"
+    shell: >
+      source ~/.sdkman/bin/sdkman-init.sh && ~/.local/bin/adr help
     args:
       executable: /bin/bash
     register: result

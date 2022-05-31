@@ -3,6 +3,8 @@
   pip:
     name: ansible
     extra_args: --user
+  environment:
+    DISPLAY: ''  # Fix to resolve extremely slow installs on WSL2 (see https://github.com/microsoft/WSL/issues/6643)
 
 - name: Ensure ansible pip dependencies
   pip:
@@ -10,3 +12,6 @@
       - jmespath
       - dnspython
       - lxml
+    extra_args: --user
+  environment:
+    DISPLAY: ''  # Fix to resolve extremely slow installs on WSL2 (see https://github.com/microsoft/WSL/issues/6643)

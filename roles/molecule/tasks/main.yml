@@ -3,8 +3,10 @@
   pip:
     name: "{{ packages }}"
     state: present
+    extra_args: --user
   vars:
     packages:
       - molecule
-      - molecule-lint
       - molecule-docker
+  environment:
+    DISPLAY: ''  # Fix to resolve extremely slow installs on WSL2 (see https://github.com/microsoft/WSL/issues/6643)

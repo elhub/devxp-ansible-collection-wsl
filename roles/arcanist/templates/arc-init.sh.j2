@@ -108,7 +108,7 @@ assign_positional_args 1 "${_positionals[@]}"
 # [ <-- needed because of Argbash
 set -eE
 
-TEMPLATE_PATH={{devtools_path}}/templates/repo
+TEMPLATE_PATH={{ install_path }}/templates/repo
 
 # shellcheck disable=SC2154
 if ! echo "$_arg_action" | grep -E '(generic|gradle|maven|npm)' >/dev/null; then

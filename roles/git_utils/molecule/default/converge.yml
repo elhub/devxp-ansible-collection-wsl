@@ -1,0 +1,10 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Install base"
+      include_role:
+        name: base
+    - name: "Install git_utils"
+      include_role:
+        name: git_utils

@@ -1,0 +1,3 @@
+# Default user for docker. Defaults to 'ansible_user_id'
+# Can be overidden with the following variable
+# docker_user: jane.doe

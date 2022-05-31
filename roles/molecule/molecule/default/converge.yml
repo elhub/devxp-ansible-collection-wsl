@@ -5,6 +5,6 @@
     - name: "Install base"
       include_role:
         name: base
-    - name: "Install docker"
+    - name: "Install molecule"
       include_role:
-        name: docker
+        name: molecule
