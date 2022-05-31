@@ -1,38 +1,38 @@
-Role Name
-=========
+# ansible-collection-wsl.linters
 
-A brief description of the role goes here.
+This role install is used to install the standard set of linters on the WSL dev box. It can be configured to
+only install a subset of these linters.
 
-Requirements
-------------
+## Variables
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+See [defaults.yml](https://github.com/elhub/ansible-collection-wsl/blob/main/roles/linters/defaults/main.yml).
 
-Role Variables
---------------
+## Examples
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+Run the role using a playbook as follows:
 
-Dependencies
-------------
+```yaml
+- name: Deploy devxp
+  hosts:
+    - localhost
+  collections:
+    - elhub.ansible_collection_wsl
+  roles:
+    - role: linters
+```
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+To change which linters are installed:
 
-Example Playbook
-----------------
-
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
-
-License
--------
-
-BSD
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+```yaml
+- name: Deploy devxp
+  hosts:
+    - localhost
+  collections:
+    - elhub_devxp.ansible_collection_wsl
+  roles:
+    - role: linters
+      vars:
+        default_linters:
+          - ansible_lint
+          - yamllint
+```
