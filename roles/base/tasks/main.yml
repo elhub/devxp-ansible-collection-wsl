@@ -1,5 +1,5 @@
 ---
-- name: add .local paths
+- name: add {{ ansible_env.HOME }}/.local paths
   file:
     path: "{{ ansible_env.HOME }}/.local/{{ item }}"
     mode: 0755

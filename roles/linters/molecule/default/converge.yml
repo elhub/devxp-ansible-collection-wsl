@@ -1,0 +1,13 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Install base"
+      include_role:
+        name: base
+    - name: "Install java"
+      include_role:
+        name: java
+    - name: "Install linters"
+      include_role:
+        name: linters

@@ -1,0 +1,7 @@
+---
+- name: Ensure yamllint
+  apt:
+    name: yamllint
+  become_user: root
+  become: yes
+  ignore_errors: "{{ ansible_check_mode }}"

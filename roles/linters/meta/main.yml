@@ -1,0 +1,18 @@
+---
+galaxy_info:
+  role_name: linters
+  namespace: elhub
+  author: elhub/devxp
+  description: See README
+  company: Elhub
+  license: MIT
+  min_ansible_version: 2.1
+  platforms:
+    - name: Ubuntu
+      versions:
+        - 20.04
+  galaxy_tags: []
+
+dependencies:
+  - role: base
+  - role: java
