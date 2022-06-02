@@ -51,11 +51,6 @@
 
 - name: Persist additional SDKMAN environment variables
   include_tasks: sdkman_env.yml
-  loop:
-    - .bashrc
-    - .zshrc
-  loop_control:
-    loop_var: sdkman_profile
 
 - name: Flush SDK caches
   shell: source {{ sdkman_dir }}/bin/sdkman-init.sh && sdk flush
