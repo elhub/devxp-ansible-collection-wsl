@@ -12,8 +12,7 @@ import jetbrains.buildServer.configs.kotlin.v2019_2.BuildType
 import jetbrains.buildServer.configs.kotlin.v2019_2.VcsRoot
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
 
-
-version = "2022.4"
+version = "2022.04"
 
 project {
 
