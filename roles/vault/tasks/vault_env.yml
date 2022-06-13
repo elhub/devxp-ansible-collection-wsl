@@ -1,0 +1,17 @@
+- name: Template .vaultrc
+  template:
+    src: "vaultrc.j2"
+    dest: "{{ ansible_env.HOME }}/.vaultrc"
+    mode: "u=rw,go=r"
+
+- name: Configure .bashrc
+  lineinfile:
+    path: "{{ item }}"
+    state: present
+    regexp: "^source {{ ansible_env.HOME }}/.vaultrc"
+    line: "source {{ ansible_env.HOME }}/.vaultrc"
+    create: yes
+    mode: "u=rw,go=r"
+  loop:
+    - '~/.bashrc'
+    - '~/.zshrc'

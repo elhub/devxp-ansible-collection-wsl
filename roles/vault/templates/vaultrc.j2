@@ -1,0 +1,12 @@
+export VAULT_ADDR="https://vault.elhub.cloud:8200"
+
+# Just a little helper to keep vault alive
+vault_autorenew() {
+  while true; do
+    vault token renew > /dev/null
+    echo Token renewed. $(date) Rerun in 10 minutes.
+    sleep 600
+  done;
+}
+
+export -f vault_autorenew
