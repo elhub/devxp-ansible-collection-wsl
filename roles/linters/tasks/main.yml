@@ -6,10 +6,13 @@
     mode: 0755
 
 - include_tasks: checkstyle.yml
-  when: '"checkstyle" in {{ default_linters }}'
+  when: '"checkstyle" in default_linters'
+
 - include_tasks: detekt.yml
-  when: '"detekt" in {{ default_linters }}'
+  when: '"detekt" in default_linters'
+
 - include_tasks: yamllint.yml
-  when: '"yamllint" in {{ default_linters }}'
+  when: '"yamllint" in default_linters'
+
 - include_tasks: ansible_lint.yml
-  when: '"ansible_lint" in {{ default_linters }}'
+  when: '"ansible_lint" in default_linters'
