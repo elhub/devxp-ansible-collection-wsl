@@ -11,6 +11,7 @@ galaxy_info:
     - name: Ubuntu
       versions:
         - 20.04
+        - 22.04
   galaxy_tags: []
 
 dependencies:

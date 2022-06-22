@@ -6,3 +6,13 @@
       - php7.4-curl
       - php7.4-xml
   become: yes
+  when: ansible_distribution_version == "20.04"
+
+- name: Ensure php
+  apt:
+    name:
+      - php8.1
+      - php8.1-curl
+      - php8.1-xml
+  become: yes
+  when: ansible_distribution_version == "22.04"
