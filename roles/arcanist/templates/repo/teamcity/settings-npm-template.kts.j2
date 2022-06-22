@@ -12,88 +12,81 @@ import no.elhub.common.build.configuration.ProjectType
 import no.elhub.common.build.configuration.SonarScan
 import no.elhub.common.build.configuration.UnitTest
 
-version = "2021.1"
+version = "2022.04"
 
 project {
-
-    val projectId = "no.elhub.example:example-project"
-    val projectType = ProjectType.NPM
-    val artifactoryRepository = "elhub-npm-release-local"
-    val buildDir = "dist"
 
     params {
         param("teamcity.ui.settings.readOnly", "true")
     }
 
-    val buildChain = sequential {
+    val projectId = "no.elhub.${elhub_platform_name}:${elhub_module_name}"
+    val projectType = ProjectType.NPM
+    val artifactoryRepository = "elhub-npm-release-local"
+    val buildDir = "dist"
 
-        buildType(
-            UnitTest(
-                UnitTest.Config(
-                    vcsRoot = DslContext.settingsRoot,
-                    type = projectType
-                )
-            )
-        )
-
-        buildType(
-            SonarScan(
-                SonarScan.Config(
-                    vcsRoot = DslContext.settingsRoot,
-                    type = projectType,
-                    sonarId = projectId
-                )
-            )
-        )
-
-         val assembleBuildType = buildType(
-            Assemble(
-                Assemble.Config(
-                    vcsRoot = DslContext.settingsRoot,
-                    type = projectType
-                )
-            )
-        ) {
-             artifactRules = "${buildDir} => ${buildDir}.zip"
-        }
-        buildType(assembleBuildType)
-
-        buildType(
-            AutoRelease(
-                AutoRelease.Config(
-                    vcsRoot = DslContext.settingsRoot,
-                    type = projectType
-                )
-            ) {
-                triggers {
-                    vcs {
-                        branchFilter = "+:<default>"
-                        quietPeriodMode = VcsTrigger.QuietPeriodMode.USE_DEFAULT
-                    }
-                }
-                dependencies {
-                    assembleBuildType.let {
-                        artifacts(it) {
-                            buildRule = sameChainOrLastFinished()
-                            artifactRules = "+:$buildDir.zip!** => $buildDir"
-                        }
-                    }
-                }
-            }
-        )
-
-    }
-
-    buildChain.buildTypes().forEach { buildType(it) }
+    val sonarScanConfig = SonarScan.Config(
+        vcsRoot = DslContext.settingsRoot,
+        type = projectType,
+        sonarId = projectId
+    )
 
     buildType(
         CodeReview(
             CodeReview.Config(
                 vcsRoot = DslContext.settingsRoot,
                 type = projectType,
-                sonarId = projectId
+                sonarScanConfig = sonarScanConfig,
             )
         )
     )
 
+    val unitTest = UnitTest(
+        UnitTest.Config(
+            vcsRoot = DslContext.settingsRoot,
+            type = projectType
+        )
+    )
+
+    val sonarScan = SonarScan(sonarScanConfig) {
+        dependencies {
+            snapshot(unitTest) { }
+        }
+    }
+
+    val assemble = Assemble(
+        Assemble.Config(
+            vcsRoot = DslContext.settingsRoot,
+            type = projectType
+        )
+    ) {
+        dependencies {
+            snapshot(sonarScan) { }
+        }
+    }
+
+    val autoRelease = AutoRelease(
+        AutoRelease.Config(
+            vcsRoot = DslContext.settingsRoot,
+            type = projectType
+        )
+    ) {
+        dependencies {
+            snapshot(assemble) { }
+        }
+    }
+
+    val publishDocs = PublishDocs(
+        PublishDocs.Config(
+            vcsRoot = DslContext.settingsRoot,
+            type = projectType,
+            dest = "no.elhub.${elhub_platform_name}/${elhub_module_name}"
+        )
+    ) {
+        dependencies {
+            snapshot(autoRelease) { }
+        }
+    }
+
+    listOf(unitTest, sonarScan, assemble, autoRelease, publishDocs).forEach { buildType(it) }
 }
