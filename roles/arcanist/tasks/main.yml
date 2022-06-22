@@ -90,7 +90,7 @@
 - include_tasks: templates.yml
 
 - name: Validate that arc works # noqa command-instead-of-shell
-  shell: "arc help --"
+  shell: "{{ ansible_env.HOME }}/.local/bin/arc help --"
   args:
     executable: /bin/bash
   register: result
