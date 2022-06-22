@@ -9,3 +9,5 @@
     - role: deploy_logger
       vars:
         command: post
+        environment:
+          ELHUB_DEPLOY_PWD: "{{ lookup('community.hashi_vault.hashi_vault', 'elhub/data/' + elhub_env + '/db/pdb/elhub_custom/users/elhub_deploy:password') }}"
