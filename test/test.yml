@@ -1,0 +1,24 @@
+---
+- name: Deploy devxp-linux
+  hosts:
+    - localhost
+  roles:
+    # Install basics
+    - role: base
+    - role: git
+    - role: docker
+    - role: molecule
+    - role: vault
+    # Install SDK
+    - role: python
+    - role: ansible
+    - role: java
+    - role: kotlin
+    - role: node
+    # Install Workflow
+#    - role: adr # To test this role, uncomment and repo to download the adr-j.jar
+#      vars:
+#        repository: TODO
+    - role: arcanist
+    - role: git_utils
+    - role: linters

@@ -89,13 +89,23 @@ For details and examples for the other individual roles:
 
 ## Testing
 
-The roles can be tested using molecule. Ensure you have python, ansible, docker, and molecule installed (the roles in
-this collection should ensure that your environment is set up correctly) and a docker backend running. Then change to
-the role you wish to validate and run:
+### Molecule
+
+The roles can be tested using molecule. Ensure you have python, ansible, docker, and molecule installed (the roles in this collection should ensure that your environment is set up correctly) and a docker backend running. Then change to the role you wish to validate and run:
 
 ```bash
 molecule test
 ```
+
+### Testing with Docker
+
+While molecule is great for "unit testing", it can be desirable to test new things in a 'test environment', before adding these roles to a playbook that sets up your main workstation. For this we build a minimal Docker image which can then used to create container and validate things work as expected.
+
+To build the image run: `docker build -f test/Dockerfile -t wsl-test:latest .`
+
+You might want to install only certain roles from this collection, or maybe set some specific vars for any given role. In this case modify the [test.yml](test/test.yml) accordingly before building the image.
+
+Then you can ssh into the container with `docker run -it wsl-test:latest` and test things out before you install them on your main system.
 
 ## Contributing
 
