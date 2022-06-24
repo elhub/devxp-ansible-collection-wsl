@@ -8,6 +8,7 @@ default_packages:
   - curl
   - dos2unix
   - findutils
+  - gettext-base
   - gnupg-agent
   - jq
   - make

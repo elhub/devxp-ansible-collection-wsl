@@ -3,16 +3,16 @@
 <!--
 *** We make use of project shields to provide useful stats about the project at a glance.
 *** Add the relevant IDs/URLs as suggested in the comments
-*** For the sonar links, do a query replace of no.elhub.tools with the relevant package of your project and dev-tools-linux with the name of the project
+*** For the sonar links, do a query replace of no.elhub.${elhub_platform_name} with the relevant package of your project and ${elhub_module_name} with the name of the project
 -->
 [<img src="https://img.shields.io/badge/repo-github-blue" alt="">](<!--TODO Add repository url here -->)
 [<img src="https://img.shields.io/badge/issues-jira-orange" alt="">](<!--TODO Add a jira url here -->)
 [<img src="https://teamcity.elhub.cloud/app/rest/builds/buildType:(id:<!--TODO Add TeamCity project ID here -->)/statusIcon" alt="">](https://teamcity.elhub.cloud/buildConfiguration/<!--TODO Add TeamCity project ID here -->)
-[<img src="https://sonar.elhub.cloud/api/project_badges/measure?project=no.elhub.tools%3Adev-tools-linux&metric=alert_status" alt="">](https://sonar.elhub.cloud/dashboard?id=no.elhub.tools%3Adev-tools-linux)
-[<img src="https://sonar.elhub.cloud/api/project_badges/measure?project=no.elhub.tools%3Adev-tools-linux&metric=ncloc" alt="">](https://sonar.elhub.cloud/dashboard?id=no.elhub.tools%3Adev-tools-linux)
-[<img src="https://sonar.elhub.cloud/api/project_badges/measure?project=no.elhub.tools%3Adev-tools-linux&metric=bugs" alt="">](https://sonar.elhub.cloud/dashboard?id=no.elhub.tools%3Adev-tools-linux)
-[<img src="https://sonar.elhub.cloud/api/project_badges/measure?project=no.elhub.tools%3Adev-tools-linux&metric=vulnerabilities" alt="">](https://sonar.elhub.cloud/dashboard?id=no.elhub.tools%3Adev-tools-linux)
-[<img src="https://sonar.elhub.cloud/api/project_badges/measure?project=no.elhub.tools%3Adev-tools-linux&metric=coverage" alt="">](https://sonar.elhub.cloud/dashboard?id=no.elhub.tools%3Adev-tools-linux)
+[<img src="https://sonar.elhub.cloud/api/project_badges/measure?project=no.elhub.${elhub_platform_name}%3A${elhub_module_name}&metric=alert_status" alt="">](https://sonar.elhub.cloud/dashboard?id=no.elhub.${elhub_platform_name}%3A${elhub_module_name})
+[<img src="https://sonar.elhub.cloud/api/project_badges/measure?project=no.elhub.${elhub_platform_name}%3A${elhub_module_name}&metric=ncloc" alt="">](https://sonar.elhub.cloud/dashboard?id=no.elhub.${elhub_platform_name}%3A${elhub_module_name})
+[<img src="https://sonar.elhub.cloud/api/project_badges/measure?project=no.elhub.${elhub_platform_name}%3A${elhub_module_name}&metric=bugs" alt="">](https://sonar.elhub.cloud/dashboard?id=no.elhub.${elhub_platform_name}%3A${elhub_module_name})
+[<img src="https://sonar.elhub.cloud/api/project_badges/measure?project=no.elhub.${elhub_platform_name}%3A${elhub_module_name}&metric=vulnerabilities" alt="">](https://sonar.elhub.cloud/dashboard?id=no.elhub.${elhub_platform_name}%3A${elhub_module_name})
+[<img src="https://sonar.elhub.cloud/api/project_badges/measure?project=no.elhub.${elhub_platform_name}%3A${elhub_module_name}&metric=coverage" alt="">](https://sonar.elhub.cloud/dashboard?id=no.elhub.${elhub_platform_name}%3A${elhub_module_name})
 
 ## Table of Contents
 
