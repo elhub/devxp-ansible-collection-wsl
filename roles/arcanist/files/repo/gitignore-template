@@ -1,10 +1,8 @@
 ### Elhub-Ansible
 ansible/galaxy/*
 ansible/inventories/*
-ansible/vault_ids/*
 !ansible/galaxy/.gitkeep
 !ansible/inventories/.gitkeep
-!ansible/vault_ids/.gitkeep
 
 ### Intellij+all Patch ###
 # Ignores the whole .idea folder and all .iml files
@@ -47,6 +45,7 @@ pom.xml.versionsBackup
 pom.xml.next
 release.properties
 dependency-reduced-pom.xml
+buildNumber.properties
 .mvn/timing.properties
 # https://github.com/takari/maven-wrapper#usage-without-binary-jar
 .mvn/wrapper/maven-wrapper.jar

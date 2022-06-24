@@ -15,7 +15,7 @@
 - name: Ensure arcanist
   git:
     repo: https://github.com/phacility/arcanist.git
-    dest: "{{  install_path  }}/arcanist"
+    dest: "{{ install_path }}/arcanist"
     version: master
 
 - name: Ensure dev-tools-arcanist extensions
