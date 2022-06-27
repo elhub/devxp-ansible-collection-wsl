@@ -62,8 +62,8 @@
     src: "{{ install_path }}/arcanist/bin/arc"
     dest: "{{ ansible_env.HOME }}/.local/bin/arc"
     state: link
-  become_user: root
-  become: yes
+    owner: "{{ ansible_user_id }}"
+    group: "{{ ansible_user_gid }}"
   ignore_errors: "{{ ansible_check_mode }}"
 
 - name: Link phage
@@ -71,8 +71,8 @@
     src: "{{ install_path }}/arcanist/bin/phage"
     dest: "{{ ansible_env.HOME }}/.local/bin/phage"
     state: link
-  become_user: root
-  become: yes
+    owner: "{{ ansible_user_id }}"
+    group: "{{ ansible_user_gid }}"
   ignore_errors: "{{ ansible_check_mode }}"
 
 - name: Set up arcanist scripts
@@ -80,8 +80,8 @@
     src: "{{ item }}.sh.j2"
     dest: "{{ ansible_env.HOME }}/.local/bin/{{ item }}"
     mode: 0755
-  become_user: root
-  become: yes
+    owner: "{{ ansible_user_id }}"
+    group: "{{ ansible_user_gid }}"
   loop:
     - arc-init
     - arc-patch-clean

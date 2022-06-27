@@ -3,6 +3,8 @@
   file:
     path: "/usr/local/bin/{{ item }}}"
     state: absent
+    owner: "{{ ansible_user_id }}"
+    group: "{{ ansible_user_gid }}"
   become_user: root
   become: yes
   loop:
@@ -16,8 +18,8 @@
     src: "{{ item }}.sh.j2"
     dest: "{{ ansible_env.HOME }}/.local/bin/{{ item }}"
     mode: 0755
-  become_user: root
-  become: yes
+    owner: "{{ ansible_user_id }}"
+    group: "{{ ansible_user_gid }}"
   loop:
     - git-clone-all
     - git-mirror
