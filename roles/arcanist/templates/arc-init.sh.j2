@@ -142,7 +142,7 @@ fi
 export elhub_platform_name="${_arg_platform_name}"
 
 # shellcheck disable=SC1083
-TEMPLATE_PATH=/home/foo/.arcanist/templates/repo
+TEMPLATE_PATH={{ install_path }}/templates/repo
 
 function envsubst_file() {
   local in_file="${TEMPLATE_PATH}/$1"
