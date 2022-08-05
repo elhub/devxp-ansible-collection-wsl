@@ -203,14 +203,8 @@ fi
 # Copy teamcity files
 if [[ "${_arg_extra[*]}" =~ "teamcity" ]]; then
   mkdir -p .teamcity
-  envsubst_file "${TEMPLATE_PATH}"/teamcity/settings-"${_arg_action}"-template.kts '.teamcity/settings.kts'
+  envsubst_file teamcity/settings-"${_arg_action}"-template.kts '.teamcity/settings.kts'
   cp "${TEMPLATE_PATH}"/teamcity/pom-template.xml .teamcity/pom.xml # don't prompt, always keep pom.xml up to date
 fi
-
-if [[ $(git rev-parse --is-inside-work-tree) == "true" ]]; then
-  git init
-fi
-
-copy-git-hooks
 
 # ] <-- needed because of Argbash
