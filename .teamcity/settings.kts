@@ -3,11 +3,11 @@ import jetbrains.buildServer.configs.kotlin.v2019_2.project
 import jetbrains.buildServer.configs.kotlin.v2019_2.triggers.VcsTrigger
 import jetbrains.buildServer.configs.kotlin.v2019_2.triggers.vcs
 import jetbrains.buildServer.configs.kotlin.v2019_2.version
-import no.elhub.common.build.configuration.AutoRelease
-import no.elhub.common.build.configuration.CodeReview
-import no.elhub.common.build.configuration.ProjectType.ANSIBLE
-import no.elhub.common.build.configuration.SonarScan
-import no.elhub.common.build.configuration.UnitTest
+import no.elhub.devxp.build.configuration.AutoRelease
+import no.elhub.devxp.build.configuration.CodeReview
+import no.elhub.devxp.build.configuration.ProjectType.ANSIBLE
+import no.elhub.devxp.build.configuration.SonarScan
+import no.elhub.devxp.build.configuration.UnitTest
 import jetbrains.buildServer.configs.kotlin.v2019_2.BuildType
 import jetbrains.buildServer.configs.kotlin.v2019_2.VcsRoot
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
