@@ -34,7 +34,9 @@
                 "3": "disabled",
                 "5": "disabled"
             },
-            "exclude": "(\\Makefile$)"
+            "exclude": [
+                "(Makefile$)"
+            ]
         },
         "checkstyle": {
             "type": "checkstyle",
