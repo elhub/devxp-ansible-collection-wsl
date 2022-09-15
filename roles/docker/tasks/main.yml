@@ -25,6 +25,7 @@
       - docker-ce
       - docker-ce-cli
       - containerd.io
+      - docker-compose-plugin
   become: yes
 
 - name: Add user to docker group
@@ -33,3 +34,13 @@
     groups: docker
     append: yes
   become: yes
+
+# dependencies for ansible docker_* modules
+- name: Install docker python packages
+  pip:
+    name:
+      - docker
+      - docker-compose
+    extra_args: --user
+  environment:
+    DISPLAY: ''  # Fix to resolve extremely slow installs on WSL2 (see https://github.com/microsoft/WSL/issues/6643)

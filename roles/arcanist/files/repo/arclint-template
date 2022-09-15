@@ -35,7 +35,8 @@
                 "5": "disabled"
             },
             "exclude": [
-                "(Makefile$)"
+                "(Makefile$)",
+                "(\\.drawio$)"
             ]
         },
         "checkstyle": {
@@ -82,8 +83,11 @@
         "yamllint": {
             "type": "yamllint",
             "include": [
-            "(\\.yml$)",
+                "(\\.yml$)",
                 "(\\.yaml$)"
+            ],
+            "exclude": [
+                "(docker-compose*.yml$)"
             ]
         },
         "prettier": {

@@ -2,7 +2,7 @@
 #
 # ARG_POSITIONAL_SINGLE([action],[Valid actions are 'generic', 'gradle', 'maven' and 'npm'.],[])
 # ARG_OPTIONAL_REPEATED([extra],[e],[Additional config files. Valid values are: 'ansible', 'teamcity', 'docs'.],['ansible' 'docs' 'teamcity'])
-# ARG_OPTIONAL_SINGLE([platform-name],[p],[Platform name the module (project) belongs to, e.g. 'common', 'core', 'services', 'reporting', 'ui', 'test'],[""])
+# ARG_OPTIONAL_SINGLE([platform-name],[p],[Platform name the module (project) belongs to, e.g. 'core', 'services', 'reporting', 'ui', 'test', 'devxp'],[""])
 # ARG_OPTIONAL_SINGLE([module-name],[m],[Module (project) name. Should be same as repo name in bitbucket. Defaults to current directory name, if not provided],[""])
 # ARG_HELP([Utility script to initialize a code directory for arcanist.])
 # ARGBASH_GO()
@@ -37,7 +37,7 @@ print_help() {
   printf 'Usage: %s [-e|--extra <arg>] [-p|--platform-name <arg>] [-m|--module-name <arg>] [-h|--help] <action>\n' "$0"
   printf '\t%s\n' "<action>: Valid actions are 'generic', 'gradle', 'maven' and 'npm'."
   printf '\t%s\n' "-e, --extra: Additional config files. Valid values are: 'ansible', 'teamcity', 'docs'. (empty by default)"
-  printf '\t%s\n' "-p, --platform-name: Platform name the module (project) belongs to, e.g. 'common', 'core', 'services', 'reporting', 'ui', 'test' (default: '""')"
+  printf '\t%s\n' "-p, --platform-name: Platform name the module (project) belongs to, e.g. 'core', 'services', 'reporting', 'ui', 'test', 'devxp' (default: '""')"
   printf '\t%s\n' "-m, --module-name: Module (project) name. Should be same as repo name in bitbucket. Defaults to current directory name, if not provided (default: '""')"
   printf '\t%s\n' "-h, --help: Prints help"
 }
@@ -134,8 +134,9 @@ if [ "$_arg_module_name" == "" ]; then
   export elhub_module_name=${module_name:-/}   # correct for dirname=/ case
 fi
 
-if [ "$_arg_platform_name" == "" ]; then
-  echo "Missing value for '-p' option."
+allowed_platform_names=("core" "services" "reporting" "ui" "test" "devxp")
+if [[ ! " ${allowed_platform_names[*]} " =~ "$_arg_platform_name" ]]; then
+  echo "Invalid value for '-p' option."
   print_help
   exit 1
 fi
@@ -166,6 +167,7 @@ cp "${TEMPLATE_PATH}/arcconfig-${_arg_action}-template" .arcconfig
 cp "${TEMPLATE_PATH}/arclint-template" .arclint
 envsubst_file 'CODEOWNERS-template' CODEOWNERS
 cp "${TEMPLATE_PATH}/CONTRIBUTING-template.md" CONTRIBUTING.md
+cp "${TEMPLATE_PATH}/dockerignore-template" .dockerignore
 cp "${TEMPLATE_PATH}/gitattributes-template" .gitattributes
 cp "${TEMPLATE_PATH}/gitignore-template" .gitignore
 envsubst_file 'README-template.md' README.md # QUESTION do we really want to update README on each 'arc init'?
