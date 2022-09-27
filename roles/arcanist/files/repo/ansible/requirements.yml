@@ -1,7 +1,7 @@
 ---
 collections:
-  - name: ssh://git@code.elhub.cloud:7999/com/ansible-collection-commons.git
+  - name: ssh://git@code.elhub.cloud:7999/dev/devxp-ansible-collection.git
     type: git
-    version: v0.23.4
+    version: v0.27.1
   - name: oracle.oci
   - name: community.hashi_vault

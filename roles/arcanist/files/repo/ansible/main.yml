@@ -3,5 +3,5 @@
   hosts: localhost # TODO change to target host(s)
 
   tasks:
-    - debug:
+    - fail:
         msg: TODO

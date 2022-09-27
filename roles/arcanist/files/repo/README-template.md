@@ -1,57 +1,27 @@
 # Project Name
 
-<!--
-*** We make use of project shields to provide useful stats about the project at a glance.
-*** Add the relevant IDs/URLs as suggested in the comments
-*** For the sonar links, do a query replace of no.elhub.${elhub_platform_name} with the relevant package of your project and ${elhub_module_name} with the name of the project
--->
-[<img src="https://img.shields.io/badge/repo-github-blue" alt="">](<!--TODO Add repository url here -->)
-[<img src="https://img.shields.io/badge/issues-jira-orange" alt="">](<!--TODO Add a jira url here -->)
-[<img src="https://teamcity.elhub.cloud/app/rest/builds/buildType:(id:<!--TODO Add TeamCity project ID here -->)/statusIcon" alt="">](https://teamcity.elhub.cloud/buildConfiguration/<!--TODO Add TeamCity project ID here -->)
+[<img src="https://img.shields.io/badge/repo-bitbucket-blue" alt="">](<!--TODO Add repository url here -->)
+[<img src="https://img.shields.io/badge/issues-jira-orange" alt="">](https://jira.elhub.cloud/issues/?jql=project%20%3D%20%22Team%20Dev%22%20AND%20component%20%3D%20${elhub_module_name}%20AND%20status%20!%3D%20Done)
+[<img src="https://teamcity.elhub.cloud/app/rest/builds/buildType:(id:<!--TODO Add teamcity project ID-->_AutoRelease)/statusIcon" alt="">](https://teamcity.elhub.cloud/project/<!--TODO Add teamcity project ID-->?mode=builds#all-projects)
 [<img src="https://sonar.elhub.cloud/api/project_badges/measure?project=no.elhub.${elhub_platform_name}%3A${elhub_module_name}&metric=alert_status" alt="">](https://sonar.elhub.cloud/dashboard?id=no.elhub.${elhub_platform_name}%3A${elhub_module_name})
 [<img src="https://sonar.elhub.cloud/api/project_badges/measure?project=no.elhub.${elhub_platform_name}%3A${elhub_module_name}&metric=ncloc" alt="">](https://sonar.elhub.cloud/dashboard?id=no.elhub.${elhub_platform_name}%3A${elhub_module_name})
 [<img src="https://sonar.elhub.cloud/api/project_badges/measure?project=no.elhub.${elhub_platform_name}%3A${elhub_module_name}&metric=bugs" alt="">](https://sonar.elhub.cloud/dashboard?id=no.elhub.${elhub_platform_name}%3A${elhub_module_name})
 [<img src="https://sonar.elhub.cloud/api/project_badges/measure?project=no.elhub.${elhub_platform_name}%3A${elhub_module_name}&metric=vulnerabilities" alt="">](https://sonar.elhub.cloud/dashboard?id=no.elhub.${elhub_platform_name}%3A${elhub_module_name})
 [<img src="https://sonar.elhub.cloud/api/project_badges/measure?project=no.elhub.${elhub_platform_name}%3A${elhub_module_name}&metric=coverage" alt="">](https://sonar.elhub.cloud/dashboard?id=no.elhub.${elhub_platform_name}%3A${elhub_module_name})
 
-## Table of Contents
-
-* [About](#about)
-* [Getting Started](#getting-started)
-  * [Prerequisites](#prerequisites)
-  * [Installation](#installation)
-* [Usage](#usage)
-* [Testing](#testing)
-* [Contributing](#contributing)
-* [Owners](#owners)
-* [License](#license)
-
-
 ## About
 
 One to two paragraph statement about the project and what it does.
-
 
 ## Getting Started
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-```sh
-npm install npm@latest -g
-```
+List any external prerequisites, dependencies, etc., that are expected on the client side.
 
 ### Installation
-git
-1. Clone the repo
-```sh
-git clone https://github.com/github_username/repo_name.git
-```
-2. Install NPM packages
-```sh
-npm install
-```
+
+Provide installation instructions. For example, if this is a "library", provide guidelines on how to add this project as a dependency.
 
 ## Usage
 
@@ -80,4 +50,4 @@ code, see the [Codeowners](https://link-to/CODEOWNERS) file.
 
 ## License
 
-This project is [MIT](https://link-to/LICENSE.md) licensed.
+Describe the license for this project (Mostly applicable for open-source projects.)

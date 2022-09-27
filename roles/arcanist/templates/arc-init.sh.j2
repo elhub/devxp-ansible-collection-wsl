@@ -157,20 +157,27 @@ function envsubst_file() {
   fi
 }
 
+function copy_template() {
+  local template_file="${TEMPLATE_PATH}/$1"
+  local destination="$2"
+  cp "$template_file" "$destination"
+}
+
 # shellcheck disable=SC2154
 if ! echo "$_arg_action" | grep -E '(generic|gradle|maven|npm)' >/dev/null; then
   print_help
   exit 1
 fi
 
-cp "${TEMPLATE_PATH}/arcconfig-${_arg_action}-template" .arcconfig
-cp "${TEMPLATE_PATH}/arclint-template" .arclint
-envsubst_file 'CODEOWNERS-template' CODEOWNERS
-cp "${TEMPLATE_PATH}/CONTRIBUTING-template.md" CONTRIBUTING.md
-cp "${TEMPLATE_PATH}/dockerignore-template" .dockerignore
-cp "${TEMPLATE_PATH}/gitattributes-template" .gitattributes
-cp "${TEMPLATE_PATH}/gitignore-template" .gitignore
-envsubst_file 'README-template.md' README.md # QUESTION do we really want to update README on each 'arc init'?
+copy_template "arcconfig-${_arg_action}-template" .arcconfig
+copy_template "arclint-template" .arclint
+envsubst_file "CODEOWNERS-template" CODEOWNERS
+copy_template "CONTRIBUTING-template.md" CONTRIBUTING.md
+copy_template "dockerignore-template" .dockerignore
+copy_template "gitattributes-template" .gitattributes
+copy_template "gitignore-template" .gitignore
+copy_template "LICENSE-template" LICENSE
+envsubst_file "README-template.md" README.md # QUESTION do we really want to update README on each 'arc init'?
 
 # Copy maven files for maven projects
 if echo "$_arg_action" | grep -E 'maven' >/dev/null; then
@@ -187,8 +194,8 @@ fi
 
 # Copy ansible files
 if [[ "${_arg_extra[*]}" =~ "ansible" ]]; then
-  cp "${TEMPLATE_PATH}"/yamllint-template ./.yamllint
-  cp "${TEMPLATE_PATH}"/ansible-lint-template ./.ansible-lint
+  copy_template "yamllint-template" .yamllint
+  copy_template "ansible-lint-template" .ansible-lint
   mkdir -p ansible
   envsubst_file 'ansible/README.md'
   cp -rn "${TEMPLATE_PATH}"/ansible . # don't replace existing configs
@@ -196,17 +203,16 @@ fi
 
 # Copy docs files
 if [[ "${_arg_extra[*]}" =~ "docs" ]]; then
-  mkdir -p docs/wiki
-  envsubst_file 'docs/config.yml'
-  envsubst_file 'docs/wiki/risks.md'
-  cp -rn "${TEMPLATE_PATH}"/docs . -r # don't replace existing configs
+  mkdir -p docs/sysdocs
+  envsubst_file 'docs/sysdocs/risks.md'
+  cp -rn "${TEMPLATE_PATH}"/docs . # don't replace existing configs
 fi
 
 # Copy teamcity files
 if [[ "${_arg_extra[*]}" =~ "teamcity" ]]; then
   mkdir -p .teamcity
   envsubst_file teamcity/settings-"${_arg_action}"-template.kts '.teamcity/settings.kts'
-  cp "${TEMPLATE_PATH}"/teamcity/pom-template.xml .teamcity/pom.xml # don't prompt, always keep pom.xml up to date
+  copy_template "teamcity/pom-template.xml" .teamcity/pom.xml
 fi
 
 # ] <-- needed because of Argbash

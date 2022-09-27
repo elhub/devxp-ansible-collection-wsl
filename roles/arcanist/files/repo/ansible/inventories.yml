@@ -2,8 +2,5 @@
 - hosts:
     - localhost
 
-  collections:
-    - elhub.commons
-
   roles:
-    - role: inventory
+    - role: elhub.devxp.inventory

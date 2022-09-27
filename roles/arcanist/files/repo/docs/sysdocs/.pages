@@ -1,0 +1,5 @@
+title: System Documentation
+nav:
+    - architecture.md
+    - infrastructure.md
+    - risks.md
