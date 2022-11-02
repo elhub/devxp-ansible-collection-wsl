@@ -4,6 +4,13 @@ ansible/inventories/*
 !ansible/galaxy/.gitkeep
 !ansible/inventories/.gitkeep
 
+### Backup files
+**/*.bkp
+**/*.bak
+
+### Env files
+*.env
+
 ### Intellij+all Patch ###
 # Ignores the whole .idea folder and all .iml files
 .idea/
