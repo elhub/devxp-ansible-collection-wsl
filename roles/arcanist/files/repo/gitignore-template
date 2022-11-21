@@ -1,8 +1,8 @@
 ### Elhub-Ansible
-ansible/galaxy/*
-ansible/inventories/*
-!ansible/galaxy/.gitkeep
-!ansible/inventories/.gitkeep
+**/galaxy/*
+**/inventories/*
+!**/galaxy/.gitkeep
+!**/inventories/.gitkeep
 
 ### Backup files
 **/*.bkp
