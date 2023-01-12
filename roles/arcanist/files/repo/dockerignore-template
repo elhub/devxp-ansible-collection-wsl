@@ -20,3 +20,5 @@
 /coverage/
 /allure-report/
 /allure-results/
+# node dependencies
+/node_modules
