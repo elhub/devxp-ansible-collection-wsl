@@ -1,18 +1,24 @@
 ---
-- name: Ensure php
-  apt:
+- name: Ensure PHP 8.1 is not installed
+  ansible.builtin.apt:
+    name:
+      - php8.1
+      - php8.1-curl
+      - php8.1-xml
+    state: absent
+  become: yes
+  when: ansible_distribution_version == "22.04"
+- name: Add the main PHP PPA repository Ondrej for installing PHP 7.4 for arcanite
+  ansible.builtin.apt_repository:
+    repo: 'ppa:ondrej/php'
+    state: present
+  become: yes
+  when: ansible_distribution_version == "22.04"
+- name: Install PHP 7.4 and dependencies needed for arcanite
+  ansible.builtin.apt:
     name:
       - php7.4
       - php7.4-curl
       - php7.4-xml
   become: yes
-  when: ansible_distribution_version == "20.04"
-
-- name: Ensure php
-  apt:
-    name:
-      - php8.1
-      - php8.1-curl
-      - php8.1-xml
-  become: yes
-  when: ansible_distribution_version == "22.04"
+  when: ansible_distribution_version == "20.04" or ansible_distribution_version == "22.04"
