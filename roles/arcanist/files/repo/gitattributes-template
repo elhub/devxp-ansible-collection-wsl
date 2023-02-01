@@ -36,3 +36,4 @@
 *.woff2 binary
 *.rpd   binary
 *.catalog binary
+*.xlsx  binary
