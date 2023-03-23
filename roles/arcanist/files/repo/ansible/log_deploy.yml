@@ -2,8 +2,11 @@
 - name: Log deploy result
   hosts: localhost
 
+  collections:
+    - elhub.devxp
+
   roles:
-    - role: elhub.devxp.deploy_logger
+    - role: deploy_logger
       vars:
         command: post
         environment:

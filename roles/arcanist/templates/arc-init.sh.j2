@@ -141,6 +141,7 @@ if [[ ! " ${allowed_platform_names[*]} " =~ "$_arg_platform_name" ]]; then
   exit 1
 fi
 export elhub_platform_name="${_arg_platform_name}"
+export elhub_platform_name_upper=$(echo "$elhub_platform_name" | tr '[:lower:]' '[:upper:]')
 
 # shellcheck disable=SC1083
 TEMPLATE_PATH={{ install_path }}/templates/repo

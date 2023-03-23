@@ -1,4 +1,7 @@
+import jetbrains.buildServer.configs.kotlin.v2019_2.BuildType
 import jetbrains.buildServer.configs.kotlin.v2019_2.DslContext
+import jetbrains.buildServer.configs.kotlin.v2019_2.VcsRoot
+import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.v2019_2.project
 import jetbrains.buildServer.configs.kotlin.v2019_2.triggers.VcsTrigger
 import jetbrains.buildServer.configs.kotlin.v2019_2.triggers.vcs
@@ -7,12 +10,8 @@ import no.elhub.devxp.build.configuration.AutoRelease
 import no.elhub.devxp.build.configuration.CodeReview
 import no.elhub.devxp.build.configuration.ProjectType.ANSIBLE
 import no.elhub.devxp.build.configuration.SonarScan
-import no.elhub.devxp.build.configuration.UnitTest
-import jetbrains.buildServer.configs.kotlin.v2019_2.BuildType
-import jetbrains.buildServer.configs.kotlin.v2019_2.VcsRoot
-import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
 
-version = "2022.04"
+version = "2022.10"
 
 project {
 
@@ -20,7 +19,7 @@ project {
     val projectType = ANSIBLE
 
     params {
-//        param("teamcity.ui.settings.readOnly", "true")
+        param("teamcity.ui.settings.readOnly", "true")
     }
 
     val sonarScanConfig = SonarScan.Config(
@@ -69,12 +68,15 @@ project {
         }
     }
 
-    listOf("Adr", "Ansible", "Arcanist", "Base", "Docker", "Git", "GitUtils", "Java", "Kotlin", "Linters", "Molecule",
-        "Node", "Python").forEach { role ->
-            buildType(MoleculeTest(MoleculeTest.Config(
-                DslContext.settingsRoot,
-                role
-            )))
+    listOf(
+        "Adr", "Ansible", "Arcanist", "Base", "Docker", "Git", "GitUtils", "Java", "Kotlin", "Linters", "Molecule",
+        "Node", "Python"
+    ).forEach { role ->
+        buildType(
+            MoleculeTest(
+                MoleculeTest.Config(DslContext.settingsRoot, role)
+            )
+        )
     }
 
     // Release Build Chain
@@ -89,7 +91,6 @@ project {
             )
         )
     )
-
 }
 
 class MoleculeTest(config: Config, buildConfig: BuildType.() -> Unit = {}) : BuildType({
