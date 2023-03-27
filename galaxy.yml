@@ -1,6 +1,6 @@
 ---
 namespace: elhub
-name: ansible_collection_wsl
+name: wsl
 version: 1.0.0-SNAPSHOT
 readme: README.md
 authors:
