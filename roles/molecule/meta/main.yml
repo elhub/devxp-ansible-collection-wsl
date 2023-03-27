@@ -12,9 +12,3 @@ galaxy_info:
       versions:
         - 20.04
   galaxy_tags: []
-
-dependencies:
-  - role: base
-  - role: python
-  - role: ansible
-  - role: docker
