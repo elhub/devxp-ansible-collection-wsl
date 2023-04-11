@@ -27,3 +27,5 @@
   pip:
     name: hvac
     executable: pip3
+
+- include_tasks: vault_env.yml
