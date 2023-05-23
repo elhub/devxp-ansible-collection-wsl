@@ -12,4 +12,3 @@
 - include_tasks: sshagent.yml
 - include_tasks: packages.yml
 - include_tasks: screendir.yml
-- include_tasks: sdkman.yml
