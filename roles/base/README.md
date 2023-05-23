@@ -1,6 +1,6 @@
 # ansible-collection-wsl.base
 
-This role bootstraps core packages, creates base directories, sets up the ssh-agent and SDKMAN. It should generally be
+This role bootstraps core packages, creates base directories and sets up the ssh-agent. It should generally be
 run before any other roles in this collection are run.
 
 ## Variables
