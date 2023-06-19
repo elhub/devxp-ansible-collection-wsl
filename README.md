@@ -30,7 +30,7 @@ a Windows developer workstation at Elhub.
 The ansible collection contains:
 
 * The base [role](https://github.com/elhub/ansible-collection-wsl/tree/main/roles/base). This bootstraps core packages,
-creates base directories, and sets up ssh-agent
+  creates base directories, and sets up ssh-agent
 * Roles for setting up common tools such as [git](https://github.com/elhub/ansible-collection-wsl/tree/main/roles/git),
   [docker](https://github.com/elhub/ansible-collection-wsl/tree/main/roles/docker),
   [molecule](https://github.com/elhub/ansible-collection-wsl/tree/main/roles/molecule)
