@@ -4,9 +4,11 @@
   args:
     creates: "{{ nvm_install_path }}/nvm.sh"
 
-- name: install npm
-  shell: >
+- name: install node
+  shell: |
     . {{ nvm_install_path }}/nvm.sh
     nvm install {{ node_version }}
+  args:
+    executable: /bin/bash
   register: node_version_response
   changed_when: "'already installed' not in node_version_response.stderr"

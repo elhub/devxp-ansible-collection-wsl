@@ -14,4 +14,4 @@ tags: []
 dependencies: {}
 repository: https://github.com/elhub/ansible-collection-wsl
 documentation: https://github.com/elhub/ansible-collection-wsl/blob/main/README.md
-issues: https://jira.elhub.cloud/projects/TD/issues
+issues: https://jira.elhub.cloud/projects/TDX/issues
