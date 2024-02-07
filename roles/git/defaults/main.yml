@@ -1,3 +1,17 @@
 ---
 # Default path to place git hooks
 git_hooks_path: "{{ ansible_env.HOME }}/.local/etc/git-hooks"
+
+# Which git hooks to install
+git_hooks:
+  - hook: pre-commit
+    part: pre-commit-installed
+  - hook: commit-msg
+    part: conventional-subject
+  - hook: commit-msg
+    part: jira
+  - hook: prepare-commit-msg
+    part: format
+
+# Whether to install git hooks or not
+git_install_hooks: false

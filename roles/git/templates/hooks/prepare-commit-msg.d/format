@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+# {{ ansible_managed }}
+# This scripts adds some information about conventional commits to the commit message template
+# It also adds the JIRA issue key to the commit message if the branch name contains it
+
+set -u -o pipefail
+
+ORIG_FILE=$1
+
+FIRST_LINE=`head -n1 $ORIG_FILE`
+# non-empty first line means that this is an --amend so we can skip adding info
+if [ ! -z "$FIRST_LINE" ]; then
+  exit 0
+fi
+
+
+TMP_FILE=$(mktemp)
+
+JIRA_ISSUE_KEY=$(git branch | grep '^\*' | grep -Eo '[A-Z]+-[0-9]+')
+if [ ! -z "$JIRA_ISSUE_KEY" ]; then
+  echo " [$JIRA_ISSUE_KEY]" >> $TMP_FILE
+  echo "# The JIRA issue key $JIRA_ISSUE_KEY was extracted from your branch name."  >> $TMP_FILE
+  echo "# Please keep it in the commit message" >> $TMP_FILE
+else
+  echo "" >> $TMP_FILE
+  echo "# Please include a reference to a JIRA ticket in your commit message." >> $TMP_FILE
+fi
+
+
+cat <<EOT >> "$TMP_FILE"
+# We are following the conventional commits format
+# Read more at https://www.conventionalcommits.org/en/v1.0.0/#summary
+# The format is:
+#
+#     <type>[optional scope]: <description>
+#
+#     [optional body]
+#
+#     [optional footer(s)]
+#
+# Type can be one of the following: feat, fix, docs, style, refactor, perf, test, chore, build, ci
+# The first line (subject) should be less than 72 characters
+#
+EOT
+
+grep -vE '^$' "$ORIG_FILE" >> "$TMP_FILE"
+mv "$TMP_FILE" "$ORIG_FILE"

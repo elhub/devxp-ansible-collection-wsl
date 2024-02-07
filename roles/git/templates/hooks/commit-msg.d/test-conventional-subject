@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+set -u -o pipefail
+
+echo "Testing conventional-subject"
+
+allowed_msg=(
+    "feat: some msg" \
+    "fix: some msg" \
+    "docs: some msg" \
+    "style: some msg" \
+    "revert: refactor: some msg" \
+    "perf!: some msg" \
+    "test: some msg" \
+    "chore: some msg" \
+    "build: some msg" \
+    "ci: test"
+)
+
+disallowed_msg=(
+    "revert: some msg" \
+    "some random message" \
+    "docs:  notice the double space" \
+    "fix:     \nbody"
+)
+
+warning_msg=(
+    "feat: some msg that is way too long and should not be allowed adasd aasdadasdasdsad" \
+)
+
+tmp_file=$(mktemp)
+
+for msg in "${allowed_msg[@]}"; do
+    echo "$msg" > $tmp_file
+    ./conventional-subject $tmp_file 2> /dev/null
+    if [ $? -ne 0 ]; then
+        echo "Test failed for: $msg"
+        exit 1
+    fi
+done
+
+
+for msg in "${disallowed_msg[@]}"; do
+    echo "$msg" > $tmp_file
+    ./conventional-subject $tmp_file 2> /dev/null
+    if [ $? -ne 1 ]; then
+        echo "Test failed for: $msg"
+        exit 1
+    fi
+done
+
+for msg in "${warning_msg[@]}"; do
+    echo "$msg" > $tmp_file
+    out=$(./conventional-subject $tmp_file 2>&1)
+    if [ $? -ne 0 ]; then
+        echo "This message should not error: $msg"
+        exit 1
+    fi
+    if [ ${#out} -eq 0 ]; then
+        echo "No warning for: $msg"
+        exit 1
+    fi
+done
+
+echo "All good!"

@@ -1,17 +1,42 @@
 ---
 - name: Ensure git
-  apt:
+  ansible.builtin.apt:
     name:
       - git
   become: yes
 
-- name: add git-hooks paths
-  file:
+- name: Add git-hooks paths
+  ansible.builtin.file:
     path: "{{ git_hooks_path }}"
     state: directory
+    mode: 0755
+
+- name: Template global base hooks
+  ansible.builtin.template:
+    src: hooks/base_hook.j2.bash
+    dest: "{{ git_hooks_path }}/{{ item }}"
+    mode: 0755
+  loop: "{{ git_hooks | map(attribute='hook') | unique }}"
+  when: git_install_hooks | bool
+
+- name: Global hooks.d directories
+  ansible.builtin.file:
+    path: "{{ git_hooks_path }}/{{ item }}.d"
+    state: directory
+    mode: 0755
+  loop: "{{ git_hooks | map(attribute='hook') | unique }}"
+  when: git_install_hooks | bool
+
+- name: Global hooks
+  ansible.builtin.template:
+    src: "hooks/{{ item.hook }}.d/{{ item.part }}"
+    dest: "{{ git_hooks_path }}/{{ item.hook }}.d/{{ item.part }}"
+    mode: 0755
+  loop: "{{ git_hooks }}"
+  when: git_install_hooks | bool
 
 - name: Set git global config
-  shell: >
+  ansible.builtin.shell: >
     test "$(git config --global {{ item.key }})" == "{{ item.value }}"
     && echo "unchanged"
     || git config --global {{ item.key }} "{{ item.value }}"

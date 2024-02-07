@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# {{ ansible_managed }}
+# This script validates that a commit message file ($1) contains something that looks like a JIRA ticket.
+# A jira ticket is a string that looks like "ABC-1234" where ABC is the project and 1234 is the ticket number.
+set -u -o pipefail
+
+RED='\033[0;31m'
+YELLOW='\033[0;33m'
+BLUE='\033[0;34m'
+NC='\033[0m'
+
+grep -E '[A-Z]+-[0-9]+' $1 &> /dev/null
+
+if [ $? -ne 0 ]; then
+    >&2 echo ""
+    >&2 echo -e "    ${YELLOW}WARNING${NC}: No JIRA ticket found in commit message."
+    >&2 echo -e "    Consider doing ${RED}git commit --amend${NC} to add a JIRA ticket."
+    >&2 echo ""
+fi
+
+exit 0
