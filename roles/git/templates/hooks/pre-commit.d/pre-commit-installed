@@ -9,7 +9,7 @@ BLUE='\033[0;34m'
 NC='\033[0m'
 
 PRE_COMMIT_CONFIG_FILE="$(git rev-parse --show-toplevel)/.pre-commit-config.yaml"
-LOCAL_PRE_COMMIT_HOOK="$(git rev-parse --git-dir)/.git/hooks/pre-commit"
+LOCAL_PRE_COMMIT_HOOK="$(git rev-parse --git-dir)/hooks/pre-commit"
 
 if [ -f "$PRE_COMMIT_CONFIG_FILE" ]; then
     if [ ! -x "$LOCAL_PRE_COMMIT_HOOK" ]; then
