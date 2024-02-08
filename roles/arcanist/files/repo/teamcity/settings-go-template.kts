@@ -1,19 +1,19 @@
 import no.elhub.devxp.build.configuration.pipeline.ElhubProject.Companion.elhubProject
 import no.elhub.devxp.build.configuration.pipeline.constants.Group
-import no.elhub.devxp.build.configuration.pipeline.jobs.ansibleSonarScan
 import no.elhub.devxp.build.configuration.pipeline.jobs.genericAutoRelease
+import no.elhub.devxp.build.configuration.pipeline.jobs.goVerify
 
 
 elhubProject(Group.TEST, "test-project-name") {
 
     phabricator {
-        ansibleSonarScan()
+        goVerify()
     }
 
     pipeline {
         sequential {
-            ansibleSonarScan()
-            genericAutoRelease()
+            goVerify()
+            genericAutoRelease() // goAutoRelease is in development. This only pushes tags to the repository.
         }
     }
 }
