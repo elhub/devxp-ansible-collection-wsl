@@ -11,7 +11,7 @@ See [defaults.yml](https://github.com/elhub/ansible-collection-wsl/blob/main/rol
 Run the role using a playbook as follows:
 
 ```yaml
-- name: Install Gi
+- name: Install GitHub CLI
   hosts:
     - localhost
   collections:
