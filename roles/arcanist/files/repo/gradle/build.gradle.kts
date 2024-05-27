@@ -1,5 +1,5 @@
 plugins {
-    id("no.elhub.devxp.kotlin-library") version "0.0.15"
+    id("no.elhub.devxp.kotlin-library") version "0.1.6"
 }
 
 group = "no.elhub.${elhub_platform_name}
@@ -11,6 +11,5 @@ repositories {
 
 dependencies {
     implementation(platform(libs.kotlin.bom))
-    implementation(libs.kotlin.stdlib.jdk8)
     testImplementation(libs.test.kotest.runner.junit5)
 }
