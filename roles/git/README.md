@@ -1,11 +1,11 @@
-# ansible-collection-wsl.git
+# devxp-ansible-collection-wsl.git
 
 This role streamlines the git installation. In particular, it ensures that everyone is set up with username/e-mail
 and consistent EOL and autocrlf settings.
 
 ## Variables
 
-See [defaults.yml](https://github.com/elhub/ansible-collection-wsl/blob/main/roles/git/defaults/main.yml).
+See [defaults.yml](https://github.com/elhub/devxp-ansible-collection-wsl/blob/main/roles/git/defaults/main.yml).
 
 ## Examples
 

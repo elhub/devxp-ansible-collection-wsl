@@ -1,10 +1,10 @@
-# ansible-collection-wsl.kotlin
+# devxp-ansible-collection-wsl.kotlin
 
 This role install the Kotlin SDK.
 
 ## Variables
 
-See [defaults.yml](https://github.com/elhub/ansible-collection-wsl/blob/main/roles/kotlin/defaults/main.yml).
+See [defaults.yml](https://github.com/elhub/devxp-ansible-collection-wsl/blob/main/roles/kotlin/defaults/main.yml).
 
 ## Examples
 

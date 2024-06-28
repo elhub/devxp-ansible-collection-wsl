@@ -1,4 +1,4 @@
-# ansible-collection-wsl.git_utils
+# devxp-ansible-collection-wsl.git_utils
 
 This role installs git utility scripts for Elhub.
 

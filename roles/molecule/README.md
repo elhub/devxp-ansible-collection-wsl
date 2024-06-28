@@ -1,4 +1,4 @@
-# ansible-collection-wsl.molecule
+# devxp-ansible-collection-wsl.molecule
 
 This role installs molecule and its supporting libraries on WSL.
 

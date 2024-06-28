@@ -1,10 +1,10 @@
-# ansible-collection-wsl.adr
+# devxp-ansible-collection-wsl.adr
 
 This role installs [nvm](https://github.com/nvm-sh/nvm) and [nodejs](https://nodejs.org/en/) to your environment.
 
 ## Variables
 
-See [defaults.yml](https://github.com/elhub/ansible-collection-wsl/blob/main/roles/adr/defaults/main.yml).
+See [defaults.yml](https://github.com/elhub/devxp-ansible-collection-wsl/blob/main/roles/adr/defaults/main.yml).
 
 ## Examples
 

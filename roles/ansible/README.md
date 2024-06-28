@@ -1,4 +1,4 @@
-# ansible-collection-wsl.ansible
+# devxp-ansible-collection-wsl.ansible
 
 This role installs ansible. It ensures that the install of ansible is done according to our conventions and adds
 a couple of required pip packages.

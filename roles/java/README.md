@@ -1,10 +1,10 @@
-# ansible-collection-wsl.java
+# devxp-ansible-collection-wsl.java
 
 This role install the Java SDK.
 
 ## Variables
 
-See [defaults.yml](https://github.com/elhub/ansible-collection-wsl/blob/main/roles/java/defaults/main.yml).
+See [defaults.yml](https://github.com/elhub/devxp-ansible-collection-wsl/blob/main/roles/java/defaults/main.yml).
 
 ## Examples
 

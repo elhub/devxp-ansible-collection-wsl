@@ -12,6 +12,6 @@ license:
   - MIT
 tags: []
 dependencies: {}
-repository: https://github.com/elhub/ansible-collection-wsl
-documentation: https://github.com/elhub/ansible-collection-wsl/blob/main/README.md
+repository: https://github.com/elhub/devxp-ansible-collection-wsl
+documentation: https://github.com/elhub/devxp-ansible-collection-wsl/blob/main/README.md
 issues: https://jira.elhub.cloud/projects/TDX/issues
