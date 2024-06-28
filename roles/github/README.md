@@ -1,10 +1,10 @@
-# ansible-collection-wsl.git
+# devxp-ansible-collection-wsl.git
 
 This role installs Github cli and dxp plugin
 
 ## Variables
 
-See [defaults.yml](https://github.com/elhub/ansible-collection-wsl/blob/main/roles/git/defaults/main.yml).
+See [defaults.yml](https://github.com/elhub/devxp-ansible-collection-wsl/blob/main/roles/git/defaults/main.yml).
 
 ## Examples
 

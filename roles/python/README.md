@@ -1,4 +1,4 @@
-# ansible-collection-wsl.python
+# devxp-ansible-collection-wsl.python
 
 This role installs Python 3 on WSL and sets it to the default. It also installs various necessary supporting packages.
 

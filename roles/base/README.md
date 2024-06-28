@@ -1,11 +1,11 @@
-# ansible-collection-wsl.base
+# devxp-ansible-collection-wsl.base
 
 This role bootstraps core packages, creates base directories and sets up the ssh-agent. It should generally be
 run before any other roles in this collection are run.
 
 ## Variables
 
-See [defaults.yml](https://github.com/elhub/ansible-collection-wsl/blob/main/roles/base/defaults/main.yml).
+See [defaults.yml](https://github.com/elhub/devxp-ansible-collection-wsl/blob/main/roles/base/defaults/main.yml).
 
 ## Examples
 

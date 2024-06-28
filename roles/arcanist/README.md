@@ -1,11 +1,11 @@
-# ansible-collection-wsl.arcanist
+# devxp-ansible-collection-wsl.arcanist
 
 This role installs [arcanist](https://secure.phabricator.com/book/phabricator/article/arcanist/), the command-line
 interface to [Phabricator](https://secure.phabricator.com/). Phabricator is used by Elhub for code reviews.
 
 ## Variables
 
-See [defaults.yml](https://github.com/elhub/ansible-collection-wsl/blob/main/roles/arcanist/defaults/main.yml).
+See [defaults.yml](https://github.com/elhub/devxp-ansible-collection-wsl/blob/main/roles/arcanist/defaults/main.yml).
 
 ## Examples
 

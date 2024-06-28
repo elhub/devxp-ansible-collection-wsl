@@ -1,11 +1,11 @@
-# ansible-collection-wsl.linters
+# devxp-ansible-collection-wsl.linters
 
 This role install is used to install the standard set of linters on the WSL dev box. It can be configured to
 only install a subset of these linters.
 
 ## Variables
 
-See [defaults.yml](https://github.com/elhub/ansible-collection-wsl/blob/main/roles/linters/defaults/main.yml).
+See [defaults.yml](https://github.com/elhub/devxp-ansible-collection-wsl/blob/main/roles/linters/defaults/main.yml).
 
 ## Examples
 

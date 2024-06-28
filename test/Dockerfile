@@ -13,7 +13,7 @@ RUN \
 
 USER foo
 
-WORKDIR '/home/foo/ansible-collection-wsl/'
+WORKDIR '/home/foo/devxp-ansible-collection-wsl/'
 
 CMD /bin/bash
 
@@ -21,7 +21,7 @@ COPY . .
 
 COPY roles test/.
 
-RUN sudo chown -R foo:foo ~/ansible-collection-wsl
+RUN sudo chown -R foo:foo ~/devxp-ansible-collection-wsl
 
 RUN \
     sudo apt update && \

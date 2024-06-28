@@ -1,6 +1,6 @@
-# ansible-collection-wsl.adr
+# devxp-ansible-collection-wsl.adr
 
-This role adds [ADR-J](https://github.com/adoble/adr-j), a java-based command-line tool for working with 
+This role adds [ADR-J](https://github.com/adoble/adr-j), a java-based command-line tool for working with
 [Architecture Decision Records](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions) to your
 environment.
 
@@ -9,7 +9,7 @@ of this externally, you will need to provide your own jar files.
 
 ## Variables
 
-See [defaults.yml](https://github.com/elhub/ansible-collection-wsl/blob/main/roles/adr/defaults/main.yml).
+See [defaults.yml](https://github.com/elhub/devxp-ansible-collection-wsl/blob/main/roles/adr/defaults/main.yml).
 
 ## Examples
 

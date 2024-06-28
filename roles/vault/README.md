@@ -1,4 +1,4 @@
-# ansible-collection-wsl.molecule
+# devxp-ansible-collection-wsl.molecule
 
 This role installs [vault](https://www.vaultproject.io/) on WSL.
 
