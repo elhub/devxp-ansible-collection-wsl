@@ -3,8 +3,7 @@
   pip:
     name: ansible
     extra_args: --user
-    state: present
-    version: "9.7.0"
+    state: latest
   environment:
     DISPLAY: ''  # Fix to resolve extremely slow installs on WSL2 (see https://github.com/microsoft/WSL/issues/6643)
 
