@@ -1,10 +1,17 @@
+- name: Gather facts
+  ansible.builtin.setup:
+
+- name: Determine the shell template
+  set_fact:
+    vaultrc_template: "{{ 'vaultrcZSH.j2' if ansible_env.SHELL.endswith('zsh') else 'vaultrc.j2' }}"
+
 - name: Template .vaultrc
   template:
-    src: "vaultrc.j2"
+    src: "{{ vaultrc_template }}"
     dest: "{{ ansible_env.HOME }}/.vaultrc"
     mode: "u=rw,go=r"
 
-- name: Configure .bashrc
+- name: Configure .bashrc and .zshrc
   lineinfile:
     path: "{{ item }}"
     state: present
