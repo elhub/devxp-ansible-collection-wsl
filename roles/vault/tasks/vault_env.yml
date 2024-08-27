@@ -3,7 +3,7 @@
 
 - name: Determine the shell template
   set_fact:
-    vaultrc_template: "{{ 'vaultrcZSH.j2' if ansible_env.SHELL.endswith('zsh') else 'vaultrc.j2' }}"
+    vaultrc_template: "{{ 'vaultrcZSH.j2' if 'SHELL' in ansible_env and ansible_env.SHELL.endswith('zsh') else 'vaultrc.j2' }}"
 
 - name: Template .vaultrc
   template:

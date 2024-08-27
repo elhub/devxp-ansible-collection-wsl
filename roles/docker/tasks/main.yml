@@ -25,6 +25,9 @@
   ansible.builtin.apt_key:
     url: https://download.docker.com/linux/ubuntu/gpg
     state: present
+  environment:
+    http_proxy: "{{ http_proxy_param }}"
+    https_proxy: "{{ http_proxy_param }}"
   become: yes
 
 - name: Add apt repository for Docker stable version
