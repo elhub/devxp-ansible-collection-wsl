@@ -1,0 +1,7 @@
+---
+# defaults file for golang
+# version of go to install
+# if "latest", the latest version will be installed
+# if a version number, that version will be installed
+# use the format "1.22.0"
+go_version: latest
