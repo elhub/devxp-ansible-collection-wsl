@@ -24,9 +24,9 @@
     dest: "{{ ansible_env.HOME }}/.local/lib/go/{{ _go_version }}"
     creates: "{{ ansible_env.HOME }}/.local/lib/go/{{ _go_version }}/bin/go"
 
-- name: Symlink current
+- name: Symlink to GOROOT
   ansible.builtin.file:
-    path: "{{ ansible_env.HOME }}/.local/lib/go/current"
+    path: "{{ go_root }}"
     src: "{{ ansible_env.HOME }}/.local/lib/go/{{ _go_version }}"
     state: link
 
@@ -36,13 +36,40 @@
     marker: "# {mark} Ansible - elhub.wsl.golang"
     block: |
       # adjust the GOROOT since we have a non-default location
-      if [ -d "$GOROOT/bin" ] ; then
-        export GOROOT="$HOME/.local/lib/go/current"
+      if [ -d "{{ go_root }}" ] ; then
+        export GOROOT="{{ go_root }}"
         export PATH="$GOROOT/bin:$PATH"
       fi
 
       # ensure that tools installed with "go install" ends in PATH
-      if [ -d "$HOME/go" ] ; then
-        export GOPATH="$HOME/go"
+      if [ -d "{{ go_path }}" ] ; then
+        export GOPATH="{{ go_path }}"
         export PATH="$GOPATH/bin:$PATH"
       fi
+
+- name: Install linters with go install
+  ansible.builtin.shell:
+    cmd: >
+      {{ go_root }}/bin/go
+      install
+      {{ item.package }}@latest
+    creates: "{{ go_path }}/bin/{{ item.name }}"
+  environment:
+    GOROOT: "{{ go_root }}"
+    GOPATH: "{{ go_path }}"
+  loop:
+    # https://pkg.go.dev/golang.org/x/tools/cmd/goimports
+    - name: goimports
+      package: golang.org/x/tools/cmd/goimports
+
+    # https://golangci-lint.run/welcome/install#install-from-source
+    - name: golangci-lint
+      package: github.com/golangci/golangci-lint/cmd/golangci-lint
+
+    # https://github.com/fzipp/gocyclo
+    - name: gocyclo
+      package: github.com/fzipp/gocyclo/cmd/gocyclo
+
+    # https://github.com/go-critic/go-critic
+    - name: gocritic
+      package: github.com/go-critic/go-critic/cmd/gocritic

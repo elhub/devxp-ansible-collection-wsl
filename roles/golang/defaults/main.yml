@@ -5,3 +5,9 @@
 # if a version number, that version will be installed
 # use the format "1.22.0"
 go_version: latest
+
+# GOROOT
+go_root: "{{ ansible_env.HOME }}/.local/lib/go/current"
+
+# GOPATH
+go_path: "{{ ansible_env.HOME }}/go"
