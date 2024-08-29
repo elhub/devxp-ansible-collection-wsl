@@ -58,18 +58,6 @@
     GOROOT: "{{ go_root }}"
     GOPATH: "{{ go_path }}"
   loop:
-    # https://pkg.go.dev/golang.org/x/tools/cmd/goimports
-    - name: goimports
-      package: golang.org/x/tools/cmd/goimports
-
     # https://golangci-lint.run/welcome/install#install-from-source
     - name: golangci-lint
       package: github.com/golangci/golangci-lint/cmd/golangci-lint
-
-    # https://github.com/fzipp/gocyclo
-    - name: gocyclo
-      package: github.com/fzipp/gocyclo/cmd/gocyclo
-
-    # https://github.com/go-critic/go-critic
-    - name: gocritic
-      package: github.com/go-critic/go-critic/cmd/gocritic
