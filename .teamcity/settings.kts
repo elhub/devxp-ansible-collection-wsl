@@ -12,13 +12,17 @@ elhubProject(DEVXP, "devxp-ansible-collection-wsl") {
     phabricator {
         sequential {
             ansibleSonarScan()
-            roles.forEach { moleculeTest(it) }
+            parallel {
+                roles.forEach { moleculeTest(it) }
+            }
         }
     }
 
     pipeline {
         sequential {
-            roles.forEach { moleculeTest(it) }
+            parallel {
+                roles.forEach { moleculeTest(it) }
+            }
             ansibleAutoRelease()
         }
     }
