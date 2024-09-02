@@ -3,7 +3,7 @@ driver:
   name: docker
 platforms:
   - name: instance
-    image: "geerlingguy/docker-ubuntu2004-ansible:latest"
+    image: "geerlingguy/docker-ubuntu2204-ansible:latest"
     volumes:
       - /var/lib/docker
     privileged: true
