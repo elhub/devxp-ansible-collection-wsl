@@ -3,5 +3,5 @@
   hosts: all
   tasks:
     - name: "Install base"
-      include_role:
+      ansible.builtin.include_role:
         name: base

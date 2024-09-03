@@ -3,14 +3,14 @@
   hosts: all
   gather_facts: false
   tasks:
-  - name: Test checkstyle
-    shell: "source ~/.sdkman/bin/sdkman-init.sh && ~/.local/bin/checkstyle --version"
-    args:
-      executable: /bin/bash
-    changed_when: false
+    - name: Test checkstyle
+      ansible.builtin.shell: "source ~/.sdkman/bin/sdkman-init.sh && ~/.local/bin/checkstyle --version"
+      args:
+        executable: /bin/bash
+      changed_when: false
 
-  - name: Test detekt
-    shell: "source ~/.sdkman/bin/sdkman-init.sh && ~/.local/bin/detekt --version"
-    args:
-      executable: /bin/bash
-    changed_when: false
+    - name: Test detekt
+      ansible.builtin.shell: "source ~/.sdkman/bin/sdkman-init.sh && ~/.local/bin/detekt --version"
+      args:
+        executable: /bin/bash
+      changed_when: false

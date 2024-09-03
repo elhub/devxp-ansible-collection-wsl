@@ -2,12 +2,12 @@
 - name: Dependencies
   ansible.builtin.apt:
     name:
-       - zip
-       - unzip
-       - curl
+      - zip
+      - unzip
+      - curl
   become: true
 
-- name: Install
+- name: Install # noqa command-instead-of-module
   ansible.builtin.shell:
     cmd: curl -s 'https://get.sdkman.io?rcupdate=false' | bash
     creates: "{{ sdkman_dir }}"

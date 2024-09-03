@@ -1,11 +1,11 @@
 ---
 - name: Install Java packages
-  shell: >
-    source {{ sdkman_dir }}/bin/sdkman-init.sh &&
+  ansible.builtin.shell: >
+    source {{ java_sdkman_dir }}/bin/sdkman-init.sh &&
     sdk install java {{ item }}
   args:
     executable: /bin/bash
-  loop: "{{ sdkman_install_versions }}"
+  loop: "{{ java_sdkman_install_versions }}"
   register: sdk_install
   changed_when: |
     'is already installed.' not in sdk_install.stdout
@@ -13,24 +13,24 @@
     sdk_install.rc != 0 and 'is already installed.' not in sdk_install.stdout
 
 - name: Uninstall SDK candidates/versions
-  shell: >
-    source {{ sdkman_dir }}/bin/sdkman-init.sh &&
+  ansible.builtin.shell: >
+    source {{ java_sdkman_dir }}/bin/sdkman-init.sh &&
     sdk uninstall java {{ item }}
   args:
     executable: /bin/bash
-  loop: "{{ sdkman_uninstall_versions }}"
+  loop: "{{ java_sdkman_uninstall_versions }}"
   register: sdk_uninstall
   changed_when: not 'is not installed.' in sdk_uninstall.stdout
 
 - name: Get SDK defaults
-  shell: source {{ sdkman_dir }}/bin/sdkman-init.sh && sdk current java
+  ansible.builtin.shell: source {{ java_sdkman_dir }}/bin/sdkman-init.sh && sdk current java
   args:
     executable: /bin/bash
   register: get_sdk_defaults
   changed_when: false
 
 - name: Set SDK defaults
-  shell: source {{ sdkman_dir }}/bin/sdkman-init.sh && sdk default java {{ sdkman_default_version | first }}
+  ansible.builtin.shell: source {{ java_sdkman_dir }}/bin/sdkman-init.sh && sdk default java {{ java_sdkman_default_version | first }}
   args:
     executable: /bin/bash
-  changed_when: not (sdkman_default_version | first) in get_sdk_defaults.stdout
+  changed_when: not (java_sdkman_default_version | first) in get_sdk_defaults.stdout

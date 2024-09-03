@@ -1,17 +1,17 @@
 ---
 - name: Clean old dev-tools installation
-  file:
+  ansible.builtin.file:
     path: "{{ item }}"
     state: absent
   loop:
     - "/usr/local/lib/adr-j-3.1.0-SNAPSHOT"
     - "/usr/local/bin/adr"
-  become: yes
+  become: true
   ignore_errors: "{{ ansible_check_mode }}"
 
 - name: Unpack adr-j lib
-  unarchive:
-    src: "{{ repository }}/{{ adr_version }}/adr-j.zip"
+  ansible.builtin.unarchive:
+    src: "{{ adr_repository }}/{{ adr_adr_version }}/adr-j.zip"
     dest: "{{ ansible_env.HOME }}/.local/lib"
     remote_src: yes
     owner: "{{ ansible_user_id }}"
@@ -19,7 +19,7 @@
   ignore_errors: "{{ ansible_check_mode }}"
 
 - name: Link adr
-  file:
+  ansible.builtin.file:
     src: "{{ ansible_env.HOME }}/.local/lib/adr-j-{{ adr_version }}/bin/adr-j"
     dest: "{{ ansible_env.HOME }}/.local/bin/adr"
     state: link

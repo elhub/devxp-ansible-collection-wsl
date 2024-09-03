@@ -1,12 +1,12 @@
 ---
 - name: Clean old dev-tools installation
-  file:
+  ansible.builtin.file:
     path: "/usr/local/bin/{{ item }}}"
     state: absent
     owner: "{{ ansible_user_id }}"
     group: "{{ ansible_user_gid }}"
   become_user: root
-  become: yes
+  become: true
   loop:
     - git-clone-all
     - git-mirror
@@ -14,7 +14,7 @@
   ignore_errors: "{{ ansible_check_mode }}"
 
 - name: Set up git util scripts
-  template:
+  ansible.builtin.template:
     src: "{{ item }}.sh.j2"
     dest: "{{ ansible_env.HOME }}/.local/bin/{{ item }}"
     mode: 0755

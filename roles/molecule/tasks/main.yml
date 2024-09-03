@@ -1,6 +1,6 @@
 ---
 - name: Install molecule
-  pip:
+  ansible.builtin.pip:
     name: "{{ packages }}"
     state: present
     extra_args: --user

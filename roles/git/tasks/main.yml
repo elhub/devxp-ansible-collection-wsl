@@ -3,7 +3,7 @@
   ansible.builtin.apt:
     name:
       - git
-  become: yes
+  become: true
 
 - name: Add git-hooks paths
   ansible.builtin.file:

@@ -10,7 +10,7 @@ description: >
   of the varied Linux(WSL) tools that are used at Elhub.
 license:
   - MIT
-tags: []
+tags: ['infrastructure']
 dependencies: {}
 repository: https://github.com/elhub/devxp-ansible-collection-wsl
 documentation: https://github.com/elhub/devxp-ansible-collection-wsl/blob/main/README.md
