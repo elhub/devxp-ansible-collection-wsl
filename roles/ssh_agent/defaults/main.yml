@@ -1,0 +1,3 @@
+---
+# automatically load these private keys from ~/.ssh on login
+ssh_agent_add_keys: []

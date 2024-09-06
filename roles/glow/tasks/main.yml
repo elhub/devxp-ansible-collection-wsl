@@ -1,0 +1,27 @@
+- name: get latest release version from github
+  ansible.builtin.uri:
+    url: 'https://api.github.com/repos/charmbracelet/glow/releases/latest'
+    return_content: yes
+  register: _glow_latest
+
+- name: register reusable version var
+  ansible.builtin.set_fact:
+    _glow_version: '{{ _glow_latest.json.tag_name }}'
+
+- name: create dir
+  ansible.builtin.file:
+    path: '{{ ansible_env.HOME }}/.local/lib/glow/glow-{{ _glow_version }}'
+    state: directory
+
+- name: 'download {{ _glow_version }}'
+  ansible.builtin.unarchive:
+    src: 'https://github.com/charmbracelet/glow/releases/download/{{ _glow_version }}/glow_Linux_x86_64.tar.gz'
+    remote_src: yes
+    dest: '{{ ansible_env.HOME }}/.local/lib/glow/glow-{{ _glow_version }}'
+    creates: '{{ ansible_env.HOME }}/.local/lib/glow/glow-{{ _glow_version }}/glow'
+
+- name: symlink bin
+  ansible.builtin.file:
+    path: '{{ ansible_env.HOME }}/.local/bin/glow'
+    src: '{{ ansible_env.HOME }}/.local/lib/glow/glow-{{ _glow_version }}/glow'
+    state: link

@@ -1,0 +1,8 @@
+---
+# https://podman.io/docs/installation
+# The podman package is available in the official repositories for Ubuntu 20.10 and newer.
+- name: Ensure podman
+  ansible.builtin.apt:
+    name: podman
+    state: present
+  become: true

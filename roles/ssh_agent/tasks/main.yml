@@ -1,0 +1,27 @@
+---
+- name: directory for ssh-find-agent
+  ansible.builtin.file:
+    path: '{{ ansible_env.HOME }}/.local/lib/ssh-find-agent'
+    state: directory
+    mode: 0751
+
+- name: ssh-find-agent
+  ansible.builtin.get_url:
+    url: https://raw.githubusercontent.com/wwalker/ssh-find-agent/master/ssh-find-agent.sh
+    dest: '{{ ansible_env.HOME }}/.local/lib/ssh-find-agent/ssh-find-agent.sh'
+    mode: 0640
+
+- name: ssh-find-agent in bashrc
+  ansible.builtin.blockinfile:
+    path: '{{ ansible_env.HOME }}/.bashrc'
+    marker: '# {mark} Ansible - ssh-agent'
+    block: |
+      source {{ ansible_env.HOME }}/.local/lib/ssh-find-agent/ssh-find-agent.sh
+
+      # find/create and set agent
+      ssh-add -l >&/dev/null || ssh-find-agent -a || eval $(ssh-agent) > /dev/null
+
+      # automatically add keys to ssh agent if they are not loaded already
+      {% for key in ssh_agent_add_keys %}
+      ssh-add -l | grep -q $(ssh-keygen -lf ~/.ssh/{{ key }}  | awk '{print $2}') || ssh-add ~/.ssh/{{ key }}
+      {% endfor %}

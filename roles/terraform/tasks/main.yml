@@ -1,0 +1,27 @@
+---
+- name: get latest version
+  ansible.builtin.uri:
+    url: https://api.github.com/repos/hashicorp/terraform/releases/latest
+    return_content: yes
+  register: _terraform_latest
+
+- name: lib directory
+  file:
+    path: '{{ ansible_env.HOME }}/.local/lib/terraform/terraform-{{ _terraform_latest.json.name }}'
+    state: directory
+
+- name: get
+  unarchive:
+    src: https://releases.hashicorp.com/terraform/{{ _terraform_latest.json.name[1:] }}/terraform_{{ _terraform_latest.json.name[1:] }}_linux_amd64.zip
+    remote_src: yes
+    dest: '{{ ansible_env.HOME }}/.local/lib/terraform/terraform-{{ _terraform_latest.json.name }}/'
+    creates: '{{ ansible_env.HOME }}/.local/lib/terraform/terraform-{{ _terraform_latest.json.name }}/terraform'
+
+- name: symlink in local bin
+  file:
+    path: '{{ ansible_env.HOME }}/.local/bin/{{ item }}'
+    state: link
+    src: '{{ ansible_env.HOME }}/.local/lib/terraform/terraform-{{ _terraform_latest.json.name }}/terraform'
+  loop:
+    - 'terraform'
+    - 'terraform{{ _terraform_latest.json.name[1:] }}'
