@@ -1,0 +1,63 @@
+---
+# tasks file for golang
+- name: Get latest release version from github
+  ansible.builtin.uri:
+    url: https://go.dev/dl/?mode=json
+    return_content: yes
+  register: _go_latest
+
+- name: Register reusable version var
+  ansible.builtin.set_fact:
+    _go_version: "{{ _go_latest.json[0].version if go_version == 'latest' else 'go' + go_version }}"
+
+- name: Create lib dir for go
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.local/lib/go/{{ _go_version }}"
+    state: directory
+    mode: "0755"
+
+- name: "Download {{ _go_version }}"
+  ansible.builtin.unarchive:
+    src: "https://go.dev/dl/{{ _go_version }}.linux-amd64.tar.gz"
+    remote_src: yes
+    extra_opts: ['--strip-components=1'] # the archive contains a top-level "go" directory
+    dest: "{{ ansible_env.HOME }}/.local/lib/go/{{ _go_version }}"
+    creates: "{{ ansible_env.HOME }}/.local/lib/go/{{ _go_version }}/bin/go"
+
+- name: Symlink to GOROOT
+  ansible.builtin.file:
+    path: "{{ go_root }}"
+    src: "{{ ansible_env.HOME }}/.local/lib/go/{{ _go_version }}"
+    state: link
+
+- name: Add go to PATH
+  ansible.builtin.blockinfile:
+    path: "{{ ansible_env.HOME }}/.profile"
+    marker: "# {mark} Ansible - elhub.wsl.golang"
+    block: |
+      # adjust the GOROOT since we have a non-default location
+      if [ -d "{{ go_root }}" ] ; then
+        export GOROOT="{{ go_root }}"
+        export PATH="$GOROOT/bin:$PATH"
+      fi
+
+      # ensure that tools installed with "go install" ends in PATH
+      if [ -d "{{ go_path }}" ] ; then
+        export GOPATH="{{ go_path }}"
+        export PATH="$GOPATH/bin:$PATH"
+      fi
+
+- name: Install linters with go install
+  ansible.builtin.shell:
+    cmd: >
+      {{ go_root }}/bin/go
+      install
+      {{ item.package }}@latest
+    creates: "{{ go_path }}/bin/{{ item.name }}"
+  environment:
+    GOROOT: "{{ go_root }}"
+    GOPATH: "{{ go_path }}"
+  loop:
+    # https://golangci-lint.run/welcome/install#install-from-source
+    - name: golangci-lint
+      package: github.com/golangci/golangci-lint/cmd/golangci-lint
