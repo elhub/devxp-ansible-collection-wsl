@@ -1,0 +1,41 @@
+---
+- name: get latest release version from github
+  ansible.builtin.uri:
+    url: 'https://api.github.com/repos/plantuml/plantuml/releases/latest'
+    return_content: yes
+  register: _plantuml_latest
+
+- name: register reusable version var
+  ansible.builtin.set_fact:
+    _plantuml_version: '{{ _plantuml_latest.json.tag_name }}'
+
+- name: create dir
+  ansible.builtin.file:
+    path: '{{ ansible_env.HOME }}/.local/lib/plantuml'
+    state: directory
+
+- name: 'download {{ _plantuml_version }}'
+  ansible.builtin.get_url:
+    url: 'https://github.com/plantuml/plantuml/releases/download/{{ _plantuml_version }}/plantuml-{{ _plantuml_version[1:] }}.jar'
+    dest: '{{ ansible_env.HOME }}/.local/lib/plantuml/plantuml-{{ _plantuml_version[1:] }}.jar'
+    mode: 0750
+
+- name: make launcher script
+  ansible.builtin.copy:
+    dest: '{{ ansible_env.HOME }}/.local/bin/plantuml'
+    mode: 0755
+    content: |
+      #!/usr/bin/env bash
+
+      if [ -n "${JAVA_HOME}" ] && [ -x "${JAVA_HOME}/bin/java" ] ; then
+          JAVA="${JAVA_HOME}/bin/java"
+      elif [ -x /usr/bin/java ] ; then
+          JAVA=/usr/bin/java
+      else
+          echo Cannot find JVM
+          exit 1
+      fi
+
+      $JAVA -Djava.net.useSystemProxies=true \
+        -jar {{ ansible_env.HOME }}/.local/lib/plantuml/plantuml-{{ _plantuml_version[1:] }}.jar \
+        "$@"

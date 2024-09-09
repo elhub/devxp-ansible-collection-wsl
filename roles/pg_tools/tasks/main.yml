@@ -1,0 +1,96 @@
+---
+- name: PostgreSQL signing key
+  ansible.builtin.apt_key:
+    url: 'https://www.postgresql.org/media/keys/ACCC4CF8.asc'
+    state: present
+  become: true
+
+- name: PostgreSQL external repository
+  ansible.builtin.apt_repository:
+    repo: 'deb http://apt.postgresql.org/pub/repos/apt/ jammy-pgdg main'
+    state: present
+    filename: 'postgresql'
+  become: true
+
+- name: Official client binaries
+  ansible.builtin.apt:
+    update_cache: true
+    name:
+      - postgresql-client
+  become: true
+
+- name: psycopg dependencies
+  ansible.builtin.apt:
+    name:
+      - python3-dev
+      - libpq-dev
+  become: true
+
+- name: pgcli
+  ansible.builtin.pip:
+    name:
+      - pgcli
+      - psycopg2 # requirement
+    state: latest
+    extra_args: --user
+
+- name: config directory for pgcli
+  ansible.builtin.file:
+    state: directory
+    path: '{{ ansible_env.HOME }}/.config/pgcli'
+    mode: 0755
+
+- name: sqlfluff
+  ansible.builtin.pip:
+    name:
+      - sqlfluff
+    state: latest
+    extra_args: --user
+
+- name: pspg
+  ansible.builtin.apt:
+    name:
+      - pspg
+  become: true
+
+- name: enable pspg for psql
+  ansible.builtin.blockinfile:
+    path: '{{ ansible_env.HOME }}/.psqlrc'
+    block: |
+      \setenv PAGER pspg
+      \set QUIET 1
+      \pset linestyle unicode
+      \pset border 2
+      \pset null ∅
+      \unset QUIET
+    marker: '-- {mark} ANSIBLE MANAGED BLOCK - pspg'
+    create: true
+    mode: 0644
+
+- name: enable pspg for pgcli
+  ansible.builtin.lineinfile:
+    path: '{{ ansible_env.HOME }}/.config/pgcli/config'
+    regexp: '^pager'
+    line: 'pager = /usr/bin/pspg --rr=2 --quit-if-one-screen --ignore-case'
+    create: true
+    mode: 0644
+
+- name: postgres_dba
+  ansible.builtin.git:
+    repo: https://github.com/NikolayS/postgres_dba.git
+    dest: '{{ ansible_env.HOME }}/.local/lib/postgres_dba'
+
+- name: alias postgres_dba in .psqlrc
+  ansible.builtin.lineinfile:
+    path: '{{ ansible_env.HOME }}/.psqlrc'
+    regexp: 'postgres_dba'
+    line: "\\set dba '\\\\i {{ ansible_env.HOME }}/.local/lib/postgres_dba/start.psql'"
+    create: true
+    mode: 0644
+
+- name: migra
+  ansible.builtin.pip:
+    name:
+      - migra[pg]
+    state: latest
+    extra_args: --user
