@@ -6,10 +6,10 @@ import no.elhub.devxp.build.configuration.pipeline.jobs.moleculeTest
 
 elhubProject(DEVXP, "devxp-ansible-collection-wsl") {
 
-    val roles = listOf("adr", "ansible", "arcanist", "base", "docker", "git", "gitutils", "java", "kotlin", "linters", "molecule",
+    val roles = listOf("adr", "ansible", "arcanist", "base", "docker", "git", "git_utils", "java", "kotlin", "linters", "molecule",
         "node", "python")
 
-    phabricator {
+    codeReview {
         sequential {
             ansibleSonarScan()
             parallel {
