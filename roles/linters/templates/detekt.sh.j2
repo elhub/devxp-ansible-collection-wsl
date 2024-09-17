@@ -1,2 +1,2 @@
 #!/bin/bash
-java -jar {{ install_path }}/bin/detekt-cli.jar -c {{ lint_config_path }}/detekt-config.yml $* || true
+java -jar {{ linters_install_path }}/bin/detekt-cli.jar -c {{ lint_config_path }}/detekt-config.yml $* || true

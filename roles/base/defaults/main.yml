@@ -1,6 +1,6 @@
 ---
 # Default packages to install on WSL. Should generally not be overridden.
-default_packages:
+base_default_packages:
   - apt-transport-https
   - build-essential
   - ca-certificates
@@ -21,4 +21,7 @@ default_packages:
   - zip
 
 # Additional packages to install on WSL in addition to the ones listed above.
-config_packages: []
+base_config_packages: []
+
+base_http_proxy_param: ''
+base_https_proxy_param: ''

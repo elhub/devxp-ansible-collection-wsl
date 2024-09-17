@@ -14,7 +14,7 @@
       - curl
       - gnupg
       - lsb-release
-  become: yes
+  become: true
 
 - name: Get the system architecture of your computer and put it in a variable
   ansible.builtin.command: dpkg --print-architecture
@@ -26,15 +26,15 @@
     url: https://download.docker.com/linux/ubuntu/gpg
     state: present
   environment:
-    http_proxy: "{{ http_proxy_param }}"
-    https_proxy: "{{ http_proxy_param }}"
-  become: yes
+    http_proxy: "{{ docker_http_proxy_param }}"
+    https_proxy: "{{ docker_https_proxy_param }}"
+  become: true
 
 - name: Add apt repository for Docker stable version
   ansible.builtin.apt_repository:
     repo: deb [arch="{{ systemarchitecture.stdout }}"] https://download.docker.com/linux/ubuntu "{{ ansible_distribution_release }}" stable
     state: present
-  become: yes
+  become: true
 
 - name: Install Docker and its dependencies
   ansible.builtin.apt:
@@ -47,14 +47,14 @@
       - docker-ce-cli
       - containerd.io
       - docker-compose-plugin
-  become: yes
+  become: true
 
 - name: Add user to docker group
   ansible.builtin.user:
     name: "{{ docker_user }}"
     groups: docker
     append: yes
-  become: yes
+  become: true
 
 # dependencies for ansible docker_* modules
 - name: Install docker python packages

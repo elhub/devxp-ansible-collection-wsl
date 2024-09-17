@@ -1,6 +1,7 @@
+---
 # Default user for docker. Defaults to 'ansible_user_id'
 # Can be overidden with the following variable
 # docker_user: jane.doe
 
-http_proxy_param: ''
-https_proxy_param: ''
+docker_http_proxy_param: ''
+docker_https_proxy_param: ''

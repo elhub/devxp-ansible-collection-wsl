@@ -1,21 +1,21 @@
 ---
 # SDKMAN
 # Where to find sdkman
-sdkman_dir: "{{ ansible_env.HOME }}/.sdkman"
+java_sdkman_dir: "{{ ansible_env.HOME }}/.sdkman"
 
 # Kotlin versions to Install
 # This is also set as the default version - override this if you want a different default
 # Use sdkman_additional_versions to add more than version of the SDK
-sdkman_default_version:
+java_sdkman_default_version:
   - 17.0.7-tem
 
 # Additional versions to install
-sdkman_additional_versions:
+java_sdkman_additional_versions:
   - 8.0.302-open
 
 # The list of actual versions installed
-sdkman_install_versions: "{{ sdkman_default_version + sdkman_additional_versions }}"
+java_sdkman_install_versions: "{{ sdkman_default_version + sdkman_additional_versions }}"
 
 # Old versions of Kotlin to uninstall
 # By default none.
-sdkman_uninstall_versions: []
+java_sdkman_uninstall_versions: []

@@ -1,13 +1,13 @@
 ---
-- name: ensure nvm is installed
-  shell: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v{{ nvm_version }}/install.sh | bash
+- name: Ensure nvm is installed # noqa command-instead-of-module
+  ansible.builtin.shell: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v{{ node_nvm_version }}/install.sh | bash
   args:
-    creates: "{{ nvm_install_path }}/nvm.sh"
+    creates: "{{ node_nvm_install_path }}/nvm.sh"
 
-- name: install node
-  shell: |
-    . {{ nvm_install_path }}/nvm.sh
-    nvm install {{ node_version }}
+- name: Install node
+  ansible.builtin.shell: |
+    . {{ node_nvm_install_path }}/nvm.sh
+    nvm install {{ node_node_version }}
   args:
     executable: /bin/bash
   register: node_version_response

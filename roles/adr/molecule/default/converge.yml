@@ -3,11 +3,11 @@
   hosts: all
   tasks:
     - name: "Install base"
-      include_role:
+      ansible.builtin.include_role:
         name: base
     - name: "Install java"
-      include_role:
+      ansible.builtin.include_role:
         name: java
     - name: "Install adr"
-      include_role:
+      ansible.builtin.include_role:
         name: adr

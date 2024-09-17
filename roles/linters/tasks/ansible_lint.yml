@@ -1,6 +1,6 @@
 ---
 - name: Install ansible-lint
-  pip:
+  ansible.builtin.pip:
     name:
       - ansible-lint[yamllint]
     extra_args: --user

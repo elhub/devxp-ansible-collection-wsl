@@ -1,32 +1,32 @@
 ---
 - name: Clean old dev-tools installation
-  file:
+  ansible.builtin.file:
     path: "{{ item }}}"
     state: absent
   become_user: root
-  become: yes
+  become: true
   loop:
     - /usr/local/lib/detekt-cli.jar
     - /usr/local/bin/detekt-cli
   ignore_errors: "{{ ansible_check_mode }}"
 
 - name: Ensure detekt
-  get_url:
+  ansible.builtin.get_url:
     url: https://github.com/detekt/detekt/releases/download/v{{ detekt_version }}/detekt-cli-{{ detekt_version }}-all.jar
-    dest: "{{ install_path }}/bin/detekt-cli.jar"
+    dest: "{{ linters_install_path }}/bin/detekt-cli.jar"
     mode: 0755
   ignore_errors: "{{ ansible_check_mode }}"
 
 - name: Write detekt config
-  template:
+  ansible.builtin.template:
     src: detekt-config.yml.j2
     dest: "{{ lint_config_path }}/detekt-config.yml"
     mode: 0644
   ignore_errors: "{{ ansible_check_mode }}"
 
 - name: Create detekt script
-  template:
+  ansible.builtin.template:
     src: detekt.sh.j2
-    dest: "{{ install_path }}/bin/detekt"
+    dest: "{{ linters_install_path }}/bin/detekt"
     mode: 0755
   ignore_errors: "{{ ansible_check_mode }}"
