@@ -1,31 +1,31 @@
 ---
 - name: Clean old dev-tools installation
-  file:
+  ansible.builtin.file:
     path: "{{ item }}}"
     state: absent
   become_user: root
-  become: yes
+  become: true
   loop:
     - /usr/local/lib/checkstyle.jar
     - /usr/local/bin/checkstyle
   ignore_errors: "{{ ansible_check_mode }}"
 
 - name: Ensure checkstyle
-  get_url:
+  ansible.builtin.get_url:
     url: https://github.com/checkstyle/checkstyle/releases/download/checkstyle-{{ checkstyle_version }}/checkstyle-{{ checkstyle_version }}-all.jar
-    dest: "{{ install_path }}/lib/checkstyle.jar"
+    dest: "{{ linters_install_path }}/lib/checkstyle.jar"
     mode: 0755
   ignore_errors: "{{ ansible_check_mode }}"
 
 - name: Write checkstyle config
-  template:
+  ansible.builtin.template:
     src: checkstyle-config.xml.j2
     dest: "{{ lint_config_path }}/checkstyle-config.xml"
     mode: 0644
 
 - name: Create checkstyle script
-  template:
+  ansible.builtin.template:
     src: checkstyle.sh.j2
-    dest: "{{ install_path }}/bin/checkstyle"
+    dest: "{{ linters_install_path }}/bin/checkstyle"
     mode: 0755
   ignore_errors: "{{ ansible_check_mode }}"

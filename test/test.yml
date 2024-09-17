@@ -16,9 +16,8 @@
     - role: kotlin
     - role: node
     # Install Workflow
-#    - role: adr # To test this role, uncomment and repo to download the adr-j.jar
-#      vars:
-#        repository: TODO
-    - role: arcanist
+    # - role: adr # To test this role, uncomment and repo to download the adr-j.jar
+    #   vars:
+    #     repository: TODO
     - role: git_utils
     - role: linters

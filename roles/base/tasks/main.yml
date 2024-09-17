@@ -1,6 +1,6 @@
 ---
-- name: add {{ ansible_env.HOME }}/.local paths
-  file:
+- name: Add {{ ansible_env.HOME }}/.local paths
+  ansible.builtin.file:
     path: "{{ ansible_env.HOME }}/.local/{{ item }}"
     mode: 0755
     state: directory
@@ -9,6 +9,9 @@
     - etc
     - lib
 
-- include_tasks: sshagent.yml
-- include_tasks: packages.yml
-- include_tasks: screendir.yml
+- name: Include ssh gnupg-agent
+  ansible.builtin.include_tasks: sshagent.yml
+- name: Include packages
+  ansible.builtin.include_tasks: packages.yml
+- name: Include screen directory
+  ansible.builtin.include_tasks: screendir.yml

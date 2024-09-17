@@ -41,7 +41,6 @@ The ansible collection contains:
   [node/javascript](https://github.com/elhub/devxp-ansible-collection-wsl/tree/main/roles/node), and
   [python](https://github.com/elhub/devxp-ansible-collection-wsl/tree/main/roles/python).
 * Roles for setting up scripts and apps used by the development team such as
-  [arcanist](https://github.com/elhub/devxp-ansible-collection-wsl/tree/main/roles/arcanist),
   [git utils](https://github.com/elhub/devxp-ansible-collection-wsl/tree/main/roles/git_utils), and
   [adr](https://github.com/elhub/devxp-ansible-collection-wsl/tree/main/roles/adr).
 
@@ -77,7 +76,6 @@ For details and examples for the other individual roles:
 
 * **adr** role: See the documentation [here](https://github.com/elhub/devxp-ansible-collection-wsl/blob/main/roles/adr/README.md)
 * **ansible** role: See the documentation [here](https://github.com/elhub/devxp-ansible-collection-wsl/blob/main/roles/ansible/README.md)
-* **arcanist** role: See the documentation [here](https://github.com/elhub/devxp-ansible-collection-wsl/blob/main/roles/arcanist/README.md)
 * **docker** role: See the documentation [here](https://github.com/elhub/devxp-ansible-collection-wsl/blob/main/roles/docker/README.md)
 * **git** role: See the documentation [here](https://github.com/elhub/devxp-ansible-collection-wsl/blob/main/roles/git/README.md)
 * **git_utils** role: See the documentation [here](https://github.com/elhub/devxp-ansible-collection-wsl/blob/main/roles/git_utils/README.md)

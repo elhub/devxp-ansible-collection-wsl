@@ -1,11 +1,11 @@
 ---
-- name: install .sdkmanshrc
+- name: Install .sdkmanshrc
   ansible.builtin.template:
     src: "sdkmanshrc.sh.j2"
     dest: "{{ sdkman_dir }}/.sdkmanshrc"
     mode: "u=rw,go=r"
 
-- name: configure .bashrc
+- name: Configure .bashrc
   ansible.builtin.lineinfile:
     path: "~/.bashrc"
     state: present
@@ -14,7 +14,7 @@
     create: yes
     mode: "u=rw,go=r"
 
-- name: configure .zshrc
+- name: Configure .zshrc
   ansible.builtin.lineinfile:
     path: "~/.zshrc"
     state: present

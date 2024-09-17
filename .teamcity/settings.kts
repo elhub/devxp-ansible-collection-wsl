@@ -4,6 +4,7 @@ import no.elhub.devxp.build.configuration.pipeline.jobs.ansibleAutoRelease
 import no.elhub.devxp.build.configuration.pipeline.jobs.ansibleSonarScan
 import no.elhub.devxp.build.configuration.pipeline.jobs.moleculeTest
 
+
 elhubProject(DEVXP, "devxp-ansible-collection-wsl") {
 
     val roles = listOf("adr", "ansible", "arcanist", "base", "docker", "git", "git_utils", "java", "kotlin", "linters", "molecule",

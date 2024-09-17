@@ -1,14 +1,14 @@
 ---
-- name:
+- name: Verify adr
   hosts: all
   gather_facts: false
   tasks:
-  - name: Run adr
-    shell: >
-      source ~/.sdkman/bin/sdkman-init.sh && ~/.local/bin/adr help
-    args:
-      executable: /bin/bash
-    register: result
-    changed_when: false
-    failed_when:
-      - result.rc != 0 or 'architectural decision records' not in result.stdout
+    - name: Run adr
+      ansible.builtin.shell: >
+        source ~/.sdkman/bin/sdkman-init.sh && ~/.local/bin/adr help
+      args:
+        executable: /bin/bash
+      register: result
+      changed_when: false
+      failed_when:
+        - result.rc != 0 or 'architectural decision records' not in result.stdout
