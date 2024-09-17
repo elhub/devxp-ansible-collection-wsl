@@ -3,4 +3,4 @@
 adr_repository: https://jfrog.elhub.cloud/artifactory/elhub-bin/adr-j
 
 # Version of the artifact to download
-adr_adr_version: 3.1.0-SNAPSHOT
+adr_version: 3.1.0-SNAPSHOT

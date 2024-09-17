@@ -30,7 +30,7 @@
   changed_when: false
 
 - name: Set SDK defaults
-  ansible.builtin.shell: source {{ kotlin_sdkman_dir }}/bin/sdkman-init.sh && sdk default kotlin {{ sdkman_default_version | first }}
+  ansible.builtin.shell: source {{ kotlin_sdkman_dir }}/bin/sdkman-init.sh && sdk default kotlin {{ kotlin_sdkman_default_version | first }}
   args:
     executable: /bin/bash
   changed_when: not (kotlin_sdkman_default_version | first) in get_sdk_defaults.stdout
