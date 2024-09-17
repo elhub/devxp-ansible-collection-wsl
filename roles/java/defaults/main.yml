@@ -14,7 +14,7 @@ java_sdkman_additional_versions:
   - 8.0.302-open
 
 # The list of actual versions installed
-java_sdkman_install_versions: "{{ sdkman_default_version + sdkman_additional_versions }}"
+java_sdkman_install_versions: "{{ java_sdkman_default_version + java_sdkman_additional_versions }}"
 
 # Old versions of Kotlin to uninstall
 # By default none.

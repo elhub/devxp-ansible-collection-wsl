@@ -7,14 +7,14 @@
 
 - name: Ensure default packages
   ansible.builtin.package:
-    name: "{{ default_packages }}"
+    name: "{{ base_default_packages }}"
     state: present
   become: true
   retries: 3
 
 - name: Ensure configured packages
   ansible.builtin.package:
-    name: "{{ config_packages }}"
+    name: "{{ base_config_packages }}"
     state: present
   become: true
   retries: 3

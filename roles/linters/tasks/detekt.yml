@@ -12,7 +12,7 @@
 
 - name: Ensure detekt
   ansible.builtin.get_url:
-    url: https://github.com/detekt/detekt/releases/download/v{{ detekt_version }}/detekt-cli-{{ detekt_version }}-all.jar
+    url: https://github.com/detekt/detekt/releases/download/v{{ linters_detekt_version }}/detekt-cli-{{ linters_detekt_version }}-all.jar
     dest: "{{ linters_install_path }}/bin/detekt-cli.jar"
     mode: 0755
   ignore_errors: "{{ ansible_check_mode }}"
@@ -20,7 +20,7 @@
 - name: Write detekt config
   ansible.builtin.template:
     src: detekt-config.yml.j2
-    dest: "{{ lint_config_path }}/detekt-config.yml"
+    dest: "{{ linters_lint_config_path }}/detekt-config.yml"
     mode: 0644
   ignore_errors: "{{ ansible_check_mode }}"
 

@@ -13,7 +13,7 @@ kotlin_sdkman_default_version:
 kotlin_sdkman_additional_versions: []
 
 # The list of actual versions installed
-kotlin_sdkman_install_versions: "{{ sdkman_default_version + sdkman_additional_versions }}"
+kotlin_sdkman_install_versions: "{{ kotlin_sdkman_default_version + kotlin_sdkman_additional_versions }}"
 
 # Old versions of Kotlin to uninstall
 # By default none.

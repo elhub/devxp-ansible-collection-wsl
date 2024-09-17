@@ -11,7 +11,7 @@
 
 - name: Unpack adr-j lib
   ansible.builtin.unarchive:
-    src: "{{ adr_repository }}/{{ adr_adr_version }}/adr-j.zip"
+    src: "{{ adr_repository }}/{{ adr_version }}/adr-j.zip"
     dest: "{{ ansible_env.HOME }}/.local/lib"
     remote_src: yes
     owner: "{{ ansible_user_id }}"
