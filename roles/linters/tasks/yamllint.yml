@@ -3,5 +3,5 @@
   ansible.builtin.apt:
     name: yamllint
   become_user: root
-  become: false
+  become: true
   ignore_errors: "{{ ansible_check_mode }}"
