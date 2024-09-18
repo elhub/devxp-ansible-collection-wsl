@@ -7,7 +7,7 @@
 - name: Install node
   ansible.builtin.shell: |
     . {{ node_nvm_install_path }}/nvm.sh
-    nvm install {{ node_node_version }}
+    nvm install {{ node_version }}
   args:
     executable: /bin/bash
   register: node_version_response

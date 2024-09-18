@@ -1,6 +1,6 @@
 ---
 # version of node to install, defaults to 'latest'
-node_node_version: 'node'
+node_version: 'node'
 
 node_nvm_version: '0.39.4'
 
