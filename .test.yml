@@ -1,6 +1,0 @@
----
-- name: install golang from the golang role
-  hosts: localhost
-  become: false
-  roles:
-    - role: golang
