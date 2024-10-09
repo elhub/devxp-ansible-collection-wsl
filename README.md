@@ -11,12 +11,17 @@
 
 ## Table of Contents
 
+* [Table of Contents](#table-of-contents)
 * [About](#about)
 * [Getting Started](#getting-started)
   * [Prerequisites](#prerequisites)
   * [Installation](#installation)
 * [Usage](#usage)
+  * [From ansible playbooks](#from-ansible-playbooks)
+  * [From command line](#from-command-line)
 * [Testing](#testing)
+  * [Molecule](#molecule)
+  * [Testing with Docker](#testing-with-docker)
 * [Contributing](#contributing)
 * [Owners](#owners)
 * [License](#license)
@@ -63,7 +68,15 @@ collections:
      version: main
 ```
 
+You can also install manually by using the following ansible-galaxy command
+
+```bash
+ansible-galaxy collection install git+https://github.com/elhub/devxp-ansible-collection-wsl
+```
+
 ## Usage
+
+### From ansible playbooks
 
 The roles in this playbook are shared by the ansible playbooks used to set up the developer PC's; see e.g.,
 [devxp-linux](https://github.com/elhub/devxp-linux).
@@ -84,6 +97,18 @@ For details and examples for the other individual roles:
 * **molecule** role: See the documentation [here](https://github.com/elhub/devxp-ansible-collection-wsl/blob/main/roles/molecule/README.md)
 * **node** role: See the documentation [here](https://github.com/elhub/devxp-ansible-collection-wsl/blob/main/roles/node/README.md)
 * **python** role: See the documentation [here](https://github.com/elhub/devxp-ansible-collection-wsl/blob/main/roles/python/README.md)
+
+### From command line
+
+Install the collection using the [instructions above](#installation).
+You can run the roles from the command line using the following command.
+Replace `elhub.wsl.restish` with the role you want to run.
+
+```bash
+ansible -m import_role -e "{ 'ansible_env' : { 'HOME' : '$HOME' }}" -a name=elhub.wsl.restish localhost
+```
+
+If the role requires sudo/root, add `--ask-become-pass` to the command.
 
 ## Testing
 

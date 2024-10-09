@@ -1,0 +1,7 @@
+# restish handlers
+---
+- name: restish completions
+  ansible.builtin.shell:
+    cmd: >
+      {{ ansible_env.HOME }}/.local/bin/restish completion bash >
+      {{ ansible_env.HOME }}/.local/share/bash-completion/completions/restish
