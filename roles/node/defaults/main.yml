@@ -2,7 +2,9 @@
 # version of node to install, defaults to 'latest'
 node_version: 'node'
 
-node_nvm_version: '0.39.4'
+# version of nvm to install, defaults to 'latest'
+# when using latest, the role will pick the latest version from github
+node_nvm_version: 'latest'
 
 # Install path for nvm (defaults to $HOME/.nvm)
 node_nvm_install_path: "{{ ansible_env.HOME }}/.nvm"
