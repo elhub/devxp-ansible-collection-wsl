@@ -7,7 +7,7 @@
 
 - name: PostgreSQL external repository
   ansible.builtin.apt_repository:
-    repo: 'deb http://apt.postgresql.org/pub/repos/apt/ jammy-pgdg main'
+    repo: 'deb http://apt.postgresql.org/pub/repos/apt/ {{ ansible_distribution_release }}-pgdg main'
     state: present
     filename: 'postgresql'
   become: true
@@ -27,12 +27,9 @@
   become: true
 
 - name: pgcli
-  ansible.builtin.pip:
-    name:
-      - pgcli
-      - psycopg2 # requirement
+  community.general.pipx:
+    name: pgcli
     state: latest
-    extra_args: --user
 
 - name: config directory for pgcli
   ansible.builtin.file:
@@ -41,11 +38,9 @@
     mode: 0755
 
 - name: sqlfluff
-  ansible.builtin.pip:
-    name:
-      - sqlfluff
+  community.general.pipx:
+    name: sqlfluff
     state: latest
-    extra_args: --user
 
 - name: pspg
   ansible.builtin.apt:
@@ -89,8 +84,6 @@
     mode: 0644
 
 - name: migra
-  ansible.builtin.pip:
-    name:
-      - migra[pg]
+  community.general.pipx:
+    name: migra
     state: latest
-    extra_args: --user
