@@ -19,7 +19,7 @@
 - name: Get the system architecture of your computer and put it in a variable
   ansible.builtin.command: dpkg --print-architecture
   changed_when: false
-  register: systemarchitecture
+  register: _docker_system_architecture
 
 - name: Add apt signing key for Docker
   ansible.builtin.apt_key:
@@ -32,7 +32,7 @@
 
 - name: Add apt repository for Docker stable version
   ansible.builtin.apt_repository:
-    repo: deb [arch="{{ systemarchitecture.stdout }}"] https://download.docker.com/linux/ubuntu "{{ ansible_distribution_release }}" stable
+    repo: deb [arch="{{ _docker_system_architecture.stdout }}"] https://download.docker.com/linux/ubuntu "{{ ansible_distribution_release }}" stable
     state: present
   become: true
 
@@ -46,6 +46,7 @@
       - docker-ce
       - docker-ce-cli
       - containerd.io
+      - docker-buildx-plugin
       - docker-compose-plugin
   become: true
 
@@ -65,3 +66,4 @@
     extra_args: --user
   environment:
     DISPLAY: ''  # Fix to resolve extremely slow installs on WSL2 (see https://github.com/microsoft/WSL/issues/6643)
+  when: "{{ docker_ansible_dependencies_pip | bool }}"
