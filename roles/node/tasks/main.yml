@@ -1,6 +1,17 @@
 ---
+- name: get latest release version from github
+  ansible.builtin.uri:
+    url: 'https://api.github.com/repos/nvm-sh/nvm/releases/latest'
+    return_content: yes
+  register: _node_nvm_latest
+  changed_when: false
+
+- name: register reusable version var
+  ansible.builtin.set_fact:
+    _node_nvm_version: "{{ _node_nvm_latest.json.tag_name if node_nvm_version == 'latest' else 'v' + node_nvm_version }}"
+
 - name: Ensure nvm is installed # noqa command-instead-of-module
-  ansible.builtin.shell: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v{{ node_nvm_version }}/install.sh | bash
+  ansible.builtin.shell: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/{{ _node_nvm_version }}/install.sh | bash
   args:
     creates: "{{ node_nvm_install_path }}/nvm.sh"
 
