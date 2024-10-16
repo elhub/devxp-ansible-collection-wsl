@@ -5,3 +5,7 @@
 
 docker_http_proxy_param: ''
 docker_https_proxy_param: ''
+
+# Install docker ansible dependencies with pip
+# Set this to false, e.g. if ansible is installed via pipx
+docker_ansible_dependencies_pip: true
