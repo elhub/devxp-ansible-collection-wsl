@@ -1,0 +1,33 @@
+# shrc tasks file
+---
+- name: Create shrc.d directory
+  ansible.builtin.file:
+    path: "{{ shrc_d }}"
+    state: directory
+    mode: '0755'
+
+- name: Ensure .bashrc sources shrc.d files
+  ansible.builtin.blockinfile:
+    path: "{{ ansible_env.HOME }}/.bashrc"
+    marker: "# {mark} elhub.wsl.shellrc"
+    create: true
+    mode: '0644'
+    block: |
+      for file in {{ shrc_d }}/*sh; do
+        if [[ -r "$file" ]] && [[ "$file" =~ \.(sh|bash)$ ]]; then
+          source "$file"
+        fi
+      done
+
+- name: Ensure .zshrc sources shrc.d files
+  ansible.builtin.blockinfile:
+    path: "{{ ansible_env.HOME }}/.zshrc"
+    marker: "# {mark} elhub.wsl.shellrc"
+    create: true
+    mode: '0644'
+    block: |
+      for file in {{ shrc_d }}/*sh; do
+        if [[ -r "$file" ]] && [[ "$file" =~ \.(sh|zsh)$ ]]; then
+          source "$file"
+        fi
+      done
