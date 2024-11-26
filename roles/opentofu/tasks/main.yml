@@ -1,0 +1,48 @@
+---
+- name: Add OpenTofu GPG key
+  ansible.builtin.get_url:
+    url: https://get.opentofu.org/opentofu.gpg
+    dest: /etc/apt/keyrings/opentofu.gpg
+    mode: '0644'
+    owner: root
+    group: root
+  become: true
+
+- name: Add OpenTofu repository GPG key
+  ansible.builtin.get_url:
+    url: https://packages.opentofu.org/opentofu/tofu/gpgkey
+    dest: /etc/apt/keyrings/opentofu-repo.asc
+    mode: '0644'
+    owner: root
+    group: root
+  become: true
+
+- name: Dearmor asc key
+  ansible.builtin.command:
+    cmd: gpg --no-tty --batch --dearmor --output opentofu-repo.gpg opentofu-repo.asc
+    chdir: /etc/apt/keyrings
+    creates: /etc/apt/keyrings/opentofu-repo.gpg
+  become: true
+
+- name: Add OpenTofu repository
+  ansible.builtin.apt_repository:
+    repo: "deb [signed-by=/etc/apt/keyrings/opentofu.gpg,/etc/apt/keyrings/opentofu-repo.gpg] https://packages.opentofu.org/opentofu/tofu/any/ any main"
+    state: present
+    filename: opentofu
+  become: true
+
+- name: Install OpenTofu
+  ansible.builtin.apt:
+    name: tofu
+    update_cache: true
+    state: latest
+  become: true
+
+- name: Bash aliases for OpenTofu
+  ansible.builtin.blockinfile:
+    path: "{{ ansible_env.HOME }}/.bash_aliases"
+    marker: "# {mark} elhub.wsl.opentofu"
+    create: true
+    block: |
+      alias tf='tofu'
+      alias terraform='tofu'
