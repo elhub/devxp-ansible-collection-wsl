@@ -66,15 +66,16 @@
     - brew-upgrade.timer
 
 - name: Systemd daemon-reload if services changed
-  ansible.builtin.systemd:
+  ansible.builtin.systemd_service:
     daemon_reload: yes
   when: _homebrew_services.changed
   become: true
 
 - name: Enable systemd timers
-  ansible.builtin.systemd:
+  ansible.builtin.systemd_service:
     name: "{{ item }}"
     enabled: yes
+    state: started
   become: true
   loop:
     - brew-update.timer
