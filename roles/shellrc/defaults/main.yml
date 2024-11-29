@@ -1,0 +1,3 @@
+# shrc defaults file
+---
+shrc_d: "{{ ansible_env.HOME }}/.shrc.d"

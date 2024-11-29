@@ -1,0 +1,82 @@
+# homebrew tasks file
+---
+- name: Ensure required build tools are installed
+  ansible.builtin.apt:
+    name:
+      - build-essential
+      - procps
+      - curl
+      - file
+      - git
+    state: present
+    update_cache: yes
+  become: true
+
+- name: Download installer script
+  ansible.builtin.get_url:
+    url: https://raw.githubusercontent.com/Homebrew/install/master/install.sh
+    dest: /tmp/install_homebrew.sh
+    mode: 0755
+    force: true
+  # We are using force and become since the installation script below will run sudo internally.
+  # Setting become makes ansible run sudo and since sudo is caching credentials for 5 minutes on local connections,
+  # the installation script will not ask for a password.
+  become: true
+  become_user: root
+  when: not '/home/linuxbrew/.linuxbrew' is exists
+
+- name: Run installer script
+  ansible.builtin.shell:
+    cmd: >-
+      /tmp/install_homebrew.sh
+    creates: /home/linuxbrew/.linuxbrew
+  environment:
+    NONINTERACTIVE: '1'
+
+- name: Shell rc file
+  ansible.builtin.copy:
+    content: |
+      # Managed by ansible elhub.wsl.homebrew
+      eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    dest: "{{ ansible_env.HOME }}/.shrc.d/50-homebrew.sh"
+    mode: 0644
+
+- name: Ensure brew is up to date
+  ansible.builtin.shell:
+    cmd: |
+      set -eu
+      . {{ ansible_env.HOME }}/.shrc.d/50-homebrew.sh
+      brew update
+  register: _homebrew_update
+  changed_when: not 'Already up-to-date.' in _homebrew_update.stdout
+
+- name: Systemd services and timers to update and upgrade
+  ansible.builtin.template:
+    dest: "/usr/lib/systemd/system/{{ item }}"
+    src: "{{ item }}.j2"
+    mode: '0644'
+    owner: root
+    group: root
+  become: true
+  register: _homebrew_services
+  loop:
+    - brew-update.service
+    - brew-update.timer
+    - brew-upgrade.service
+    - brew-upgrade.timer
+
+- name: Systemd daemon-reload if services changed
+  ansible.builtin.systemd_service:
+    daemon_reload: yes
+  when: _homebrew_services.changed
+  become: true
+
+- name: Enable systemd timers
+  ansible.builtin.systemd_service:
+    name: "{{ item }}"
+    enabled: yes
+    state: started
+  become: true
+  loop:
+    - brew-update.timer
+    - brew-upgrade.timer
