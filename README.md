@@ -12,6 +12,7 @@
 ## Table of Contents
 
 * [Table of Contents](#table-of-contents)
+* [Ubuntu 20.04](#ubuntu-2004)
 * [About](#about)
 * [Getting Started](#getting-started)
   * [Prerequisites](#prerequisites)
@@ -26,6 +27,10 @@
 * [Owners](#owners)
 * [License](#license)
 
+## Ubuntu 20.04
+
+> [!WARNING]
+> You are now viewing the `ubuntu22` branch of this collection. This is the branch that is compatible with the WSL setup in `devxp-linux` and `plat-intune-wsl` that is based on Ubuntu 20.04. The `main` branch is **not** compatible with this setup and is intended for use with Ubuntu 24.04 and the new `devxp-wsl` setup.
 
 ## About
 
