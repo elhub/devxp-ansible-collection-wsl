@@ -12,6 +12,7 @@
 ## Table of Contents
 
 * [Table of Contents](#table-of-contents)
+* [Breaking changes for Ubuntu 24.04 and devxp-wsl](#breaking-changes-for-ubuntu-2404-and-devxp-wsl)
 * [About](#about)
 * [Getting Started](#getting-started)
   * [Prerequisites](#prerequisites)
@@ -26,6 +27,12 @@
 * [Owners](#owners)
 * [License](#license)
 
+## Breaking changes for Ubuntu 24.04 and devxp-wsl
+
+> [!WARNING]
+> This collection has gotten some breaking changes due to the move
+> from Ubuntu 22.04 to Ubuntu 24.04 and `devxp-linux`/`plat-intune-wsl` to `devxp-wsl`.
+> If you are on Ubuntu 22.04, use the `ubuntu22` branch.
 
 ## About
 
