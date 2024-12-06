@@ -1,7 +1,0 @@
----
-- name: Ensure yamllint
-  ansible.builtin.apt:
-    name: yamllint
-  become_user: root
-  become: true
-  ignore_errors: "{{ ansible_check_mode }}"
