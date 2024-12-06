@@ -1,8 +1,4 @@
 ---
-- name: Set docker user
-  ansible.builtin.set_fact:
-    docker_user: "{{ docker_user | default(ansible_user_id) }}"
-
 - name: Install pre-requisites for installing Docker
   ansible.builtin.apt:
     name: "{{ packages }}"
@@ -25,9 +21,6 @@
   ansible.builtin.apt_key:
     url: https://download.docker.com/linux/ubuntu/gpg
     state: present
-  environment:
-    http_proxy: "{{ docker_http_proxy_param }}"
-    https_proxy: "{{ docker_https_proxy_param }}"
   become: true
 
 - name: Add apt repository for Docker stable version
@@ -56,14 +49,3 @@
     groups: docker
     append: yes
   become: true
-
-# dependencies for ansible docker_* modules
-- name: Install docker python packages
-  ansible.builtin.pip:
-    name:
-      - docker
-      - docker-compose
-    extra_args: --user
-  environment:
-    DISPLAY: ''  # Fix to resolve extremely slow installs on WSL2 (see https://github.com/microsoft/WSL/issues/6643)
-  when: "{{ docker_ansible_dependencies_pip | bool }}"

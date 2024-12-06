@@ -1,6 +1,0 @@
----
-vault_version: 1.7.0
-
-vault_dir: "{{ ansible_env.HOME }}/.local/lib/vault/{{ vault_version }}"
-
-vault_addr: "https://vault.elhub.cloud:443"
