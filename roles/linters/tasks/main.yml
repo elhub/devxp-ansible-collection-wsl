@@ -12,11 +12,3 @@
 - name: Include detekt
   ansible.builtin.include_tasks: detekt.yml
   when: '"detekt" in linters_default_linters'
-
-- name: Include yamllint.yml
-  ansible.builtin.include_tasks: yamllint.yml
-  when: '"yamllint" in linters_default_linters'
-
-- name: Include ansible lint
-  ansible.builtin.include_tasks: ansible_lint.yml
-  when: '"ansible_lint" in linters_default_linters'

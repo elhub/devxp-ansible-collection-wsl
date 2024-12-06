@@ -1,6 +1,0 @@
-- name: install
-  ansible.builtin.pip:
-    name:
-      - pre-commit
-    version: latest
-    extra_args: --user

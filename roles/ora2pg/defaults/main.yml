@@ -1,3 +1,0 @@
----
-# where instantclient is installed
-ora2pg_oracle_home: '{{ ansible_env.HOME }}/.local/lib/oracle/instantclient_19_18'

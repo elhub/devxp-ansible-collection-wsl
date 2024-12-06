@@ -1,9 +1,7 @@
 ---
 linters_default_linters:
-  - ansible_lint
   - checkstyle
   - detekt
-  - yamllint
 
 linters_install_path: "{{ ansible_env.HOME }}/.local"
 
