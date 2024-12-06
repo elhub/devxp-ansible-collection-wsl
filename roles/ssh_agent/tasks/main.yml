@@ -12,16 +12,12 @@
     mode: 0640
 
 - name: ssh-find-agent in bashrc
-  ansible.builtin.blockinfile:
-    path: '{{ ansible_env.HOME }}/.bashrc'
-    marker: '# {mark} Ansible - ssh-agent'
-    block: |
+  ansible.builtin.copy:
+    dest: '{{ ansible_env.HOME }}/.shrc.d/60-ssh-agent.sh'
+    mode: 0640
+    content: |
+      # Managed by Ansible - elhub.wsl.ssh_agent
       source {{ ansible_env.HOME }}/.local/lib/ssh-find-agent/ssh-find-agent.sh
 
       # find/create and set agent
       ssh-add -l >&/dev/null || ssh-find-agent -a || eval $(ssh-agent) > /dev/null
-
-      # automatically add keys to ssh agent if they are not loaded already
-      {% for key in ssh_agent_add_keys %}
-      ssh-add -l | grep -q $(ssh-keygen -lf ~/.ssh/{{ key }}  | awk '{print $2}') || ssh-add ~/.ssh/{{ key }}
-      {% endfor %}

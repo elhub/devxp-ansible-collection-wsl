@@ -37,12 +37,3 @@
     update_cache: true
     state: latest
   become: true
-
-- name: Bash aliases for OpenTofu
-  ansible.builtin.blockinfile:
-    path: "{{ ansible_env.HOME }}/.bash_aliases"
-    marker: "# {mark} elhub.wsl.opentofu"
-    create: true
-    block: |
-      alias tf='tofu'
-      alias terraform='tofu'
