@@ -1,0 +1,69 @@
+---
+- name: venv
+  ansible.builtin.apt:
+    name: python3-venv
+  become: true
+
+- name: add deadsnakes ppa
+  ansible.builtin.apt_repository:
+    # https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa
+    repo: ppa:deadsnakes/ppa
+  become: true
+
+- name: additional python versions
+  ansible.builtin.apt:
+    name:
+      - python{{ item }}
+      - python{{ item }}-venv
+      - python{{ item }}-dev
+    update_cache: true
+  loop:
+    - "3.13" # Latest stable
+    # 3.12 is standard python3 on Ubuntu 24.04
+    - "3.9" # Default on Oracle Linux 9
+    - "3.8" # Latest available in software collection on Oracle Linux 7
+  become: true
+
+- name: dependencies for installing from source
+  ansible.builtin.apt:
+    name:
+      - build-essential
+      - clang
+      - libbz2-dev
+      - libffi-dev
+      - libgdbm-dev
+      - liblzma-dev
+      - libncurses5-dev
+      - libncursesw5-dev
+      - libnss3-dev
+      - libreadline-dev
+      - libsqlite3-dev
+      - libssl-dev
+      - llvm
+      - llvm-dev
+      - tk-dev
+      - xz-utils
+      - zlib1g-dev
+  become: true
+
+- name: ensure directory for python src files
+  ansible.builtin.file:
+    state: directory
+    path: "{{ ansible_env.HOME }}/.local/src/python"
+
+- name: install from source
+  include_tasks: install-from-source.yml
+  loop_control:
+    loop_var: _python_source_version
+  loop:
+    - "3.6.8" # Default on Oracle Linux 7
+
+- name: add lib dir to LD_LIBRARY_PATH
+  ansible.builtin.copy:
+    dest: "{{ ansible_env.HOME }}/.shrc.d/50-python.sh"
+    mode: 0644
+    content: |
+      # Managed by Ansible - elhub.wsl.python
+      if [ -d "$HOME/.local/bin" ] ; then
+        export LD_LIBRARY_PATH="{{ ansible_env.HOME }}/.local/lib:$LD_LIBRARY_PATH"
+      fi
