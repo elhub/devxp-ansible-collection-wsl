@@ -27,7 +27,7 @@
   become: true
 
 - name: pgcli
-  community.general.pipx:
+  community.general.homebrew:
     name: pgcli
     state: latest
 
@@ -38,7 +38,7 @@
     mode: 0755
 
 - name: sqlfluff
-  community.general.pipx:
+  community.general.homebrew:
     name: sqlfluff
     state: latest
 
@@ -82,8 +82,3 @@
     line: "\\set dba '\\\\i {{ ansible_env.HOME }}/.local/lib/postgres_dba/start.psql'"
     create: true
     mode: 0644
-
-- name: migra
-  community.general.pipx:
-    name: migra
-    state: latest

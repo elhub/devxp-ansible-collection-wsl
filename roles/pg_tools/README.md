@@ -7,4 +7,3 @@ Installs and configures:
 * [sqlfluff](https://github.com/sqlfluff/sqlfluff) for linting and formatting
 * [pspg](https://github.com/okbob/pspg)
 * [postgres_dba](https://github.com/NikolayS/postgres_dba)
-* [migra](https://github.com/djrobstep/migra)
