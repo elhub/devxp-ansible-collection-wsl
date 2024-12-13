@@ -144,7 +144,7 @@ Contributing, issues and feature requests are welcome. See the
 
 ## Owners
 
-This project is developed by [Elhub](https://wwww.elhub.no). For the specific development group responsible for this
+This project is developed by [Elhub](https://www.elhub.no). For the specific development group responsible for this
 code, see the [Codeowners](https://github.com/elhub/devxp-ansible-collection-wsl/blob/main/CODEOWNERS) file.
 
 ## License
