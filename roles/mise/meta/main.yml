@@ -1,0 +1,14 @@
+---
+galaxy_info:
+  role_name: docker
+  namespace: elhub
+  author: elhub/devxp
+  description: See README
+  company: Elhub
+  license: MIT
+  min_ansible_version: "2.2"
+  platforms:
+    - name: Ubuntu
+      versions:
+        - focal
+  galaxy_tags: []

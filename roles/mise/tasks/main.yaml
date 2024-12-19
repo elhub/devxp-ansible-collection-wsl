@@ -1,0 +1,5 @@
+---
+- name: Install mise-en-place  
+  ansible.builtin.shell: curl https://mise.run | sh
+  args:
+    creates: "{{ mise_path }}"

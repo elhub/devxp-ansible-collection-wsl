@@ -104,6 +104,7 @@ For details and examples for the other individual roles:
 * **molecule** role: See the documentation [here](https://github.com/elhub/devxp-ansible-collection-wsl/blob/main/roles/molecule/README.md)
 * **node** role: See the documentation [here](https://github.com/elhub/devxp-ansible-collection-wsl/blob/main/roles/node/README.md)
 * **python** role: See the documentation [here](https://github.com/elhub/devxp-ansible-collection-wsl/blob/main/roles/python/README.md)
+* **mise** dole: See documentation [here](https://github.com/elhub/devxp-ansible-collection-wsl/blob/main/roles/mise/README.md)
 
 ### From command line
 
