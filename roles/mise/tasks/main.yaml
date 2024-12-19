@@ -3,3 +3,12 @@
   ansible.builtin.shell: curl https://mise.run | sh
   args:
     creates: "{{ mise_path }}"
+
+- name: Add mise-en-place to PATH
+  ansible.builtin.copy:
+    dest: "{{ ansible_env.HOME }}/.shrc.d/60-mise.sh"
+    mode: 0640
+    content: |
+      # Managed by Ansible - elhub.wsl.mise
+      eval "$(mise activate zsh)
+      eval "$(mise activate bash)
