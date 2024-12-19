@@ -10,5 +10,5 @@
     mode: 0640
     content: |
       # Managed by Ansible - elhub.wsl.mise
-      eval "$(mise activate zsh)
-      eval "$(mise activate bash)
+      eval "$(mise activate zsh)"
+      eval "$(mise activate bash)"
