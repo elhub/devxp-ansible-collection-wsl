@@ -10,5 +10,5 @@
     mode: '0644'
     content: |
       # Managed by Ansible - elhub.wsl.mise
-      eval "$({{ mise_path }}/mise activate zsh)"
-      eval "$({{ mise_path }}/mise activate bash)"
+      eval "$({{ mise_path }} activate zsh)"
+      eval "$({{ mise_path }} activate bash)"
