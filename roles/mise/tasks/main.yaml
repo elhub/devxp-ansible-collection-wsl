@@ -1,8 +1,31 @@
 ---
-- name: Install mise-en-place  
-  ansible.builtin.shell: curl https://mise.run | sh
-  args:
-    creates: "{{ mise_path }}"
+- name: Add mise-en-place GPG key 
+  ansible.builtin.apt_key:
+    url: https://mise.jdx.dev/gpg-key.pub
+    dest: /etc/apt/keyrings/mise-archive-keyring.gpg
+    mode: '0644'
+    owner: root
+    group: root
+  become: true
+
+- name: Get the system architecture of your computer and put it in a variable
+  ansible.builtin.command: dpkg --print-architecture
+  changed_when: false
+  register: _mise_system_architecture
+
+- name: Add apt repository for mise-en-place stable version
+  ansible.builtin.apt_repository:
+    repo: "deb [signed-by=/etc/apt/keyrings/mise-archive-keyring.gpg arch="{{ _mise_system_architecture.stdout }}"] https://mise.jdx.dev/deb stable main"
+    state: present
+    filename: mise.list
+  become: true
+
+- name: Install mise-en-place
+  ansible.builtin.apt:
+    name: mise
+    state: present
+    update_cache: yes
+  become: true
 
 - name: Add mise-en-place to PATH
   ansible.builtin.copy:
