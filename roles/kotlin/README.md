@@ -15,7 +15,7 @@ Run the role using a playbook as follows:
   hosts:
     - localhost
   collections:
-    - elhub.ansible_collection_wsl
+    - elhub.wsl
   roles:
     - role: kotlin
 ```
@@ -27,7 +27,7 @@ To install an older Kotlin SDK and set that to be default:
   hosts:
     - localhost
   collections:
-    - elhub_devxp.ansible_collection_wsl
+    - elhub.wsl
   roles:
     - role: kotlin
       vars:

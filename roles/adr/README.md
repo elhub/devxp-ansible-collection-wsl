@@ -20,7 +20,7 @@ Run the role using a playbook as follows:
   hosts:
     - localhost
   collections:
-    - elhub.ansible_collection_wsl
+    - elhub.wsl
   roles:
     - role: adr
 ```
@@ -32,7 +32,7 @@ To install from an external repository:
   hosts:
     - localhost
   collections:
-    - elhub_devxp.ansible_collection_wsl
+    - elhub_devxp.wsl
   roles:
     - role: adr
       vars:

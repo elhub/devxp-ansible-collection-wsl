@@ -16,7 +16,7 @@ Run the role using a playbook as follows:
   hosts:
     - localhost
   collections:
-    - elhub.ansible_collection_wsl
+    - elhub.wsl
   roles:
     - role: mise
 ```
