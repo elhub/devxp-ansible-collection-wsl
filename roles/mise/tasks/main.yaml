@@ -11,5 +11,3 @@
     content: |
       # Managed by Ansible - elhub.wsl.mise
       export PATH="$HOME/.local/share/mise/shims:$PATH"
-
-
