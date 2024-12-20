@@ -19,7 +19,7 @@
 
 - name: Add repository to sources list
   ansible.builtin.apt_repository:
-    repo: "deb [signed-by=/etc/apt/keyrings/mise.gpg] https://mise.jdx.dev/ubuntu focal main"
+    repo: "deb [signed-by=/etc/apt/keyrings/mise.gpg arch=amd64] https://mise.jdx.dev/deb stable main"
     state: present
     filename: mise
   become: true
