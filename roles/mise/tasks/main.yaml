@@ -10,11 +10,5 @@
     mode: '0644'
     content: |
       # Managed by Ansible - elhub.wsl.mise
-      script_shell="$(readlink /proc/$$/exe | sed "s/.*\///")"
-      if [[ "${script_shell}" == "bash" ]]
-      then
-          eval "$(mise activate bash)"
-      elif [[ "${script_shell}" == "zsh" ]]
-      then
-          eval "$(mise activate zsh)"
-      fi
+      shell="$(readlink /proc/$$/exe | sed "s/.*\///")"
+      eval "$(mise activate ${shell})"
