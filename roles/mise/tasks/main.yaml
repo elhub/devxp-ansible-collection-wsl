@@ -11,6 +11,6 @@
     content: |
       # Managed by Ansible - elhub.wsl.mise
       export PATH="$HOME/.local/share/mise/shims:$PATH"
-      eval "$(mise activate bash)"
-      eval "$(mise activate zsh)"
+      # eval "$(mise activate bash)"
+      # eval "$(mise activate zsh)"
 
