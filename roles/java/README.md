@@ -15,7 +15,7 @@ Run the role using a playbook as follows:
   hosts:
     - localhost
   collections:
-    - elhub.ansible_collection_wsl
+    - elhub.wsl
   roles:
     - role: java
 ```
@@ -27,7 +27,7 @@ To install with additional Java sdks, and setting that to default:
   hosts:
     - localhost
   collections:
-    - elhub_devxp.ansible_collection_wsl
+    - elhub.wsl
   roles:
     - role: base
       vars:
