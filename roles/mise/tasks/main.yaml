@@ -15,9 +15,8 @@
 
 - name: Add apt repository for mise-en-place stable version
   ansible.builtin.apt_repository:
-    repo: "deb [signed-by=/etc/apt/keyrings/mise-archive-keyring.gpg arch="{{ _mise_system_architecture.stdout }}"] https://mise.jdx.dev/deb stable main"
+    repo: deb [signed-by=/etc/apt/keyrings/mise-archive-keyring.gpg arch="{{ _mise_system_architecture.stdout }}"] https://mise.jdx.dev/deb stable main
     state: present
-    filename: mise.list
   become: true
 
 - name: Install mise-en-place
