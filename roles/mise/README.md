@@ -6,6 +6,10 @@ This role install mise-en-place. With this tool, you can use the exact version o
 
 We will use mise to install Kubernetes tools, i.e. kubectl and helm. 
 
+Mise-en-place is activated using `mise activate` and not shims. According to its docs, this is the recommended way for interactive shells:   
+*  [Activate mise](https://mise.jdx.dev/getting-started.html#_2-activate-mise)
+* [Pros/Cons with shims](https://jdx.dev/posts/2024-04-13-shims-how-they-work-in-mise-en-place/#proscons)
+
 ## Usage 
 
 Run the role using a playbook as follows: 
