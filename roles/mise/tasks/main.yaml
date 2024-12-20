@@ -1,22 +1,32 @@
 ---
-- name: Add mise-en-place GPG key 
-  ansible.builtin.apt_key:
+- name: Create directory for APT keyrings
+  ansible.builtin.file:
+    path: /etc/apt/keyrings
+    state: directory
+    mode: '0755'
+    owner: root
+    group: root
+  become: true
+
+- name: Retrieve GPG key
+  ansible.builtin.get_url:
     url: https://mise.jdx.dev/gpg-key.pub
-    dest: /etc/apt/keyrings/mise-archive-keyring.gpg
+    dest: /etc/apt/keyrings/mise.gpg
     mode: '0644'
     owner: root
     group: root
   become: true
 
-- name: Get the system architecture of your computer and put it in a variable
-  ansible.builtin.command: dpkg --print-architecture
-  changed_when: false
-  register: _mise_system_architecture
-
-- name: Add apt repository for mise-en-place stable version
+- name: Add repository to sources list
   ansible.builtin.apt_repository:
-    repo: deb [signed-by=/etc/apt/keyrings/mise-archive-keyring.gpg arch="{{ _mise_system_architecture.stdout }}"] https://mise.jdx.dev/deb stable main
+    repo: "deb [signed-by=/etc/apt/keyrings/mise.gpg] https://mise.jdx.dev/ubuntu focal main"
     state: present
+    filename: mise
+  become: true
+
+- name: Update package list again
+  ansible.builtin.apt:
+    update_cache: true
   become: true
 
 - name: Install mise-en-place
