@@ -12,5 +12,5 @@
       # Managed by Ansible - elhub.wsl.mise
       export PATH="${{ ansible_env.HOME }}/.local/share/mise/shims:$PATH"
       echo 'eval "$(mise activate zsh)"' >> ~/.zshrc
-      echo 'eval "$(mise activate zsh)"' >> ~/.bashrc
-      
+      echo 'eval "$(mise activate bash)"' >> ~/.bashrc
+
