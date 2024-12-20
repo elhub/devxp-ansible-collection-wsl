@@ -10,5 +10,5 @@ galaxy_info:
   platforms:
     - name: Ubuntu
       versions:
-        - focal
+        - noble
   galaxy_tags: []
