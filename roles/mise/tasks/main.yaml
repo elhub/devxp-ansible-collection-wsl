@@ -1,5 +1,5 @@
 ---
-- name: Create directory for apt keyrings
+- name: Ensure the directory for apt keyrings exists
   ansible.builtin.file:
     path: /etc/apt/keyrings
     state: directory
@@ -8,41 +8,58 @@
     group: root
   become: true
 
-- name: Fetch the GPG key content
-  ansible.builtin.uri:
+- name: Add mise-en-place repository GPG key
+  ansible.builtin.get_url:
     url: https://mise.jdx.dev/gpg-key.pub
-    return_content: true
-  register: gpg_key_content
-
-- name: Save and deamor the GPG key
-  ansible.builtin.shell: |
-    echo "{{ gpg_key_content.content }}" | gpg --dearmor | tee /etc/apt/keyrings/mise-archive-keyring.gpg > /dev/null
+    dest: /etc/apt/keyrings/mise-archive-keyring.asc
+    mode: '0644'
+    owner: root
+    group: root
   become: true
 
-- name: Add the mise repository to the apt sources list 
+- name: Dearmor asc key
+  ansible.builtin.command:
+    cmd: gpg --no-tty --batch --dearmor --output mise-archive-keyring.gpg mise-archive-keyring.asc
+    chdir: /etc/apt/keyrings
+    creates: /etc/apt/keyrings/mise-archive-keyring.gpg
+  become: true
+
+- name: Get the system architecture of your computer and put it in a variable
+  ansible.builtin.command: dpkg --print-architecture
+  changed_when: false
+  register: _mise_system_architecture
+  
+- name: Add mise-en-place repository
   ansible.builtin.apt_repository:
-    repo: "deb [signed-by=/etc/apt/keyrings/mise-archive-keyring.gpg arch=amd64] https://mise.jdx.dev/deb stable main"
-    filename: "mise"
+    repo: deb [signed-by=/etc/apt/keyrings/mise-archive-keyring.gpg arch="{{ _mise_system_architecture.stdout }}"] https://mise.jdx.dev/deb stable main
     state: present
+    filename: mise
   become: true
 
 - name: Update the apt package list
   ansible.builtin.apt:
-    update_cache: yes
+    update_cache: true
   become: true
 
 - name: Install mise-en-place
   ansible.builtin.apt:
     name: mise
     state: present
-    update_cache: yes
+    update_cache: true
   become: true
 
-- name: Add mise-en-place to PATH
+- name: Add mise-en-place to bash PATH
   ansible.builtin.copy:
-    dest: "{{ ansible_env.HOME }}/.shrc.d/60-mise.sh"
+    dest: "{{ ansible_env.HOME }}/.shrc.d/60-mise.bash"
     mode: '0644'
     content: |
       # Managed by Ansible - elhub.wsl.mise
-      shell="$(readlink /proc/$$/exe | sed "s/.*\///")"
-      eval "$(mise activate ${shell})"
+      eval "$(mise activate bash)"
+
+- name: Add mise-en-place to zsh PATH
+  ansible.builtin.copy:
+    dest: "{{ ansible_env.HOME }}/.shrc.d/60-mise.zsh"
+    mode: '0644'
+    content: |
+      # Managed by Ansible - elhub.wsl.mise
+      eval "$(mise activate zsh)"
