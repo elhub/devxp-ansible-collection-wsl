@@ -1,3 +1,0 @@
----
-# Default path for mise-en-place
-mise_path: "{{ ansible_env.HOME }}/.local/bin/mise"
