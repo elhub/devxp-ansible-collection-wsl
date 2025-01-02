@@ -23,22 +23,12 @@
     chdir: /etc/apt/keyrings
     creates: /etc/apt/keyrings/mise-archive-keyring.gpg
   become: true
-
-- name: Get the system architecture of your computer and put it in a variable
-  ansible.builtin.command: dpkg --print-architecture
-  changed_when: false
-  register: _mise_system_architecture
   
 - name: Add mise-en-place repository
   ansible.builtin.apt_repository:
-    repo: deb [signed-by=/etc/apt/keyrings/mise-archive-keyring.gpg arch="{{ _mise_system_architecture.stdout }}"] https://mise.jdx.dev/deb stable main
+    repo: deb [signed-by=/etc/apt/keyrings/mise-archive-keyring.gpg arch=amd64] https://mise.jdx.dev/deb stable main
     state: present
     filename: mise
-  become: true
-
-- name: Update the apt package list
-  ansible.builtin.apt:
-    update_cache: true
   become: true
 
 - name: Install mise-en-place
