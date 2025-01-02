@@ -8,30 +8,15 @@
     group: root
   become: true
 
-- name: Create a temporary file for the GPG key 
-  ansible.builin.tempfile:
-    state: file
-    suffix: '.gpg'
-  register: temp_mise_gpg_key
-
-- name: Download the repository's GPG key
-  ansible.builtin.get_url:
+- name: Fetch the GPG key content
+  ansible.builtin.uri:
     url: https://mise.jdx.dev/gpg-key.pub
-    dest: "{{ temp_mise_gpg_key.path }}"
-    mode: '0644'
-    owner: root
-    group: root
-  become: true
+    return_content: true
+  register: gpg_key_content
 
-- name: Deamor the GPG key
-  ansible.builtin.command:
-    cmd: gpg --no-tty --batch --dearmor --output /etc/apt/keyrings/mise-archive-keyring.gpg "{{ temp_mise_gpg_key.path }}"
-  become: true
-
-- name: Clean up the temporary GPG file
-  ansible.builtin.file:
-    path: "{{ temp_mise_gpg_key.path }}"
-    state: absent
+- name: Save and deamor the GPG key
+  ansible.builtin.shell: |
+    echo "{{ gpg_key_content.content }}" | gpg --dearmor | tee /etc/apt/keyrings/mise-archive-keyring.gpg > /dev/null
   become: true
 
 - name: Add the mise repository to the apt sources list 
