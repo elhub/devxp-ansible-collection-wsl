@@ -1,0 +1,15 @@
+---
+- name: Check if maven is already installed with sdk
+  ansible.builtin.stat:
+    path: "{{ sdkman_dir }}/candidates/maven/current"
+  register: maven_installed
+
+- name: Install latest maven via sdk
+  ansible.builtin.shell: |
+    source "{{ sdkman_dir }}/bin/sdkman-init.sh"
+    sdk install maven 3.9.10
+  args:
+    executable: /bin/bash
+  register: sdk_install
+  when: not maven_installed.stat.exists
+  changed_when: true
