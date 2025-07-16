@@ -7,7 +7,7 @@
 - name: Install latest maven via sdk
   ansible.builtin.shell: |
     source "{{ sdkman_dir }}/bin/sdkman-init.sh"
-    sdk install maven 3.9.10
+    sdk install maven 3.9.11
   args:
     executable: /bin/bash
   register: sdk_install
