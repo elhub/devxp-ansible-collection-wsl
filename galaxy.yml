@@ -1,7 +1,7 @@
 ---
 namespace: elhub
 name: wsl
-version: 1.0.0-SNAPSHOT
+version: 0.2.2
 readme: README.md
 authors:
   - "@elhub/devxp"
