@@ -26,7 +26,7 @@
 
 - name: Configure sdkman
   ansible.builtin.copy:
-    dest: "/etc/.sdkman/etc/config"
+    dest: "/home/teamcity/.sdkman/etc/config"
     content: |
       sdkman_auto_answer=false
       sdkman_auto_complete=true
