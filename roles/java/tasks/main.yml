@@ -1,7 +1,11 @@
 ---
 - name: Install Java packages
-  ansible.builtin.shell: >
-    source {{ java_sdkman_dir }}/bin/sdkman-init.sh &&
+  ansible.builtin.shell: |
+    #!/bin/bash
+    source {{ java_sdkman_dir }}/bin/sdkman-init.sh
+    echo "HTTP_PROXY: $HTTP_PROXY"
+    echo "HTTPS_PROXY: $HTTPS_PROXY"
+    echo "NO_PROXY: $NO_PROXY"
     sdk install java {{ item }}
   args:
     executable: /bin/bash
