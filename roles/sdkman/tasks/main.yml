@@ -23,3 +23,20 @@
 
 - name: Configure .*rc files
   ansible.builtin.include_tasks: shell_config.yml
+
+- name: Configure sdkman
+  ansible.builtin.copy:
+    dest: "/etc/.sdkman/etc/config"
+    content: |
+      sdkman_auto_answer=false
+      sdkman_auto_complete=true
+      sdkman_auto_env=false
+      sdkman_beta_channel=false
+      sdkman_checksum_enable=true
+      sdkman_colour_enable=true
+      sdkman_curl_connect_timeout=20
+      sdkman_curl_max_time=100
+      sdkman_debug_mode=true
+      sdkman_insecure_ssl=false
+      sdkman_native_enable=true
+      sdkman_selfupdate_feature=true
