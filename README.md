@@ -36,7 +36,7 @@
 
 ## About
 
-This ansible collection comprises resources that facilitate an opinionated setup of the Linux/WSL components for a
+This ansible collection comprises resources that facilitate an opinionated setup of the Linux/WSL components for
 a Windows developer workstation at Elhub.
 
 The ansible collection contains:
