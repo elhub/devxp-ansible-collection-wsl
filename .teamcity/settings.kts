@@ -1,7 +1,6 @@
 import no.elhub.devxp.build.configuration.pipeline.constants.Group.DEVXP
 import no.elhub.devxp.build.configuration.pipeline.dsl.elhubProject
-import no.elhub.devxp.build.configuration.pipeline.jobs.ansibleAutoRelease
-import no.elhub.devxp.build.configuration.pipeline.jobs.moleculeTest
+import no.elhub.devxp.build.configuration.pipeline.jobs.ansiblePublish
 
 
 elhubProject(DEVXP, "devxp-ansible-collection-wsl") {
@@ -14,7 +13,7 @@ elhubProject(DEVXP, "devxp-ansible-collection-wsl") {
 //            parallel {
 //                roles.forEach { moleculeTest(it) }
 //            }
-            ansibleAutoRelease()
+            ansiblePublish()
         }
     }
 }
