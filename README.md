@@ -1,32 +1,5 @@
 # devxp-ansible-collection-wsl
 
-[<img src="https://img.shields.io/badge/repo-github-blue" alt="">](<https://github.com/elhub/devxp-ansible-collection-wsl)
-[<img src="https://img.shields.io/badge/issues-jira-orange" alt="">](https://jira.elhub.cloud/projects/TD/issues)
-[<img src="https://teamcity.elhub.cloud/app/rest/builds/buildType:(id:DevXP_AnsibleCollectionWsl)/statusIcon" alt="">](https://teamcity.elhub.cloud/buildConfiguration/<!--TODO Add TeamCity project ID here -->)
-[<img src="https://sonar.elhub.cloud/api/project_badges/measure?project=no.elhub.devxp%3Adevxp-ansible-collection-wsl&metric=alert_status" alt="">](https://sonar.elhub.cloud/dashboard?id=no.elhub.devxp%3Adevxp-ansible-collection-wsl)
-[<img src="https://sonar.elhub.cloud/api/project_badges/measure?project=no.elhub.devxp%3Adevxp-ansible-collection-wsl&metric=ncloc" alt="">](https://sonar.elhub.cloud/dashboard?id=no.elhub.devxp%3Adevxp-ansible-collection-wsl)
-[<img src="https://sonar.elhub.cloud/api/project_badges/measure?project=no.elhub.devxp%3Adevxp-ansible-collection-wsl&metric=bugs" alt="">](https://sonar.elhub.cloud/dashboard?id=no.elhub.devxp%3Adevxp-ansible-collection-wsl)
-[<img src="https://sonar.elhub.cloud/api/project_badges/measure?project=no.elhub.devxp%3Adevxp-ansible-collection-wsl&metric=vulnerabilities" alt="">](https://sonar.elhub.cloud/dashboard?id=no.elhub.devxp%3Adevxp-ansible-collection-wsl)
-[<img src="https://sonar.elhub.cloud/api/project_badges/measure?project=no.elhub.devxp%3Adevxp-ansible-collection-wsl&metric=coverage" alt="">](https://sonar.elhub.cloud/dashboard?id=no.elhub.devxp%3Adevxp-ansible-collection-wsl)
-
-## Table of Contents
-
-* [Table of Contents](#table-of-contents)
-* [Breaking changes for Ubuntu 24.04 and devxp-wsl](#breaking-changes-for-ubuntu-2404-and-devxp-wsl)
-* [About](#about)
-* [Getting Started](#getting-started)
-  * [Prerequisites](#prerequisites)
-  * [Installation](#installation)
-* [Usage](#usage)
-  * [From ansible playbooks](#from-ansible-playbooks)
-  * [From command line](#from-command-line)
-* [Testing](#testing)
-  * [Molecule](#molecule)
-  * [Testing with Docker](#testing-with-docker)
-* [Contributing](#contributing)
-* [Owners](#owners)
-* [License](#license)
-
 ## Breaking changes for Ubuntu 24.04 and devxp-wsl
 
 > [!WARNING]
@@ -36,7 +9,7 @@
 
 ## About
 
-This ansible collection comprises resources that facilitate an opinionated setup of the Linux/WSL components for
+This ansible collection comprises resources that facilitate an opinionated setup of the Linux/WSL components for a
 a Windows developer workstation at Elhub.
 
 The ansible collection contains:
@@ -90,21 +63,21 @@ The roles in this playbook are shared by the ansible playbooks used to set up th
 
 The base role is used to bootstrap the environment for the other roles.
 
-* **base** role: See the documentation [here](https://github.com/elhub/devxp-ansible-collection-wsl/blob/main/roles/base/README.md)
+* **base** role: See the [documentation here](https://github.com/elhub/devxp-ansible-collection-wsl/blob/main/roles/base/README.md)
 
 For details and examples for the other individual roles:
 
-* **adr** role: See the documentation [here](https://github.com/elhub/devxp-ansible-collection-wsl/blob/main/roles/adr/README.md)
-* **ansible** role: See the documentation [here](https://github.com/elhub/devxp-ansible-collection-wsl/blob/main/roles/ansible/README.md)
-* **docker** role: See the documentation [here](https://github.com/elhub/devxp-ansible-collection-wsl/blob/main/roles/docker/README.md)
-* **git** role: See the documentation [here](https://github.com/elhub/devxp-ansible-collection-wsl/blob/main/roles/git/README.md)
-* **git_utils** role: See the documentation [here](https://github.com/elhub/devxp-ansible-collection-wsl/blob/main/roles/git_utils/README.md)
-* **java** role: See the documentation [here](https://github.com/elhub/devxp-ansible-collection-wsl/blob/main/roles/java/README.md)
-* **kotlin** role: See the documentation [here](https://github.com/elhub/devxp-ansible-collection-wsl/blob/main/roles/kotlin/README.md)
-* **molecule** role: See the documentation [here](https://github.com/elhub/devxp-ansible-collection-wsl/blob/main/roles/molecule/README.md)
-* **node** role: See the documentation [here](https://github.com/elhub/devxp-ansible-collection-wsl/blob/main/roles/node/README.md)
-* **python** role: See the documentation [here](https://github.com/elhub/devxp-ansible-collection-wsl/blob/main/roles/python/README.md)
-* **mise** role: See documentation [here](https://github.com/elhub/devxp-ansible-collection-wsl/blob/main/roles/mise/README.md)
+* **adr** role: See the [documentation here](https://github.com/elhub/devxp-ansible-collection-wsl/blob/main/roles/adr/README.md)
+* **ansible** role: See the [documentation here](https://github.com/elhub/devxp-ansible-collection-wsl/blob/main/roles/ansible/README.md)
+* **docker** role: See the [documentation here](https://github.com/elhub/devxp-ansible-collection-wsl/blob/main/roles/docker/README.md)
+* **git** role: See the [documentation here](https://github.com/elhub/devxp-ansible-collection-wsl/blob/main/roles/git/README.md)
+* **git_utils** role: See the [documentation here](https://github.com/elhub/devxp-ansible-collection-wsl/blob/main/roles/git_utils/README.md)
+* **java** role: See the [documentation here](https://github.com/elhub/devxp-ansible-collection-wsl/blob/main/roles/java/README.md)
+* **kotlin** role: See the [documentation here](https://github.com/elhub/devxp-ansible-collection-wsl/blob/main/roles/kotlin/README.md)
+* **molecule** role: See the [documentation here](https://github.com/elhub/devxp-ansible-collection-wsl/blob/main/roles/molecule/README.md)
+* **node** role: See the [documentation here](https://github.com/elhub/devxp-ansible-collection-wsl/blob/main/roles/node/README.md)
+* **python** role: See the [documentation here](https://github.com/elhub/devxp-ansible-collection-wsl/blob/main/roles/python/README.md)
+* **mise** role: See [documentation here](https://github.com/elhub/devxp-ansible-collection-wsl/blob/main/roles/mise/README.md)
 
 ### From command line
 
@@ -122,7 +95,9 @@ If the role requires sudo/root, add `--ask-become-pass` to the command.
 
 ### Molecule
 
-The roles can be tested using molecule. Ensure you have python, ansible, docker, and molecule installed (the roles in this collection should ensure that your environment is set up correctly) and a docker backend running. Then change to the role you wish to validate and run:
+The roles can be tested using molecule. Ensure you have python, ansible, docker, and molecule installed (the roles in
+this collection should ensure that your environment is set up correctly) and a docker backend running. Then change to the role
+you wish to validate and run:
 
 ```bash
 molecule test
@@ -130,11 +105,14 @@ molecule test
 
 ### Testing with Docker
 
-While molecule is great for "unit testing", it can be desirable to test new things in a 'test environment', before adding these roles to a playbook that sets up your main workstation. For this we build a minimal Docker image which can then used to create container and validate things work as expected.
+While molecule is great for "unit testing", it can be desirable to test new things in a 'test environment', before
+adding these roles to a playbook that sets up your main workstation. For this we build a minimal Docker image which can
+then used to create container and validate things work as expected.
 
 To build the image run: `docker build -f test/Dockerfile -t wsl-test:latest .`
 
-You might want to install only certain roles from this collection, or maybe set some specific vars for any given role. In this case modify the [test.yml](test/test.yml) accordingly before building the image.
+You might want to install only certain roles from this collection, or maybe set some specific vars for any given role.
+In this case modify the [test.yml](test/test.yml) accordingly before building the image.
 
 Then you can ssh into the container with `docker run -it wsl-test:latest` and test things out before you install them on your main system.
 
