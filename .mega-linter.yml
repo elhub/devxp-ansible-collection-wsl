@@ -1,6 +1,0 @@
----
-EXTENDS:
-  - https://raw.githubusercontent.com/elhub/devxp-lint-configuration/main/resources/.mega-linter.yml
-
-ENABLE_LINTERS:
-  - ANSIBLE_ANSIBLE_LINT

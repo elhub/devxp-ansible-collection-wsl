@@ -1,10 +1,43 @@
-### Elhub-Ansible
-ansible/galaxy/*
-ansible/inventories/*
-ansible/vault_ids/*
-!ansible/galaxy/.gitkeep
-!ansible/inventories/.gitkeep
-!ansible/vault_ids/.gitkeep
+### Local Lint Files ###
+# This is required to avoid megalinter spamming each repository with lint configurations
+.ansible-lint
+.checkmake.ini
+.ecrc
+.editorconfig-checker.json
+.flake8
+.gitleaks.toml
+.golangci.yml
+.htmlhintrc
+.jsonlintrc
+.markdownlint.json
+.prettierrc.json
+.pylintrc
+.secretlintrc.json
+.stylelintrc.json
+.yamllint.yml
+pyproject.toml
+revive.toml
+trivy.yaml
+checkstyle-config.xml
+java-pmd-ruleset.xml
+
+### Ansible ###
+**/galaxy/*
+**/inventories/*
+!**/galaxy/.gitkeep
+!**/inventories/.gitkeep
+ansible/*.log
+ansible/*.retry
+
+### Backup files ###
+**/*.bkp
+**/*.bak
+
+### CMake ###
+cmake-build-*/
+
+### Env files ###
+*.env*
 
 ### Intellij+all Patch ###
 # Ignores the whole .idea folder and all .iml files
@@ -12,32 +45,21 @@ ansible/vault_ids/*
 modules.xml
 *.iml
 *.ipr
-
-# IntelliJ
 out/
-
-# CMake
-cmake-build-*/
-
+# Project-specific kotlin files
+.kotlin/
 # JIRA plugin
 atlassian-ide-plugin.xml
-
-# SonarQube
+# SonarQube Plugin
 .idea/sonarlint
 .scannerwork/
 
 ### Gradle ###
 .gradle
-build/
-
-# Ignore Gradle GUI config
+**/build/**/*
+!**/src/**/build/**/*
 gradle-app.setting
-
-# Cache of project
 .gradletasknamecache
-
-### Gradle Patch ###
-**/build/
 
 ### Maven ###
 target/
@@ -55,12 +77,9 @@ buildNumber.properties
 ### Java ###
 # Compiled class file
 *.class
-
-# Log file
-*.log
+# Log files
 *.log*
-
-# Package Files #
+# Package Files
 *.jar
 *.war
 *.nar
@@ -68,50 +87,77 @@ buildNumber.properties
 *.zip
 *.tar.gz
 *.rar
-
 # Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
 !gradle-wrapper.jar
-
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
+### Python ###
+.venv
+__pycache__/
+*.py[cod]
+*$py.class
+# Distribution / packaging
+.Python
+dist/
+wheels/
+share/python-wheels/
+*.egg-info/
+*.egg
+MANIFEST
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
 ### React ###
 .DS_*
+dist/
 logs
 **/*.backup.*
 **/*.back.*
-
 node_modules
 bower_components
-
 *.sublime*
-
 psd
 thumb
 sketch
 screenshots/*
 !screenshots/.gitkeep
 
-### NPM ###
-dist/
+### TeamCity ###
+.teamcity/bin/
+
+### Terraform ###
+terraform/.terraform
+terraform/*.tfstate*
+terraform/*.tfvars
 
 ### Testing ###
-/coverage
+**/coverage
 /allure-report
 /allure-results
 
+### Visual Studio Code ###
 .vscode/
+*.code-workspace
 
-.checkmake.ini
-.flake8
-.golangci.yml
-.jsonlintrc
-.markdownlint.json
-.prettierrc.json
-.pylintrc
-.stylelintrc.json
-.yamllint.yml
-megalinter-reports/
-pyproject.toml
-revive.toml
-.ansible-lint
+### Helm ###
+# Chart dependencies
+**/charts/*.tgz
+# Avoid commiting chart lockfile (can cause issues with ArgoCD)
+Chart.lock
+
+### Secrets ###
+*.secrets.properties
+*.secrets.conf
