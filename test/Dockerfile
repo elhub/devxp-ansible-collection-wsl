@@ -1,6 +1,7 @@
 FROM ubuntu:noble
 
-RUN apt-get update && apt-get -y install sudo
+RUN apt-get update \
+    && apt-get -y install sudo
 
 RUN \
     groupadd -g 999 foo && useradd -u 999 -g foo -G sudo -m -s /bin/bash foo && \
@@ -15,7 +16,7 @@ USER foo
 
 WORKDIR '/home/foo/devxp-ansible-collection-wsl/'
 
-CMD /bin/bash
+CMD ["/bin/bash"]
 
 COPY . .
 
@@ -34,5 +35,5 @@ RUN \
 # Run roles via test playbook
 RUN \
     . ~/.profile && \
-    export PATH=$PATH:/home/foo/.local/bin && \
+    export PATH="$PATH":/home/foo/.local/bin && \
     ansible-playbook test/test.yml
