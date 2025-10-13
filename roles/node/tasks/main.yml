@@ -11,7 +11,10 @@
     _node_nvm_version: "{{ _node_nvm_latest.json.tag_name if node_nvm_version == 'latest' else 'v' + node_nvm_version }}"
 
 - name: Ensure nvm is installed # noqa command-instead-of-module
-  ansible.builtin.shell: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/{{ _node_nvm_version }}/install.sh | bash
+  ansible.builtin.shell: |
+    cat /home/teamcity/.curlrc
+    echo $http_proxy
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/{{ _node_nvm_version }}/install.sh | bash
   args:
     creates: "{{ node_nvm_install_path }}/nvm.sh"
 
