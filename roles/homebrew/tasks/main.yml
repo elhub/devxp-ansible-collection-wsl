@@ -30,8 +30,6 @@
     cmd: >-
       /tmp/install_homebrew.sh
     creates: /home/linuxbrew/.linuxbrew
-  environment:
-    NONINTERACTIVE: '1'
 
 - name: Shell rc file
   ansible.builtin.copy:
