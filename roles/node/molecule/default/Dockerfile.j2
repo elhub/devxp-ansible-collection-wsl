@@ -1,0 +1,28 @@
+FROM geerlingguy/docker-ubuntu2404-ansible:latest
+
+ARG HTTP_PROXY=""
+ARG HTTPS_PROXY=""
+ARG NO_PROXY=""
+
+ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8' TZ="Europe/Oslo"
+
+ENV http_proxy=${HTTP_PROXY}
+ENV https_proxy=${HTTPS_PROXY}
+ENV no_proxy=${NO_PROXY}
+
+RUN <<EOR
+  set -euE
+
+  if [ -n "$http_proxy" ]; then
+    echo "Acquire::http::Proxy \"$http_proxy\";" > /etc/apt/apt.conf;
+  fi
+
+  if [ -n "$https_proxy" ]; then
+    echo "Acquire::https::Proxy \"$https_proxy\";" >> /etc/apt/apt.conf;
+  fi
+
+  apt update
+  apt upgrade -y
+  apt install -y --no-install-recommends unzip zip
+
+  EOR

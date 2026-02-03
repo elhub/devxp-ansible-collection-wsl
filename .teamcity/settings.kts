@@ -1,33 +1,60 @@
+import jetbrains.buildServer.configs.kotlin.BuildType
+import jetbrains.buildServer.configs.kotlin.ReuseBuilds
+import jetbrains.buildServer.configs.kotlin.buildSteps.script
+import no.elhub.devxp.build.configuration.pipeline.constants.AgentScope
 import no.elhub.devxp.build.configuration.pipeline.constants.Group.DEVXP
 import no.elhub.devxp.build.configuration.pipeline.dsl.elhubProject
-import no.elhub.devxp.build.configuration.pipeline.jobs.ansiblePublish
-import no.elhub.devxp.build.configuration.pipeline.jobs.makeVerify
+import no.elhub.devxp.build.configuration.pipeline.extensions.triggerOnVcsChange
+import no.elhub.devxp.build.configuration.pipeline.jobs.customJob
+import no.elhub.devxp.build.configuration.pipeline.jobs.moleculeTest
 
 
 elhubProject(DEVXP, "devxp-ansible-collection-wsl") {
 
+    params {
+        param("env.CONTAINER_ENGINE", "docker")
+    }
+
     val roles = listOf(
-        "adr", "ansible", "arcanist", "base", "docker", "git", "git_utils", "java", "kotlin", "linters", "molecule",
-        "node", "python"
+        "adr",
+        "docker",
+        "java",
+        "kotlin",
+        "node"
     )
+    val moleculeTests: MutableList<BuildType> = mutableListOf()
 
     pipeline {
-        sequential {
-//            parallel {
-//                roles.forEach { moleculeTest(it) }
-//            }
-            makeVerify {
-                sonarScanSettings = {
-                    sonarProjectModules = roles.map { "roles/$it" }
-                    sonarProjectSources = "."
-                    additionalParams = mutableListOf("-Dsonar.exclusions=roles/**/molecule/galaxy/**")
-                }
-                enablePublishMetrics = true
-                publishMetricsSettings = {
-                    skipCodeCoverage = true
-                }
+        parallel {
+            roles.forEach {
+                moleculeTests.add(moleculeTest(it).apply {
+                    if (it == "adr") {
+                        triggerOnVcsChange()
+                    }
+                })
             }
-            ansiblePublish()
+
+            customJob(
+                AgentScope.LinuxAgentContext
+            ) {
+                id("RunAllMolecule")
+                this.name = "Run all molecule tests"
+                steps {
+                    script {
+                        scriptContent = """
+                                echo hi
+                        """.trimIndent()
+                    }
+                }
+                dependencies {
+                    moleculeTests.forEach {
+                        snapshot(it.id!!) {
+                            reuseBuilds = ReuseBuilds.NO
+                        }
+                    }
+                }
+
+            }
         }
     }
 }

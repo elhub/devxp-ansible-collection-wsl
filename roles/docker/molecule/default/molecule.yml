@@ -3,17 +3,41 @@ driver:
   name: docker
 platforms:
   - name: instance
-    image: "geerlingguy/docker-ubuntu2004-ansible:latest"
+    image: 'geerlingguy/docker-ubuntu2404-ansible:latest'
     volumes:
       - /var/lib/docker
     privileged: true
-    pre_build_image: true
-lint: |
-  set -e
-  wget https://raw.githubusercontent.com/elhub/devxp-lint-configuration/main/resources/.ansible-lint -O .ansible-lint
-  ~/.local/lib/molecule-venv/bin/yamllint .
-  ~/.local/lib/molecule-venv/bin/ansible-lint -c .ansible-lint --exclude .ansible-lint
+    pre_build_image: false
+    buildargs:
+      HTTP_PROXY: ${HTTP_PROXY}
+      HTTPS_PROXY: ${HTTPS_PROXY}
+      NO_PROXY: ${NO_PROXY}
+      CACHE_BUSTER: "{{ lookup('pipe', 'date +%s') }}"
 provisioner:
   name: ansible
+  env:
+    ANSIBLE_CONFIG: molecule/default/ansible.cfg
+    ANSIBLE_ROLES_PATH: '${PWD}/..'
+    ANSIBLE_COLLECTIONS_PATH: '${PWD}/molecule/default/galaxy/collections'
+    ANSIBLE_VERBOSITY: 5
+    HTTP_PROXY: lookup('ansible.builtin.env', 'HTTP_PROXY')
+    HTTPS_PROXY: lookup('ansible.builtin.env', 'HTTPS_PROXY')
+    NO_PROXY: lookup('ansible.builtin.env', 'NO_PROXY')
+    stdout_callback: debug
+    hosts:
+      all:
+        hosts:
+          instance:
+            ansible_host: localhost
 verifier:
   name: ansible
+
+scenario:
+  test_sequence:
+    - destroy
+    - cleanup
+    - create
+    - converge
+    - cleanup
+    - destroy
+    - cleanup

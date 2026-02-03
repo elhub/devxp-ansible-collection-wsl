@@ -2,9 +2,28 @@
 - name: Converge
   hosts: all
   tasks:
-    - name: "Install base"
+    - name: Create needed directories
+      ansible.builtin.file:
+        path: '{{ item }}'
+        state: directory
+        mode: '0755'
+      loop:
+        - /root/.local
+        - /root/.local/lib
+        - /root/.local/bin
+        - /root/.shrc.d
+
+    - name: Add required apt packages
+      ansible.builtin.apt:
+        name: unzip
+        state: present
+        update_cache: false
+      timeout: 60
+
+    - name: 'Install sdkman'
       ansible.builtin.include_role:
-        name: base
-    - name: "Install java"
+        name: sdkman
+
+    - name: 'Install java'
       ansible.builtin.include_role:
         name: java
