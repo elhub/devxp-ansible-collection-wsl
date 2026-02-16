@@ -3,8 +3,8 @@
   ansible.builtin.unarchive:
     src: "https://www.python.org/ftp/python/{{ _python_source_version }}/Python-{{ _python_source_version }}.tgz"
     remote_src: yes
-    dest: "{{ ansible_env.HOME }}/.local/src/python"
-    creates: "{{ ansible_env.HOME }}/.local/src/python/Python-{{ _python_source_version }}"
+    dest: "{{ ansible_facts['env']['HOME'] }}/.local/src/python"
+    creates: "{{ ansible_facts['env']['HOME'] }}/.local/src/python/Python-{{ _python_source_version }}"
 
 - name: configure
   ansible.builtin.command:
@@ -13,9 +13,9 @@
       --enable-optimizations
       --enable-shared
       --with-ensurepip=install
-      --prefix={{ ansible_env.HOME }}/.local
-    chdir: "{{ ansible_env.HOME }}/.local/src/python/Python-{{ _python_source_version }}"
-    creates: "{{ ansible_env.HOME }}/.local/src/python/Python-{{ _python_source_version }}/Makefile"
+      --prefix={{ ansible_facts['env']['HOME'] }}/.local
+    chdir: "{{ ansible_facts['env']['HOME'] }}/.local/src/python/Python-{{ _python_source_version }}"
+    creates: "{{ ansible_facts['env']['HOME'] }}/.local/src/python/Python-{{ _python_source_version }}/Makefile"
   environment:
     CC: clang # Using clang because of https://github.com/pyenv/pyenv/issues/1889
     CXX: clang++
@@ -24,7 +24,7 @@
 - name: altinstall
   ansible.builtin.command:
     cmd: make -j 12 altinstall
-    chdir: "{{ ansible_env.HOME }}/.local/src/python/Python-{{ _python_source_version }}"
-    creates: "{{ ansible_env.HOME }}/.local/lib/libpython3.so" # TODO this allows just one python?
+    chdir: "{{ ansible_facts['env']['HOME'] }}/.local/src/python/Python-{{ _python_source_version }}"
+    creates: "{{ ansible_facts['env']['HOME'] }}/.local/lib/libpython3.so" # TODO this allows just one python?
   environment:
     CC: clang

@@ -2,5 +2,5 @@
 - name: Configure shell
   ansible.builtin.template:
     src: "sdkmanshrc.sh.j2"
-    dest: "{{ ansible_env.HOME }}/.shrc.d/99-sdkman.sh"
+    dest: "{{ ansible_facts['env']['HOME'] }}/.shrc.d/99-sdkman.sh"
     mode: 0640

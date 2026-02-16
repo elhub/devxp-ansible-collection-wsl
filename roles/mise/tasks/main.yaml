@@ -23,7 +23,7 @@
     chdir: /etc/apt/keyrings
     creates: /etc/apt/keyrings/mise-archive-keyring.gpg
   become: true
-  
+
 - name: Add mise-en-place repository
   ansible.builtin.apt_repository:
     repo: deb [signed-by=/etc/apt/keyrings/mise-archive-keyring.gpg arch=amd64] https://mise.jdx.dev/deb stable main
@@ -40,7 +40,7 @@
 
 - name: Add mise-en-place to bash PATH
   ansible.builtin.copy:
-    dest: "{{ ansible_env.HOME }}/.shrc.d/60-mise.bash"
+    dest: "{{ ansible_facts['env']['HOME'] }}/.shrc.d/60-mise.bash"
     mode: '0644'
     content: |
       # Managed by Ansible - elhub.wsl.mise
@@ -48,7 +48,7 @@
 
 - name: Add mise-en-place to zsh PATH
   ansible.builtin.copy:
-    dest: "{{ ansible_env.HOME }}/.shrc.d/60-mise.zsh"
+    dest: "{{ ansible_facts['env']['HOME'] }}/.shrc.d/60-mise.zsh"
     mode: '0644'
     content: |
       # Managed by Ansible - elhub.wsl.mise

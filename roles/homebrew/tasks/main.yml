@@ -38,14 +38,14 @@
     content: |
       # Managed by ansible elhub.wsl.homebrew
       eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-    dest: "{{ ansible_env.HOME }}/.shrc.d/50-homebrew.sh"
+    dest: "{{ ansible_facts['env']['HOME'] }}/.shrc.d/50-homebrew.sh"
     mode: 0644
 
 - name: Ensure brew is up to date
   ansible.builtin.shell:
     cmd: |
       set -eu
-      . {{ ansible_env.HOME }}/.shrc.d/50-homebrew.sh
+      . {{ ansible_facts['env']['HOME'] }}/.shrc.d/50-homebrew.sh
       brew update
   register: _homebrew_update
   changed_when: not 'Already up-to-date.' in _homebrew_update.stdout
