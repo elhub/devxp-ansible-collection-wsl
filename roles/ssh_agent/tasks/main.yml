@@ -13,7 +13,7 @@
 
 - name: ssh-find-agent in bashrc
   ansible.builtin.copy:
-    dest: '{{ ansible_facts['env']['HOME'] }}/.shrc.d/60-ssh-agent.sh'
+    dest: "{{ ansible_facts['env']['HOME'] }}/.shrc.d/60-ssh-agent.sh"
     mode: 0640
     content: |
       # Managed by Ansible - elhub.wsl.ssh_agent
