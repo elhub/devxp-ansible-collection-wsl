@@ -12,26 +12,26 @@
     update_cache: yes
   become: true
 
-- name: Download installer script
-  ansible.builtin.get_url:
-    url: https://raw.githubusercontent.com/Homebrew/install/master/install.sh
-    dest: /tmp/install_homebrew.sh
-    mode: 0755
-    force: true
-  # We are using force and become since the installation script below will run sudo internally.
-  # Setting become makes ansible run sudo and since sudo is caching credentials for 5 minutes on local connections,
-  # the installation script will not ask for a password.
-  become: true
-  become_user: root
-  when: not '/home/linuxbrew/.linuxbrew' is exists
+- name: Is HomeBrew installed?
+  ansible.builtin.stat:
+    path: /home/linuxbrew/.linuxbrew
+  register: homebrew_stat
 
-- name: Run installer script
+- name: Create home directory and assign ownership to non-root user
+  ansible.builtin.file:
+    path: /home/linuxbrew/.linuxbrew
+    state: directory
+    owner: "{{ ansible_facts['user_id'] }}"
+    group: "{{ ansible_facts['user_gid'] }}"
+    mode: '0755'
+  become: true
+  when: not homebrew_stat.stat.exists
+
+- name: Run Homebrew installer as non-root user
   ansible.builtin.shell:
-    cmd: >-
-      /tmp/install_homebrew.sh
-    creates: /home/linuxbrew/.linuxbrew
-  environment:
-    NONINTERACTIVE: '1'
+    cmd: NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  become: false
+  when: not homebrew_stat.stat.exists
 
 - name: Shell rc file
   ansible.builtin.copy:

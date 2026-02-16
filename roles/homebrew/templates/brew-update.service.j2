@@ -6,7 +6,7 @@ After=network-online.target
 ConditionPathIsSymbolicLink=/home/linuxbrew/.linuxbrew/bin/brew
 
 [Service]
-User={{ ansible_user_id }}
+User={{ ansible_facts['user_id'] }}
 Type=oneshot
 Environment=HOMEBREW_PREFIX=/home/linuxbrew/.linuxbrew
 Environment=HOMEBREW_CELLAR=/home/linuxbrew/.linuxbrew/Cellar
