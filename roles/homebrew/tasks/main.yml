@@ -27,7 +27,7 @@
   become: true
   when: not homebrew_stat.stat.exists
 
-- name: Run Homebrew installer as non-root user
+- name: Ensure Homebrew prefix exists and is owned by the non-root user
   ansible.builtin.shell:
     cmd: NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   become: false
