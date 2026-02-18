@@ -8,7 +8,7 @@
 
 - name: Ensure .bashrc sources shrc.d files
   ansible.builtin.blockinfile:
-    path: "{{ ansible_env.HOME }}/.bashrc"
+    path: "{{ ansible_facts['env']['HOME'] }}/.bashrc"
     marker: "# {mark} elhub.wsl.shellrc"
     create: true
     mode: '0644'
@@ -21,7 +21,7 @@
 
 - name: Ensure .zshrc sources shrc.d files
   ansible.builtin.blockinfile:
-    path: "{{ ansible_env.HOME }}/.zshrc"
+    path: "{{ ansible_facts['env']['HOME'] }}/.zshrc"
     marker: "# {mark} elhub.wsl.shellrc"
     create: true
     mode: '0644'

@@ -49,7 +49,7 @@
 - name: ensure directory for python src files
   ansible.builtin.file:
     state: directory
-    path: "{{ ansible_env.HOME }}/.local/src/python"
+    path: "{{ ansible_facts['env']['HOME'] }}/.local/src/python"
 
 - name: install from source
   include_tasks: install-from-source.yml
@@ -60,10 +60,10 @@
 
 - name: add lib dir to LD_LIBRARY_PATH
   ansible.builtin.copy:
-    dest: "{{ ansible_env.HOME }}/.shrc.d/50-python.sh"
+    dest: "{{ ansible_facts['env']['HOME'] }}/.shrc.d/50-python.sh"
     mode: 0644
     content: |
       # Managed by Ansible - elhub.wsl.python
       if [ -d "$HOME/.local/bin" ] ; then
-        export LD_LIBRARY_PATH="{{ ansible_env.HOME }}/.local/lib:$LD_LIBRARY_PATH"
+        export LD_LIBRARY_PATH="{{ ansible_facts['env']['HOME'] }}/.local/lib:$LD_LIBRARY_PATH"
       fi

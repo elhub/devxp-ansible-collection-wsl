@@ -1,7 +1,7 @@
 ---
 # SDKMAN
 # Where to find sdkman
-java_sdkman_dir: "{{ ansible_env.HOME }}/.sdkman"
+java_sdkman_dir: "{{ ansible_facts['env']['HOME'] }}/.sdkman"
 
 # Kotlin versions to Install
 # This is also set as the default version - override this if you want a different default

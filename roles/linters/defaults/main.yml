@@ -3,7 +3,7 @@ linters_default_linters:
   - checkstyle
   - detekt
 
-linters_install_path: "{{ ansible_env.HOME }}/.local"
+linters_install_path: "{{ ansible_facts['env']['HOME'] }}/.local"
 
 linters_lint_config_path: "{{ linters_install_path }}/lint-config"
 

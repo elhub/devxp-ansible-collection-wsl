@@ -7,7 +7,7 @@
 go_version: latest
 
 # GOROOT
-go_root: "{{ ansible_env.HOME }}/.local/lib/go/current"
+go_root: "{{ ansible_facts['env']['HOME'] }}/.local/lib/go/current"
 
 # GOPATH
-go_path: "{{ ansible_env.HOME }}/go"
+go_path: "{{ ansible_facts['env']['HOME'] }}/go"

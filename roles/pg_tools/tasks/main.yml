@@ -34,7 +34,7 @@
 - name: config directory for pgcli
   ansible.builtin.file:
     state: directory
-    path: '{{ ansible_env.HOME }}/.config/pgcli'
+    path: "{{ ansible_facts['env']['HOME'] }}/.config/pgcli"
     mode: 0755
 
 - name: sqlfluff
@@ -50,7 +50,7 @@
 
 - name: enable pspg for psql
   ansible.builtin.blockinfile:
-    path: '{{ ansible_env.HOME }}/.psqlrc'
+    path: "{{ ansible_facts['env']['HOME'] }}/.psqlrc"
     block: |
       \setenv PAGER pspg
       \set QUIET 1
@@ -64,7 +64,7 @@
 
 - name: enable pspg for pgcli
   ansible.builtin.lineinfile:
-    path: '{{ ansible_env.HOME }}/.config/pgcli/config'
+    path: "{{ ansible_facts['env']['HOME'] }}/.config/pgcli/config"
     regexp: '^pager'
     line: 'pager = /usr/bin/pspg --rr=2 --quit-if-one-screen --ignore-case'
     create: true
@@ -73,12 +73,12 @@
 - name: postgres_dba
   ansible.builtin.git:
     repo: https://github.com/NikolayS/postgres_dba.git
-    dest: '{{ ansible_env.HOME }}/.local/lib/postgres_dba'
+    dest: "{{ ansible_facts['env']['HOME'] }}/.local/lib/postgres_dba"
 
 - name: alias postgres_dba in .psqlrc
   ansible.builtin.lineinfile:
-    path: '{{ ansible_env.HOME }}/.psqlrc'
+    path: "{{ ansible_facts['env']['HOME'] }}/.psqlrc"
     regexp: 'postgres_dba'
-    line: "\\set dba '\\\\i {{ ansible_env.HOME }}/.local/lib/postgres_dba/start.psql'"
+    line: "\\set dba '\\\\i {{ ansible_facts['env']['HOME'] }}/.local/lib/postgres_dba/start.psql'"
     create: true
     mode: 0644

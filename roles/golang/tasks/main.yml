@@ -12,7 +12,7 @@
 
 - name: Create lib dir for go
   ansible.builtin.file:
-    path: "{{ ansible_env.HOME }}/.local/lib/go/{{ _go_version }}"
+    path: "{{ ansible_facts['env']['HOME'] }}/.local/lib/go/{{ _go_version }}"
     state: directory
     mode: "0755"
 
@@ -21,18 +21,18 @@
     src: "https://go.dev/dl/{{ _go_version }}.linux-amd64.tar.gz"
     remote_src: yes
     extra_opts: ['--strip-components=1'] # the archive contains a top-level "go" directory
-    dest: "{{ ansible_env.HOME }}/.local/lib/go/{{ _go_version }}"
-    creates: "{{ ansible_env.HOME }}/.local/lib/go/{{ _go_version }}/bin/go"
+    dest: "{{ ansible_facts['env']['HOME'] }}/.local/lib/go/{{ _go_version }}"
+    creates: "{{ ansible_facts['env']['HOME'] }}/.local/lib/go/{{ _go_version }}/bin/go"
 
 - name: Symlink to GOROOT
   ansible.builtin.file:
     path: "{{ go_root }}"
-    src: "{{ ansible_env.HOME }}/.local/lib/go/{{ _go_version }}"
+    src: "{{ ansible_facts['env']['HOME'] }}/.local/lib/go/{{ _go_version }}"
     state: link
 
 - name: Add go to PATH
   ansible.builtin.copy:
-    dest: "{{ ansible_env.HOME }}/.shrc.d/60-go.sh"
+    dest: "{{ ansible_facts['env']['HOME'] }}/.shrc.d/60-go.sh"
     mode: 0640
     content: |
       # Managed by Ansible - elhub.wsl.golang

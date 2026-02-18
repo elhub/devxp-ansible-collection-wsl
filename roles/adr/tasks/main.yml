@@ -12,17 +12,17 @@
 - name: Unpack adr-j lib
   ansible.builtin.unarchive:
     src: "{{ adr_repository }}/{{ adr_version }}/adr-j.zip"
-    dest: "{{ ansible_env.HOME }}/.local/lib"
+    dest: "{{ ansible_facts['env']['HOME'] }}/.local/lib"
     remote_src: yes
-    owner: "{{ ansible_user_id }}"
-    group: "{{ ansible_user_gid }}"
+    owner: "{{ ansible_facts['user_id'] }}"
+    group: "{{ ansible_facts['user_gid'] }}"
   ignore_errors: "{{ ansible_check_mode }}"
 
 - name: Link adr
   ansible.builtin.file:
-    src: "{{ ansible_env.HOME }}/.local/lib/adr-j-{{ adr_version }}/bin/adr-j"
-    dest: "{{ ansible_env.HOME }}/.local/bin/adr"
+    src: "{{ ansible_facts['env']['HOME'] }}/.local/lib/adr-j-{{ adr_version }}/bin/adr-j"
+    dest: "{{ ansible_facts['env']['HOME'] }}/.local/bin/adr"
     state: link
-    owner: "{{ ansible_user_id }}"
-    group: "{{ ansible_user_gid }}"
+    owner: "{{ ansible_facts['user_id'] }}"
+    group: "{{ ansible_facts['user_gid'] }}"
   ignore_errors: "{{ ansible_check_mode }}"

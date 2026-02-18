@@ -1,23 +1,23 @@
 ---
 - name: directory for ssh-find-agent
   ansible.builtin.file:
-    path: '{{ ansible_env.HOME }}/.local/lib/ssh-find-agent'
+    path: "{{ ansible_facts['env']['HOME'] }}/.local/lib/ssh-find-agent"
     state: directory
     mode: 0751
 
 - name: ssh-find-agent
   ansible.builtin.get_url:
     url: https://raw.githubusercontent.com/wwalker/ssh-find-agent/master/ssh-find-agent.sh
-    dest: '{{ ansible_env.HOME }}/.local/lib/ssh-find-agent/ssh-find-agent.sh'
+    dest: "{{ ansible_facts['env']['HOME'] }}/.local/lib/ssh-find-agent/ssh-find-agent.sh"
     mode: 0640
 
 - name: ssh-find-agent in bashrc
   ansible.builtin.copy:
-    dest: '{{ ansible_env.HOME }}/.shrc.d/60-ssh-agent.sh'
+    dest: "{{ ansible_facts['env']['HOME'] }}/.shrc.d/60-ssh-agent.sh"
     mode: 0640
     content: |
       # Managed by Ansible - elhub.wsl.ssh_agent
-      source {{ ansible_env.HOME }}/.local/lib/ssh-find-agent/ssh-find-agent.sh
+      source {{ ansible_facts['env']['HOME'] }}/.local/lib/ssh-find-agent/ssh-find-agent.sh
 
       # find/create and set agent
       ssh-add -l >&/dev/null || ssh-find-agent -a || eval $(ssh-agent) > /dev/null

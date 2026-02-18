@@ -86,7 +86,7 @@ You can run the roles from the command line using the following command.
 Replace `elhub.wsl.restish` with the role you want to run.
 
 ```bash
-ansible -m import_role -e "{ 'ansible_env' : { 'HOME' : '$HOME' }}" -a name=elhub.wsl.restish localhost
+ansible -m import_role -e "{ 'ansible_facts' : {'env': { 'HOME' : '$HOME' }}}" -a name=elhub.wsl.restish localhost
 ```
 
 If the role requires sudo/root, add `--ask-become-pass` to the command.
