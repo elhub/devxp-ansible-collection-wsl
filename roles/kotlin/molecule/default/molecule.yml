@@ -8,10 +8,12 @@ platforms:
       - /var/lib/docker
     privileged: true
     pre_build_image: false
-    buildArgs:
-      - HTTP_PROXY=${HTTP_PROXY}
-      - HTTPS_PROXY=${HTTPS_PROXY}
-      - NO_PROXY=${NO_PROXY}
+    buildargs:
+      HTTP_PROXY: ${HTTP_PROXY}
+      HTTPS_PROXY: ${HTTPS_PROXY}
+      NO_PROXY: ${NO_PROXY}
+      CACHE_BUSTER: "{{ lookup('pipe', 'date +%s') }}"
+    nocache: true
 provisioner:
   name: ansible
   env:
