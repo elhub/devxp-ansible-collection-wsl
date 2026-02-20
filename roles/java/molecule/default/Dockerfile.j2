@@ -1,17 +1,22 @@
 FROM geerlingguy/docker-ubuntu2404-ansible:latest
 
-ARG HTTP_PROXY=""
-ARG HTTPS_PROXY=""
-ARG NO_PROXY=""
+ARG CACHE_BUSTER
+ARG HTTP_PROXY
+ARG HTTPS_PROXY
+ARG NO_PROXY
+
+ENV http_proxy="${HTTP_PROXY}"
+ENV https_proxy="${HTTPS_PROXY}"
+ENV no_proxy="${NO_PROXY}"
+
+RUN echo "${CACHE_BUSTER}" > /tmp/.cache_buster
 
 ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8' TZ="Europe/Oslo"
 
-ENV http_proxy=${HTTP_PROXY}
-ENV https_proxy=${HTTPS_PROXY}
-ENV no_proxy=${NO_PROXY}
-
 RUN <<EOR
   set -euE
+
+  echo "proxy = ${HTTPS_PROXY}" >> ~/.curlrc
 
   if [ -n "$http_proxy" ]; then
     echo "Acquire::http::Proxy \"$http_proxy\";" > /etc/apt/apt.conf;

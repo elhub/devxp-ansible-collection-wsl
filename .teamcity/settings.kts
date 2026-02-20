@@ -53,7 +53,6 @@ elhubProject(DEVXP, "devxp-ansible-collection-wsl") {
                         }
                     }
                 }
-
             }
         }
     }

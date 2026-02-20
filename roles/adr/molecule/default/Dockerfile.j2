@@ -1,18 +1,17 @@
 FROM geerlingguy/docker-ubuntu2404-ansible:latest
 
 ARG CACHE_BUSTER
-
-RUN echo "${CACHE_BUSTER}" > /tmp/.cache_buster
-
 ARG HTTP_PROXY
 ARG HTTPS_PROXY
 ARG NO_PROXY
 
-ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8' TZ="Europe/Oslo"
+ENV http_proxy="${HTTP_PROXY}"
+ENV https_proxy="${HTTPS_PROXY}"
+ENV no_proxy="${NO_PROXY}"
 
-ENV http_proxy=${HTTP_PROXY}
-ENV https_proxy=${HTTPS_PROXY}
-ENV no_proxy=${NO_PROXY}
+RUN echo "${CACHE_BUSTER}" > /tmp/.cache_buster
+
+ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8' TZ="Europe/Oslo"
 
 RUN <<EOR
   set -euE
