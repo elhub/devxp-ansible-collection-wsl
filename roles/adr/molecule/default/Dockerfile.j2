@@ -14,9 +14,9 @@ RUN echo "${CACHE_BUSTER}" > /tmp/.cache_buster
 ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8' TZ="Europe/Oslo"
 
 RUN <<EOR
-  set -euE
+  set -euEx
 
-  echo "proxy = ${HTTPS_PROXY}" >> ~/.curlrc
+  echo "proxy = $http_proxy" > /root/.curlrc
 
   if [ -n "$http_proxy" ]; then
     echo "Acquire::http::Proxy \"$http_proxy\";" > /etc/apt/apt.conf;
