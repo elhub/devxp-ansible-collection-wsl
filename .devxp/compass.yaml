@@ -1,6 +1,7 @@
 ---
 name: devxp-ansible-collection-wsl
 slug: devxp-ansible-collection-wsl
+id: "ari:cloud:compass:dd0efeb0-2368-4bf7-b77b-9402345ecfe5:component/4290245e-438e-4548-ba7a-a603f0c73614/c6dbb11b-e69e-41d3-81f1-44539a8e3417"
 description: |-
   This ansible collection comprises resources that facilitate an opinionated setup of the Linux/WSL components for a
   a Windows developer workstation at Elhub.
