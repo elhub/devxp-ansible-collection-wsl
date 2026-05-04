@@ -1,13 +1,14 @@
 ---
 - name: PostgreSQL signing key
-  ansible.builtin.apt_key:
+  ansible.builtin.get_url:
     url: 'https://www.postgresql.org/media/keys/ACCC4CF8.asc'
-    state: present
+    dest: /etc/apt/keyrings/postgresql.asc
+    mode: '0644'
   become: true
 
 - name: PostgreSQL external repository
   ansible.builtin.apt_repository:
-    repo: 'deb http://apt.postgresql.org/pub/repos/apt/ {{ ansible_distribution_release }}-pgdg main'
+    repo: 'deb [signed-by=/etc/apt/keyrings/postgresql.asc] http://apt.postgresql.org/pub/repos/apt/ {{ ansible_distribution_release }}-pgdg main'
     state: present
     filename: 'postgresql'
   become: true
