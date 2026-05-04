@@ -4,10 +4,26 @@
     name: python3-venv
   become: true
 
+- name: Ensure apt keyrings dir exists
+  ansible.builtin.file:
+    path: /etc/apt/keyrings
+    state: directory
+    mode: "0755"
+  become: true
+
+- name: Download deadsnakes ppa signing key
+  ansible.builtin.get_url:
+    url: "https://keyserver.ubuntu.com/pks/lookup?op=get&search=F23C5A6CF475977595C89F51BA6932366A755776"
+    dest: /etc/apt/keyrings/deadsnakes-ppa.asc
+    mode: "0644"
+  become: true
+
 - name: add deadsnakes ppa
   ansible.builtin.apt_repository:
-    # https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa
-    repo: ppa:deadsnakes/ppa
+    repo: "deb [signed-by=/etc/apt/keyrings/my-ppa.asc] https://ppa.launchpadcontent.net/OWNER/PPA/ubuntu {{ ansible_distribution_release }} main"
+    filename: deadsnakes-ppa
+    state: present
+    update_cache: true
   become: true
 
 - name: additional python versions
