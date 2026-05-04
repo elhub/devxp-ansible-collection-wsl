@@ -13,7 +13,7 @@
 
 - name: Download deadsnakes ppa signing key
   ansible.builtin.get_url:
-    url: "https://keyserver.ubuntu.com/pks/lookup?op=get&search=F23C5A6CF475977595C89F51BA6932366A755776"
+    url: "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xF23C5A6CF475977595C89F51BA6932366A755776"
     dest: /etc/apt/keyrings/deadsnakes-ppa.asc
     mode: "0644"
   become: true
