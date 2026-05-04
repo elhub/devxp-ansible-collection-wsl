@@ -34,8 +34,7 @@
       - python{{ item }}-dev
     update_cache: true
   loop:
-    - "3.13" # Latest stable
-    # 3.12 is standard python3 on Ubuntu 24.04
+    - "3.12" # Standard python3 on Ubuntu 24.04
     - "3.9" # Default on Oracle Linux 9
     - "3.8" # Latest available in software collection on Oracle Linux 7
   become: true
