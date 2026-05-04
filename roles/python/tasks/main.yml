@@ -20,7 +20,7 @@
 
 - name: add deadsnakes ppa
   ansible.builtin.apt_repository:
-    repo: "deb [signed-by=/etc/apt/keyrings/my-ppa.asc] https://ppa.launchpadcontent.net/OWNER/PPA/ubuntu {{ ansible_distribution_release }} main"
+    repo: "deb [signed-by=/etc/apt/keyrings/deadsnakes-ppa.asc] https://ppa.launchpadcontent.net/deadsnakes/ppa/ubuntu {{ ansible_distribution_release }} main"
     filename: deadsnakes-ppa
     state: present
     update_cache: true
