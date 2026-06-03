@@ -2,8 +2,12 @@
 dependency:
   name: galaxy
   options:
-    requirements-file: collections.yml
-
+    requirements-file: molecule/default/collections.yml
+    force: true
+  env:
+    ANSIBLE_CONFIG: molecule/ansible.cfg
+    ANSIBLE_ROLES_PATH: molecule/default/galaxy/roles
+    ANSIBLE_COLLECTIONS_PATH: molecule/default/galaxy/collections
 driver:
   name: docker
 platforms:
