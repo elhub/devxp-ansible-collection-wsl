@@ -2,6 +2,7 @@ import no.elhub.devxp.build.configuration.pipeline.constants.Group.DEVXP
 import no.elhub.devxp.build.configuration.pipeline.dsl.elhubProject
 import no.elhub.devxp.build.configuration.pipeline.jobs.ansiblePublish
 import no.elhub.devxp.build.configuration.pipeline.jobs.makeVerify
+import no.elhub.devxp.build.configuration.pipeline.jobs.moleculeTest
 
 
 elhubProject(DEVXP, "devxp-ansible-collection-wsl") {
