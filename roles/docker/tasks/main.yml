@@ -12,21 +12,15 @@
       - lsb-release
   become: true
 
-- name: Get the system architecture of your computer and put it in a variable
-  ansible.builtin.command: dpkg --print-architecture
-  changed_when: false
-  register: _docker_system_architecture
-
-- name: Add apt signing key for Docker
-  ansible.builtin.apt_key:
-    url: https://download.docker.com/linux/ubuntu/gpg
+- name: Add Docker repository
+  ansible.builtin.deb822_repository:
     state: present
-  become: true
-
-- name: Add apt repository for Docker stable version
-  ansible.builtin.apt_repository:
-    repo: deb [arch="{{ _docker_system_architecture.stdout }}"] https://download.docker.com/linux/ubuntu "{{ ansible_distribution_release }}" stable
-    state: present
+    name: "docker-{{ ansible_facts['distribution_release'] }}"
+    types: deb
+    uris: https://download.docker.com/linux/ubuntu
+    suites: "{{ ansible_facts['distribution_release'] }}"
+    components: stable
+    signed_by: https://download.docker.com/linux/ubuntu/gpg
   become: true
 
 - name: Install Docker and its dependencies
