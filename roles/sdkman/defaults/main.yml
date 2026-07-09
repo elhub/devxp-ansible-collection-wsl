@@ -1,5 +1,0 @@
----
-# sdkman defaults
-
-# where to install sdkman
-sdkman_dir: "{{ ansible_facts['env']['HOME'] }}/.sdkman"
