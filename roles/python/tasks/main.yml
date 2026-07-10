@@ -4,10 +4,26 @@
     name: python3-venv
   become: true
 
+- name: Ensure apt keyrings dir exists
+  ansible.builtin.file:
+    path: /etc/apt/keyrings
+    state: directory
+    mode: "0755"
+  become: true
+
+- name: Download deadsnakes ppa signing key
+  ansible.builtin.get_url:
+    url: "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xF23C5A6CF475977595C89F51BA6932366A755776"
+    dest: /etc/apt/keyrings/deadsnakes-ppa.asc
+    mode: "0644"
+  become: true
+
 - name: add deadsnakes ppa
   ansible.builtin.apt_repository:
-    # https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa
-    repo: ppa:deadsnakes/ppa
+    repo: "deb [signed-by=/etc/apt/keyrings/deadsnakes-ppa.asc] https://ppa.launchpadcontent.net/deadsnakes/ppa/ubuntu noble main"
+    filename: deadsnakes-ppa
+    state: present
+    update_cache: true
   become: true
 
 - name: additional python versions
@@ -18,8 +34,7 @@
       - python{{ item }}-dev
     update_cache: true
   loop:
-    - "3.13" # Latest stable
-    # 3.12 is standard python3 on Ubuntu 24.04
+    - "3.12" # Standard python3 on Ubuntu 24.04
     - "3.9" # Default on Oracle Linux 9
     - "3.8" # Latest available in software collection on Oracle Linux 7
   become: true
