@@ -1,34 +1,14 @@
 ---
-- name: Ensure the directory for apt keyrings exists
-  ansible.builtin.file:
-    path: /etc/apt/keyrings
-    state: directory
-    mode: '0755'
-    owner: root
-    group: root
-  become: true
-
-- name: Add mise-en-place repository GPG key
-  ansible.builtin.get_url:
-    url: https://mise.jdx.dev/gpg-key.pub
-    dest: /etc/apt/keyrings/mise-archive-keyring.asc
-    mode: '0644'
-    owner: root
-    group: root
-  become: true
-
-- name: Dearmor asc key
-  ansible.builtin.command:
-    cmd: gpg --no-tty --batch --dearmor --output mise-archive-keyring.gpg mise-archive-keyring.asc
-    chdir: /etc/apt/keyrings
-    creates: /etc/apt/keyrings/mise-archive-keyring.gpg
-  become: true
-
-- name: Add mise-en-place repository
-  ansible.builtin.apt_repository:
-    repo: deb [signed-by=/etc/apt/keyrings/mise-archive-keyring.gpg arch=amd64] https://mise.jdx.dev/deb stable main
+- name: Add ppa:jdxcode/mise repository
+  ansible.builtin.deb822_repository:
     state: present
-    filename: mise
+    name: "jdxcode-mise-{{ ansible_facts['distribution_release'] }}"
+    types: deb
+    uris: https://ppa.launchpadcontent.net/jdxcode/mise/ubuntu
+    suites: "{{ ansible_facts['distribution_release'] }}"
+    components: main
+    # Search string found on https://launchpad.net/~jdxcode/+archive/ubuntu/mise
+    signed_by: https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x38A097C0CCE691795E4B15BE23997D3EEE1EDC52
   become: true
 
 - name: Install mise-en-place

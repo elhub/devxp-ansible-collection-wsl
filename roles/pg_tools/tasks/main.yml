@@ -1,15 +1,13 @@
 ---
-- name: PostgreSQL signing key
-  ansible.builtin.apt_key:
-    url: 'https://www.postgresql.org/media/keys/ACCC4CF8.asc'
+- name: Add PostgreSQL repository
+  ansible.builtin.deb822_repository:
     state: present
-  become: true
-
-- name: PostgreSQL external repository
-  ansible.builtin.apt_repository:
-    repo: 'deb http://apt.postgresql.org/pub/repos/apt/ {{ ansible_distribution_release }}-pgdg main'
-    state: present
-    filename: 'postgresql'
+    name: "postgresql-{{ ansible_facts['distribution_release'] }}"
+    types: deb
+    uris: http://apt.postgresql.org/pub/repos/apt/
+    suites: "{{ ansible_facts['distribution_release'] }}-pgdg"
+    components: main
+    signed_by: https://www.postgresql.org/media/keys/ACCC4CF8.asc
   become: true
 
 - name: Official client binaries

@@ -24,10 +24,7 @@ elhubProject(DEVXP, "devxp-ansible-collection-wsl") {
                     sonarProjectSources = "."
                     additionalParams = mutableListOf("-Dsonar.exclusions=roles/**/molecule/galaxy/**")
                 }
-                enablePublishMetrics = true
-                publishMetricsSettings = {
-                    skipCodeCoverage = true
-                }
+                analyzeDependencies = false
             }
             ansiblePublish()
         }
