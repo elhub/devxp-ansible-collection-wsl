@@ -2,9 +2,22 @@
 - name: Converge
   hosts: all
   tasks:
-    - name: "Install base"
+    - name: 'Install dependencies'
+      ansible.builtin.apt:
+        name:
+          - zip
+          - unzip
+          - curl
+        update_cache: true
+      become: true
+    - name: Create .shrc.d directory
+      ansible.builtin.file:
+        path: /root/.shrc.d
+        state: directory
+        mode: '0755'
+    - name: 'Install sdkman'
       ansible.builtin.include_role:
-        name: base
-    - name: "Install java"
+        name: sdkman
+    - name: 'Install java'
       ansible.builtin.include_role:
         name: java
