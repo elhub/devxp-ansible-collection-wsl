@@ -1,0 +1,26 @@
+---
+version: 1
+component:
+  name: devxp-ansible-collection-wsl
+  type: library
+  lifecycle: production
+  tier: tier_4
+  owner: team-devxp
+  system: developer_experience
+  language: Jinja
+  framework: Ansible
+  description: |-
+    An Ansible collection for provisioning and configuring Ubuntu-based WSL developer environments.
+  aliases:
+    - devxp_ansible_collection_wsl
+    - no.elhub.devxp_ansible_collection_wsl
+  repositories:
+    - name: elhub/devxp-ansible-collection-wsl
+      path: /
+      provider: github
+      display_name: devxp-ansible-collection-wsl
+  tools:
+    - name: Source Code
+      category: code
+      url: https://github.com/elhub/devxp-ansible-collection-wsl
+      environment: Production
