@@ -7,7 +7,7 @@ component:
   tier: tier_4
   owner: team-devxp
   system: developer_experience
-  language: Jinja
+  language: Yaml
   framework: Ansible
   description: |-
     An Ansible collection for provisioning and configuring Ubuntu-based WSL developer environments.
@@ -23,4 +23,4 @@ component:
     - name: Source Code
       category: code
       url: https://github.com/elhub/devxp-ansible-collection-wsl
-      environment: Production
+      environment: github
