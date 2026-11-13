@@ -23,4 +23,3 @@ component:
     - name: Source Code
       category: code
       url: https://github.com/elhub/devxp-ansible-collection-wsl
-      environment: github
